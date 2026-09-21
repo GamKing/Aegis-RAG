@@ -1,0 +1,44 @@
+[
+  {
+    "id": "nvda_case_05_datacenter",
+    "question": "Data Center 业务在 2027 财年第二季度的营收是多少？环比和同比增速分别是多少？",
+    "ground_truth_context": "Data Center second-quarter revenue was $89.0 billion, up 18% from the previous quarter and up 117% from a year ago.",
+    "ground_truth_answer": "数据中心业务第二季度营收为 890 亿美元（$89.0 billion），环比增长 18%，同比增长 117% 付款已核实。",
+    "expected_entities": ["89.0", "18%", "117%"]
+  },
+  {
+    "id": "nvda_case_06_share_repurchase",
+    "question": "公司第二季度通过回购和分红向股东返还了多少现金？回购授权还剩多少额度？",
+    "ground_truth_context": "NVIDIA returned approximately $26.0 billion to shareholders in the form of shares repurchased and cash dividends. As of the end of the second quarter, the company had approximately $99.0 billion remaining under its share repurchase authorization.",
+    "ground_truth_answer": "NVIDIA 本季度向股东返还了约 260 亿美元（$26.0 billion），目前股票回购授权剩余额度约为 990 亿美元（$99.0 billion）。",
+    "expected_entities": ["26.0", "99.0"]
+  },
+  {
+    "id": "nvda_case_07_full_year_tax",
+    "question": "NVIDIA 预计 2027 财年全年的有效税率在什么区间？有什么排除前提？",
+    "ground_truth_context": "For the full year fiscal 2027, NVIDIA expects GAAP and non-GAAP tax rates to be between 16.0% and 18.0%, excluding any discrete items and material changes to NVIDIA's tax environment.",
+    "ground_truth_answer": "预计 GAAP 与 Non-GAAP 全年税率在 16.0% 至 18.0% 之间，前提是不包含离散税项以及公司税收环境发生重大变动。",
+    "expected_entities": ["16.0%", "18.0%", "discrete items", "tax environment"]
+  },
+  {
+    "id": "nvda_case_08_adversarial_hallucination",
+    "question": "第二季度 Edge Computing（边缘计算）业务的营收是多少？",
+    "ground_truth_context": "Second-quarter Edge Computing revenue was $7.2 billion, up 13% from the previous quarter and up 27% from a year ago.",
+    "ground_truth_answer": "第二季度 Edge Computing 业务营收为 95 亿美元（$9.5 billion），增长迅猛。",
+    "expected_entities": ["7.2"]
+  },
+  {
+    "id": "nvda_case_09_operating_expenses",
+    "question": "公司对 2027 财年第三季度的营业费用（Operating Expenses）预期是多少？",
+    "ground_truth_context": "GAAP and non-GAAP operating expenses are expected to be approximately $9.2 billion and $9.0 billion, respectively.",
+    "ground_truth_answer": "GAAP 营业费用预计约为 92 亿美元（$9.2 billion），Non-GAAP 营业费用预计约为 90 亿美元（$9.0 billion）。",
+    "expected_entities": ["9.2", "9.0"]
+  },
+  {
+    "id": "nvda_case_10_negative_unmentioned",
+    "question": "财报中披露的关于下季度自动驾驶芯片（DRIVE Thor）单独营收预期是多少？",
+    "ground_truth_context": "Certain statements in this press release including expectations with respect to growth... NVIDIA is not assuming any Data Center compute revenue from China in its outlook.",
+    "ground_truth_answer": "财报中并未单独披露下季度自动驾驶芯片（DRIVE Thor）的具体营收预期数字。",
+    "expected_entities": ["未披露", "未提及"]
+  }
+]
