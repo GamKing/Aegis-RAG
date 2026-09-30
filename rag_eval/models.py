@@ -6,13 +6,42 @@
 from __future__ import annotations
 
 from datetime import datetime
+from enum import Enum
 from typing import Any, Literal
 
 from pydantic import BaseModel, Field
 
 
+class FactType(str, Enum):
+    """事实类型枚举：将校验从单一"查数字"泛化为多类型命题校验。"""
+
+    NUMERIC = "numeric"        # 标量事实：70%、1500元、200元
+    ENTITY_REL = "entity_rel"  # 实体关系：A药禁止与B药合用
+    CONDITION = "condition"    # 限制/时效：仅限2026年前、非直系亲属除外
+    CATEGORICAL = "categorical"  # 分类/枚举：三级甲等、必须、禁止
+
+
+class AtomicFact(BaseModel):
+    """通用原子事实：主体-谓词-客体三元组，支持多类型校验。
+
+    与 ExtractedFact 的关系：ExtractedFact 是简单的 key/value 对，
+    适合数值型事实；AtomicFact 是结构化的三元组，适合跨类型事实校验。
+    两者共存于 ExtractionPayload 中，向后兼容。
+    """
+
+    subject: str = Field(default="", description="事实主体，如'职工医保门诊'")
+    predicate: str = Field(default="", description="谓词/属性，如'报销比例'")
+    object_value: str = Field(default="", description="客体/值，如'70%'")
+    fact_type: FactType = FactType.NUMERIC
+    is_negative: bool = Field(default=False, description="是否包含否定/例外")
+    source_text: str | None = Field(default=None, description="原文出处片段")
+
+
 class EvalSample(BaseModel):
-    """单条评测样本：问题 + 标准上下文 + 标准答案 + 必须命中的实体清单。"""
+    """单条评测样本：问题 + 标准上下文 + 标准答案 + 必须命中的实体清单。
+
+    这是评测链路的输入边界：后续评分器只依赖这份稳定契约，不直接读取数据集细节。
+    """
 
     id: str = Field(..., min_length=1, description="样本唯一标识")
     question: str = Field(..., description="用户问题")
@@ -22,6 +51,11 @@ class EvalSample(BaseModel):
         default_factory=list,
         description="答案中必须命中的实体（金额、比例、机构名、政策术语等）",
     )
+    source_id: str | None = Field(default=None, description="金标准来源文档，用于检索溯源评测")
+    required_entities: list[str] = Field(default_factory=list, description="必须全部命中的评测要点，独立于平均完整性")
+    category: str = "standard"
+    candidate_answer: str | None = Field(default=None, description="独立的对抗候选答案，不得覆盖金标准")
+    mutation_type: str | None = None
 
 
 class ExtractedFact(BaseModel):
@@ -69,7 +103,10 @@ class PipelineTrace(BaseModel):
 
 
 class EvalResult(BaseModel):
-    """单条样本的评测产出。"""
+    """单条样本的评测产出。
+
+    保留实际上下文和答案，便于指标失败时回溯数据流，而不只留下一个分数。
+    """
 
     sample_id: str
     actual_context: str = Field(..., description="RAG 实际检索到的上下文")
@@ -77,6 +114,7 @@ class EvalResult(BaseModel):
     context_recall_score: float = Field(..., ge=0.0, le=1.0)
     completeness_score: float = Field(..., ge=0.0, le=1.0)
     faithfulness_pass: bool
+    required_entities_pass: bool = True
     error_details: list[str] = Field(default_factory=list)
 
 
@@ -95,14 +133,17 @@ class EvalSummary(BaseModel):
     results: list[EvalResult] = Field(default_factory=list)
 
     def is_case_passed(self, result: EvalResult) -> bool:
-        """按阈值快照判定单条结果是否通过（recall/completeness 达标且忠实）。"""
+        """按阈值快照判定单条结果是否通过（recall/completeness 达标且忠实）。
+
+        阈值随汇总结果保存，确保报告复核时不会受运行后配置变化影响。
+        """
         recall_gate = result.context_recall_score >= self.thresholds.get(
             "context_recall", 0.0
         )
         completeness_gate = result.completeness_score >= self.thresholds.get(
             "completeness", 0.0
         )
-        return recall_gate and completeness_gate and result.faithfulness_pass
+        return recall_gate and completeness_gate and result.faithfulness_pass and result.required_entities_pass
 
     def failed_results(self) -> list[EvalResult]:
         return [r for r in self.results if not self.is_case_passed(r)]

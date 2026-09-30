@@ -49,7 +49,55 @@ flowchart TD
     S --> O[最终 RAGResponse\n进入现有三项评测]
 ```
 
-## 3. 单样本评分流程
+## 3. 通过路径（PASS Flow）
+
+下面是单条样本从受控生成到最终评测通过的完整路径。两条绿色路径分别表示：Tier 1 直接通过，或 Tier 1 失败后经 NLI 自愈并重新验证通过。
+
+```mermaid
+flowchart TD
+    A([用户 Query]) --> B[召回原始文档块]
+    B --> C[JSON Schema 受限抽取]
+    C --> D[Tier 1 代码质检]
+
+    D -->|通过| E[跳过 NLI]
+    D -->|未命中/存疑| F[Tier 2 NLI 语义裁决]
+    F -->|A：蕴含| G[单次自愈/规范化]
+    F -->|B/C：矛盾或中立| X([安全失败：不输出])
+    G --> H[Tier 1 重新验证]
+    H -->|通过| E
+    H -->|仍失败| X
+
+    E --> I[ControlledSynthesizer\n仅使用已验证 JSON]
+    I --> J[RAGResponse\ncontext + answer]
+
+    J --> K{Context Recall >= 0.80?}
+    K -->|否| X
+    K -->|是| L{Completeness >= 0.80?}
+    L -->|否| X
+    L -->|是| M{Faithfulness = PASS?}
+    M -->|否| X
+    M -->|是| N([Case PASS\n退出码 0])
+
+    classDef pass fill:#d9f7be,stroke:#389e0d,color:#135200;
+    classDef fail fill:#fff1f0,stroke:#cf1322,color:#820014;
+    class E,I,J,N pass;
+    class X fail;
+```
+
+### 通过条件总结
+
+```text
+Tier 1 直接通过
+  或
+Tier 1 失败 -> NLI 判定蕴含 -> 自愈 -> Tier 1 复验通过
+
+然后必须同时满足：
+  Context Recall >= 0.80
+  Completeness   >= 0.80
+  Faithfulness  == PASS
+```
+
+## 4. 单样本评分流程
 
 ```mermaid
 flowchart LR

@@ -12,6 +12,7 @@ class NLIJudge:
         self.model = model
 
     def classify(self, context: str, claim: str) -> str:
+        # NLI 是可选的二次裁判，只处理代码规则无法字面命中的主张，不改变默认离线路径。
         prompt = f"""你是一个严肃的逻辑事实裁判。判断【待核实主张】是否能够由【参考材料】严格推导出来。
 
 【参考材料】: {context}

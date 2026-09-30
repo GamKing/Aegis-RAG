@@ -1,0 +1,591 @@
+{
+  "total": 105,
+  "issue_counts": {
+    "missing_source": 105,
+    "invalid_gold": 11,
+    "ambiguous_question": 16
+  },
+  "issues": [
+    {
+      "sample_id": "syn-000",
+      "code": "missing_source"
+    },
+    {
+      "sample_id": "syn-001",
+      "code": "missing_source"
+    },
+    {
+      "sample_id": "syn-002",
+      "code": "missing_source"
+    },
+    {
+      "sample_id": "syn-003",
+      "code": "missing_source"
+    },
+    {
+      "sample_id": "syn-004",
+      "code": "missing_source"
+    },
+    {
+      "sample_id": "syn-005",
+      "code": "missing_source"
+    },
+    {
+      "sample_id": "syn-006",
+      "code": "missing_source"
+    },
+    {
+      "sample_id": "syn-007",
+      "code": "missing_source"
+    },
+    {
+      "sample_id": "syn-008",
+      "code": "missing_source"
+    },
+    {
+      "sample_id": "syn-009",
+      "code": "missing_source"
+    },
+    {
+      "sample_id": "syn-010",
+      "code": "missing_source"
+    },
+    {
+      "sample_id": "syn-011",
+      "code": "missing_source"
+    },
+    {
+      "sample_id": "syn-012",
+      "code": "missing_source"
+    },
+    {
+      "sample_id": "syn-013",
+      "code": "missing_source"
+    },
+    {
+      "sample_id": "syn-014",
+      "code": "missing_source"
+    },
+    {
+      "sample_id": "syn-015",
+      "code": "missing_source"
+    },
+    {
+      "sample_id": "syn-016",
+      "code": "missing_source"
+    },
+    {
+      "sample_id": "syn-017",
+      "code": "missing_source"
+    },
+    {
+      "sample_id": "syn-018",
+      "code": "missing_source"
+    },
+    {
+      "sample_id": "syn-019",
+      "code": "missing_source"
+    },
+    {
+      "sample_id": "syn-020",
+      "code": "missing_source"
+    },
+    {
+      "sample_id": "syn-021",
+      "code": "missing_source"
+    },
+    {
+      "sample_id": "syn-022",
+      "code": "missing_source"
+    },
+    {
+      "sample_id": "syn-023",
+      "code": "missing_source"
+    },
+    {
+      "sample_id": "syn-024",
+      "code": "missing_source"
+    },
+    {
+      "sample_id": "syn-025",
+      "code": "missing_source"
+    },
+    {
+      "sample_id": "syn-026",
+      "code": "missing_source"
+    },
+    {
+      "sample_id": "syn-027",
+      "code": "missing_source"
+    },
+    {
+      "sample_id": "syn-028",
+      "code": "missing_source"
+    },
+    {
+      "sample_id": "syn-029",
+      "code": "missing_source"
+    },
+    {
+      "sample_id": "syn-030",
+      "code": "missing_source"
+    },
+    {
+      "sample_id": "syn-031",
+      "code": "missing_source"
+    },
+    {
+      "sample_id": "syn-032",
+      "code": "missing_source"
+    },
+    {
+      "sample_id": "syn-033",
+      "code": "missing_source"
+    },
+    {
+      "sample_id": "syn-034",
+      "code": "missing_source"
+    },
+    {
+      "sample_id": "syn-035",
+      "code": "missing_source"
+    },
+    {
+      "sample_id": "syn-036",
+      "code": "missing_source"
+    },
+    {
+      "sample_id": "syn-037",
+      "code": "missing_source"
+    },
+    {
+      "sample_id": "syn-038",
+      "code": "missing_source"
+    },
+    {
+      "sample_id": "syn-039",
+      "code": "missing_source"
+    },
+    {
+      "sample_id": "syn-040",
+      "code": "missing_source"
+    },
+    {
+      "sample_id": "syn-041",
+      "code": "missing_source"
+    },
+    {
+      "sample_id": "syn-042",
+      "code": "missing_source"
+    },
+    {
+      "sample_id": "syn-043",
+      "code": "missing_source"
+    },
+    {
+      "sample_id": "syn-044",
+      "code": "missing_source"
+    },
+    {
+      "sample_id": "syn-045",
+      "code": "missing_source"
+    },
+    {
+      "sample_id": "syn-046",
+      "code": "missing_source"
+    },
+    {
+      "sample_id": "syn-047",
+      "code": "missing_source"
+    },
+    {
+      "sample_id": "syn-048",
+      "code": "missing_source"
+    },
+    {
+      "sample_id": "syn-049",
+      "code": "missing_source"
+    },
+    {
+      "sample_id": "syn-050",
+      "code": "missing_source"
+    },
+    {
+      "sample_id": "syn-051",
+      "code": "missing_source"
+    },
+    {
+      "sample_id": "syn-052",
+      "code": "missing_source"
+    },
+    {
+      "sample_id": "syn-053",
+      "code": "missing_source"
+    },
+    {
+      "sample_id": "syn-054",
+      "code": "missing_source"
+    },
+    {
+      "sample_id": "syn-055",
+      "code": "missing_source"
+    },
+    {
+      "sample_id": "syn-056",
+      "code": "missing_source"
+    },
+    {
+      "sample_id": "syn-057",
+      "code": "missing_source"
+    },
+    {
+      "sample_id": "syn-058",
+      "code": "missing_source"
+    },
+    {
+      "sample_id": "syn-059",
+      "code": "missing_source"
+    },
+    {
+      "sample_id": "edge-000",
+      "code": "missing_source"
+    },
+    {
+      "sample_id": "edge-001",
+      "code": "missing_source"
+    },
+    {
+      "sample_id": "edge-002",
+      "code": "missing_source"
+    },
+    {
+      "sample_id": "edge-003",
+      "code": "missing_source"
+    },
+    {
+      "sample_id": "edge-004",
+      "code": "missing_source"
+    },
+    {
+      "sample_id": "edge-005",
+      "code": "missing_source"
+    },
+    {
+      "sample_id": "edge-006",
+      "code": "missing_source"
+    },
+    {
+      "sample_id": "edge-007",
+      "code": "missing_source"
+    },
+    {
+      "sample_id": "edge-008",
+      "code": "missing_source"
+    },
+    {
+      "sample_id": "edge-009",
+      "code": "missing_source"
+    },
+    {
+      "sample_id": "edge-010",
+      "code": "missing_source"
+    },
+    {
+      "sample_id": "edge-011",
+      "code": "missing_source"
+    },
+    {
+      "sample_id": "edge-012",
+      "code": "missing_source"
+    },
+    {
+      "sample_id": "edge-013",
+      "code": "missing_source"
+    },
+    {
+      "sample_id": "edge-014",
+      "code": "missing_source"
+    },
+    {
+      "sample_id": "edge-015",
+      "code": "missing_source"
+    },
+    {
+      "sample_id": "edge-016",
+      "code": "missing_source"
+    },
+    {
+      "sample_id": "edge-017",
+      "code": "missing_source"
+    },
+    {
+      "sample_id": "edge-018",
+      "code": "missing_source"
+    },
+    {
+      "sample_id": "edge-019",
+      "code": "missing_source"
+    },
+    {
+      "sample_id": "edge-020",
+      "code": "missing_source"
+    },
+    {
+      "sample_id": "edge-021",
+      "code": "missing_source"
+    },
+    {
+      "sample_id": "edge-022",
+      "code": "missing_source"
+    },
+    {
+      "sample_id": "edge-023",
+      "code": "missing_source"
+    },
+    {
+      "sample_id": "edge-024",
+      "code": "missing_source"
+    },
+    {
+      "sample_id": "adv-000-数字篡改",
+      "code": "missing_source"
+    },
+    {
+      "sample_id": "adv-000-数字篡改",
+      "code": "invalid_gold",
+      "details": [
+        "[completeness] 实体命中率 2/3 = 0.667 低于阈值 1.00; 未命中: 「200元」",
+        "[faithfulness] 答案数值 「201」 在检索上下文中无出处（数值幻觉/篡改嫌疑），一票否决"
+      ]
+    },
+    {
+      "sample_id": "adv-001-实体缺失",
+      "code": "missing_source"
+    },
+    {
+      "sample_id": "adv-001-实体缺失",
+      "code": "invalid_gold",
+      "details": [
+        "[completeness] 实体命中率 4/5 = 0.800 低于阈值 1.00; 未命中: 「慢性肾病」"
+      ]
+    },
+    {
+      "sample_id": "adv-002-条件丢失",
+      "code": "missing_source"
+    },
+    {
+      "sample_id": "adv-003-无关注入",
+      "code": "missing_source"
+    },
+    {
+      "sample_id": "adv-003-无关注入",
+      "code": "invalid_gold",
+      "details": [
+        "[faithfulness] 答案数值 「10%」 在检索上下文中无出处（数值幻觉/篡改嫌疑），一票否决"
+      ]
+    },
+    {
+      "sample_id": "adv-004-数字篡改",
+      "code": "missing_source"
+    },
+    {
+      "sample_id": "adv-004-数字篡改",
+      "code": "invalid_gold",
+      "details": [
+        "[completeness] 实体命中率 4/5 = 0.800 低于阈值 1.00; 未命中: 「2000元」",
+        "[faithfulness] 答案数值 「2001」 在检索上下文中无出处（数值幻觉/篡改嫌疑），一票否决"
+      ]
+    },
+    {
+      "sample_id": "adv-005-实体缺失",
+      "code": "missing_source"
+    },
+    {
+      "sample_id": "adv-005-实体缺失",
+      "code": "invalid_gold",
+      "details": [
+        "[completeness] 实体命中率 3/4 = 0.750 低于阈值 1.00; 未命中: 「100元」"
+      ]
+    },
+    {
+      "sample_id": "adv-006-条件丢失",
+      "code": "missing_source"
+    },
+    {
+      "sample_id": "adv-007-无关注入",
+      "code": "missing_source"
+    },
+    {
+      "sample_id": "adv-007-无关注入",
+      "code": "invalid_gold",
+      "details": [
+        "[faithfulness] 答案数值 「10%」 在检索上下文中无出处（数值幻觉/篡改嫌疑），一票否决"
+      ]
+    },
+    {
+      "sample_id": "adv-008-数字篡改",
+      "code": "missing_source"
+    },
+    {
+      "sample_id": "adv-008-数字篡改",
+      "code": "invalid_gold",
+      "details": [
+        "[completeness] 实体命中率 3/4 = 0.750 低于阈值 1.00; 未命中: 「300元」",
+        "[faithfulness] 答案数值 「301」 在检索上下文中无出处（数值幻觉/篡改嫌疑），一票否决"
+      ]
+    },
+    {
+      "sample_id": "adv-009-实体缺失",
+      "code": "missing_source"
+    },
+    {
+      "sample_id": "adv-009-实体缺失",
+      "code": "invalid_gold",
+      "details": [
+        "[completeness] 实体命中率 2/3 = 0.667 低于阈值 1.00; 未命中: 「600元」"
+      ]
+    },
+    {
+      "sample_id": "adv-010-条件丢失",
+      "code": "missing_source"
+    },
+    {
+      "sample_id": "adv-011-无关注入",
+      "code": "missing_source"
+    },
+    {
+      "sample_id": "adv-011-无关注入",
+      "code": "invalid_gold",
+      "details": [
+        "[faithfulness] 答案数值 「10%」 在检索上下文中无出处（数值幻觉/篡改嫌疑），一票否决"
+      ]
+    },
+    {
+      "sample_id": "adv-012-数字篡改",
+      "code": "missing_source"
+    },
+    {
+      "sample_id": "adv-012-数字篡改",
+      "code": "invalid_gold",
+      "details": [
+        "[completeness] 实体命中率 2/3 = 0.667 低于阈值 1.00; 未命中: 「800元」",
+        "[faithfulness] 答案数值 「801」 在检索上下文中无出处（数值幻觉/篡改嫌疑），一票否决"
+      ]
+    },
+    {
+      "sample_id": "adv-013-实体缺失",
+      "code": "missing_source"
+    },
+    {
+      "sample_id": "adv-013-实体缺失",
+      "code": "invalid_gold",
+      "details": [
+        "[completeness] 实体命中率 4/5 = 0.800 低于阈值 1.00; 未命中: 「乙肝」"
+      ]
+    },
+    {
+      "sample_id": "adv-014-条件丢失",
+      "code": "missing_source"
+    },
+    {
+      "sample_id": "med-ins-001",
+      "code": "missing_source"
+    },
+    {
+      "sample_id": "med-ins-002",
+      "code": "missing_source"
+    },
+    {
+      "sample_id": "med-ins-003",
+      "code": "missing_source"
+    },
+    {
+      "sample_id": "med-ins-004",
+      "code": "missing_source"
+    },
+    {
+      "sample_id": "med-ins-005",
+      "code": "missing_source"
+    },
+    {
+      "code": "ambiguous_question",
+      "question": "城乡居民医保住院在三级医疗机构的起付线和报销比例是多少？",
+      "versions": 7
+    },
+    {
+      "code": "ambiguous_question",
+      "question": "慢性肾病是否纳入门诊慢特病保障范围？统筹基金年度限额和报销比例是多少？",
+      "versions": 2
+    },
+    {
+      "code": "ambiguous_question",
+      "question": "大病保险对困难群体的起付线和报销比例有没有倾斜？",
+      "versions": 19
+    },
+    {
+      "code": "ambiguous_question",
+      "question": "糖尿病是否纳入门诊慢特病保障范围？统筹基金年度限额和报销比例是多少？",
+      "versions": 2
+    },
+    {
+      "code": "ambiguous_question",
+      "question": "帕金森病是否纳入门诊慢特病保障范围？统筹基金年度限额和报销比例是多少？",
+      "versions": 3
+    },
+    {
+      "code": "ambiguous_question",
+      "question": "城乡居民医保住院在二级医疗机构的起付线和报销比例是多少？",
+      "versions": 6
+    },
+    {
+      "code": "ambiguous_question",
+      "question": "类风湿关节炎是否纳入门诊慢特病保障范围？统筹基金年度限额和报销比例是多少？",
+      "versions": 3
+    },
+    {
+      "code": "ambiguous_question",
+      "question": "乙肝是否纳入门诊慢特病保障范围？统筹基金年度限额和报销比例是多少？",
+      "versions": 2
+    },
+    {
+      "code": "ambiguous_question",
+      "question": "城乡居民医保住院在一级及以下医疗机构的起付线和报销比例是多少？",
+      "versions": 7
+    },
+    {
+      "code": "ambiguous_question",
+      "question": "慢阻肺是否纳入门诊慢特病保障范围？统筹基金年度限额和报销比例是多少？",
+      "versions": 2
+    },
+    {
+      "code": "ambiguous_question",
+      "question": "高血压是否纳入门诊慢特病保障范围？统筹基金年度限额和报销比例是多少？",
+      "versions": 2
+    },
+    {
+      "code": "ambiguous_question",
+      "question": "甲状腺功能减退是否纳入门诊慢特病保障范围？统筹基金年度限额和报销比例是多少？",
+      "versions": 4
+    },
+    {
+      "code": "ambiguous_question",
+      "question": "请问城乡居民医保住院在三级医疗机构的起付线和报销比例是多少？（请给出明确数值）",
+      "versions": 4
+    },
+    {
+      "code": "ambiguous_question",
+      "question": "慢性肾病是否纳入门诊慢特病保障范围？统筹基金年度限额和报销比例是多少？若参保人同时为困难群体和退休人员，待遇如何？",
+      "versions": 2
+    },
+    {
+      "code": "ambiguous_question",
+      "question": "帕金森病是否纳入门诊慢特病保障范围？统筹基金年度限额和报销比例是多少？若参保人同时为困难群体和退休人员，待遇如何？",
+      "versions": 2
+    },
+    {
+      "code": "ambiguous_question",
+      "question": "请问城乡居民医保住院在二级医疗机构的起付线和报销比例是多少？（请给出明确数值）",
+      "versions": 4
+    }
+  ]
+}

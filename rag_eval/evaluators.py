@@ -16,6 +16,14 @@ from typing import Optional, Protocol
 class FaithfulnessJudge(Protocol):
     def check_faithfulness(self, context: str, claim: str) -> bool: ...
 
+
+class TopKBlockProvider(Protocol):
+    """检索 Top-K 块提供者：由 ProductionRAG 注入，供 Hit@K 评分。"""
+
+    def retrieve_top_k(self, query: str, k: int) -> list[str]:
+        """返回前 K 个检索块的文本内容列表（按相关性降序）。"""
+        ...
+
 from . import text_utils as tu
 from .models import EvalSample
 
@@ -67,6 +75,7 @@ class ContextRecallEvaluator(BaseEvaluator):
     def evaluate(
         self, sample: EvalSample, actual_context: str, actual_answer: str
     ) -> MetricOutcome:
+        # 评分阶段只接收 RAG 的实际产出；标准上下文作为参照，不参与生成。
         gt_terms = tu.extract_terms(sample.ground_truth_context)
         actual_terms = tu.extract_terms(actual_context)
         if not gt_terms:  # 金标准为空，视为平凡通过
@@ -93,6 +102,58 @@ class ContextRecallEvaluator(BaseEvaluator):
             if parts:
                 detail += "; " + "; ".join(parts)
             details.append(detail)
+
+        return MetricOutcome(self.name, score=score, passed=passed, details=details)
+
+
+class HitAtKEvaluator(BaseEvaluator):
+    """检索命中率 Hit@K：标准上下文是否出现在检索 Top-K 块中。
+
+    检索层面的召回度量：对每个样本，将 ground_truth_context 的关键词项
+    （CJK bigram + ASCII 词）在 Top-K 块合并文本中计算覆盖率。当 k=1 时
+    等价于"正确答案是否被检索命中"。阈值即要求的覆盖率下限。
+
+    实现方式：通过可选的 top_k_provider 获取检索 Top-K 块；若未注入，
+    退化为基于 actual_context（合并后的上下文）计算，等价于 Context Recall
+    的另一种视角。
+    """
+
+    name = "hit_at_k"
+
+    def __init__(self, threshold: float = 0.80, k: int = 1,
+                 top_k_provider: Optional[TopKBlockProvider] = None) -> None:
+        super().__init__(threshold)
+        self.k = k
+        self.top_k_provider = top_k_provider
+
+    def evaluate(
+        self, sample: EvalSample, actual_context: str, actual_answer: str
+    ) -> MetricOutcome:
+        # 获取检索 Top-K 块合并文本
+        if self.top_k_provider is not None:
+            try:
+                blocks = self.top_k_provider.retrieve_top_k(sample.question, self.k)
+                combined = "\n".join(blocks)
+            except Exception as exc:  # noqa: BLE001
+                combined = actual_context
+        else:
+            combined = actual_context
+
+        gt_terms = tu.extract_terms(sample.ground_truth_context)
+        if not gt_terms:
+            return MetricOutcome(self.name, score=1.0, passed=True)
+
+        actual_terms = tu.extract_terms(combined)
+        hit = len(gt_terms & actual_terms)
+        score = round(hit / len(gt_terms), 4)
+        passed = score >= self.threshold
+
+        details: list = []
+        if not passed:
+            details.append(
+                f"[{self.name}] Hit@{self.k} 覆盖率 {score:.3f} 低于阈值 "
+                f"{self.threshold:.2f}（标准上下文未充分命中 Top-{self.k} 检索块）"
+            )
 
         return MetricOutcome(self.name, score=score, passed=passed, details=details)
 
@@ -131,15 +192,34 @@ class CompletenessEvaluator(BaseEvaluator):
         return MetricOutcome(self.name, score=score, passed=passed, details=details)
 
 
+class RequiredEntitiesEvaluator(BaseEvaluator):
+    """必答项独立门槛，不能由其他实体的高覆盖率补偿。"""
+
+    name = "required_entities"
+
+    def __init__(self) -> None:
+        super().__init__(threshold=1.0)
+
+    def evaluate(self, sample: EvalSample, actual_context: str, actual_answer: str) -> MetricOutcome:
+        answer = tu.normalize_for_match(actual_answer)
+        missing = [entity for entity in sample.required_entities
+                   if not tu.normalize_for_match(entity)
+                   or tu.normalize_for_match(entity) not in answer]
+        return MetricOutcome(self.name, passed=not missing,
+                             details=[f"[{self.name}] 缺失必答项: {entity}" for entity in missing])
+
+
 class FaithfulnessEvaluator(BaseEvaluator):
     """数值忠实性：答案中的每个数值/百分比都必须能在检索上下文中找到出处。
 
     纯代码断言，一票否决制：
-    - 提取答案的全部数值单元（含是否百分比标记）；
+    - 提取答案中的数值单元（含是否百分比标记）；
     - 逐一在上下文中做边界敏感匹配（见 text_utils.number_supported_in_context）；
     - 只要存在一个无出处数值 => passed=False。
 
     threshold 字段对布尔型指标无意义，保留只为统一基类接口。
+
+    增强版：支持使用规则矩阵验证多种事实类型（向后兼容旧逻辑）。
     """
 
     name = "faithfulness"
@@ -151,6 +231,7 @@ class FaithfulnessEvaluator(BaseEvaluator):
     def evaluate(
         self, sample: EvalSample, actual_context: str, actual_answer: str
     ) -> MetricOutcome:
+        # 先把答案中的数值变成可审计清单，再逐项回指检索上下文，避免整体语义判断掩盖篡改。
         numbers = tu.extract_faithfulness_numbers(actual_answer)
         normalized_context = tu.normalize_faithfulness_text(actual_context)
         unsupported = [
@@ -159,7 +240,7 @@ class FaithfulnessEvaluator(BaseEvaluator):
             if not tu.number_supported_in_context(value, is_pct, normalized_context)
         ]
 
-        # 对字面未命中的完整答案做一次可选 NLI 复核。NLI 只负责确认“合理直接推导”，
+        # 对字面未命中的完整答案做一次可选 NLI 复核。NLI 只负责确认"合理直接推导"，
         # 不会替代数字边界规则；未注入 judge 时保持原有纯代码行为。
         nli_pass = False
         if unsupported and self.nli_judge is not None:

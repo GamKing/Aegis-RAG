@@ -46,6 +46,14 @@ _MONTH_RE = re.compile(
     r"oct(?:ober)?|nov(?:ember)?|dec(?:ember)?)\b",
     re.IGNORECASE,
 )
+_EN_DATE_RE = re.compile(
+    r"\b(?P<month>jan(?:uary)?|feb(?:ruary)?|mar(?:ch)?|apr(?:il)?|"
+    r"may|jun(?:e)?|jul(?:y)?|aug(?:ust)?|sep(?:t(?:ember)?)?|"
+    r"oct(?:ober)?|nov(?:ember)?|dec(?:ember)?)\s+"
+    r"(?P<day>\d{1,2}),?\s+(?P<year>\d{4})\b",
+    re.IGNORECASE,
+)
+_ISO_DATE_RE = re.compile(r"\b(?P<year>\d{4})-(?P<month>\d{2})-(?P<day>\d{2})\b")
 _SCALE_RE = re.compile(
     r"(?P<value>\d+(?:\.\d+)?)\s*(?P<scale>million|billion)\b",
     re.IGNORECASE,
@@ -70,6 +78,7 @@ def normalize_faithfulness_text(text: str) -> str:
     该函数只做明确的单位/日期等价变换，不把语义短语（如
     ``not assuming``）擅自推断成数字 0。
     """
+    # 先统一字符形态，再做日期和金额等价变换；评分器因此只需比较一种表示。
     normalized = normalize_text(text)
 
     def month_repl(match: re.Match) -> str:
@@ -77,6 +86,17 @@ def normalize_faithfulness_text(text: str) -> str:
         return f"{month}月"
 
     normalized = _MONTH_RE.sub(month_repl, normalized)
+
+    def iso_date_repl(match: re.Match) -> str:
+        return f"{match.group('year')}年{int(match.group('month'))}月{int(match.group('day'))}日"
+
+    normalized = _ISO_DATE_RE.sub(iso_date_repl, normalized)
+
+    def english_date_repl(match: re.Match) -> str:
+        month = _MONTH_NUMBERS[match.group('month').lower()]
+        return f"{match.group('year')}年{month}月{int(match.group('day'))}日"
+
+    normalized = _EN_DATE_RE.sub(english_date_repl, normalized)
 
     def scale_repl(match: re.Match) -> str:
         value = float(match.group("value"))
@@ -125,6 +145,7 @@ def extract_terms(text: str, stopwords=DEFAULT_STOPWORDS) -> set:
     bigram 是中文无词典分词下最稳的词项粒度：既不需要 jieba 这类外部依赖，
     又能对关键短语形成覆盖性度量。
     """
+    # 召回只比较稳定的词项集合，不保留位置，以避免分词差异影响阶段边界。
     text = normalize_text(text)
     terms: set = set()
     for m in _CJK_RUN_RE.finditer(text):
@@ -257,3 +278,109 @@ def truncate_display(text: str, width: int, suffix: str = "...") -> str:
         out.append(ch)
         acc += w
     return "".join(out) + suffix
+
+
+# ---------------------------------------------------------------------------
+# 通用事实校验辅助
+# ---------------------------------------------------------------------------
+
+# 否定词集合：用于检测事实是否包含否定/例外条件
+NEGATION_WORDS = frozenset({
+    "不得", "禁止", "免予", "除外", "不纳入", "不适用", "不可", "不能",
+    "不允许", "不应", "无须", "无需", "非", "无", "不", "否",
+})
+
+# 时效/条件关键词：用于识别限制类事实
+CONDITION_KEYWORDS = frozenset({
+    "仅限", "仅", "必须", "须", "应当", "应", "需", "需要",
+    "之前", "之后", "以内", "以外", "范围内", "范围外",
+    "前提", "条件", "例外", "特殊", "除外",
+})
+
+
+def detect_negation(text: str) -> bool:
+    """检测文本是否包含否定词。
+
+    用于判断事实是否为否定型（如"A药禁止与B药合用"）。
+    """
+    normalized = normalize_text(text)
+    return any(word in normalized for word in NEGATION_WORDS)
+
+
+def extract_condition_keywords(text: str) -> list[str]:
+    """提取文本中的条件/时效关键词。
+
+    用于识别限制类事实（如"仅限2026年前"、"必须备案"）。
+    """
+    normalized = normalize_text(text)
+    return [kw for kw in CONDITION_KEYWORDS if kw in normalized]
+
+
+def entities_co_occur(entity_a: str, entity_b: str, context: str, window: str = "sentence") -> bool:
+    """判断两个实体是否在上下文中同现。
+
+    Args:
+        entity_a: 第一个实体（如"A药"）
+        entity_b: 第二个实体（如"B药"）
+        context: 上下文文本
+        window: 共现窗口，"sentence"（句子）或 "paragraph"（段落）
+
+    Returns:
+        True 如果两个实体在同一窗口内出现
+
+    用于校验实体关系事实（如"禁忌症"需要两个实体在同一段落出现）。
+    """
+    if not entity_a or not entity_b:
+        return False
+
+    norm_a = normalize_for_match(entity_a)
+    norm_b = normalize_for_match(entity_b)
+    norm_context = normalize_text(context)
+
+    if window == "paragraph":
+        # 段落级共现：按双换行分段
+        paragraphs = [p for p in context.split("\n\n") if p.strip()]
+        for para in paragraphs:
+            para_norm = normalize_for_match(para)
+            if norm_a in para_norm and norm_b in para_norm:
+                return True
+        return False
+    else:
+        # 句子级共现：按句号、分号、换行分段
+        sentences = re.split(r"[。；\n]", context)
+        for sent in sentences:
+            sent_norm = normalize_for_match(sent)
+            if norm_a in sent_norm and norm_b in sent_norm:
+                return True
+        return False
+
+
+def extract_entity_pairs(text: str, context: str) -> list[tuple[str, str]]:
+    """从文本中抽取可能的实体对（用于关系事实校验）。
+
+    简单策略：提取所有长度 2-10 的中文词组作为候选实体，
+    然后检查它们是否在上下文中同现。
+
+    这是一个启发式方法，适合无外部 NLP 依赖的场景。
+    """
+    # 提取所有中文连续段
+    cjk_runs = _CJK_RUN_RE.findall(text)
+
+    # 提取长度 2-10 的子串作为候选实体
+    candidates = set()
+    for run in cjk_runs:
+        for i in range(len(run)):
+            for length in range(2, min(11, len(run) - i + 1)):
+                candidates.add(run[i:i + length])
+
+    # 检查哪些候选实体在上下文中出现
+    norm_context = normalize_for_match(context)
+    valid_entities = [c for c in candidates if normalize_for_match(c) in norm_context]
+
+    # 生成实体对（简单策略：取前 N 个实体，两两组合）
+    pairs = []
+    for i in range(len(valid_entities)):
+        for j in range(i + 1, min(i + 5, len(valid_entities))):
+            pairs.append((valid_entities[i], valid_entities[j]))
+
+    return pairs[:10]  # 限制返回数量，避免组合爆炸

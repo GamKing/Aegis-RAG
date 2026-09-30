@@ -18,6 +18,7 @@ from .evaluators import (
     CompletenessEvaluator,
     ContextRecallEvaluator,
     FaithfulnessEvaluator,
+    RequiredEntitiesEvaluator,
 )
 from .models import EvalResult, EvalSample, EvalSummary
 
@@ -44,6 +45,7 @@ def build_default_evaluators(config: EvalConfig) -> list:
         ContextRecallEvaluator(threshold=config.context_recall_threshold),
         CompletenessEvaluator(threshold=config.completeness_threshold),
         FaithfulnessEvaluator(),
+        RequiredEntitiesEvaluator(),
     ]
 
 
@@ -52,6 +54,7 @@ def _case_passed(result: EvalResult, config: EvalConfig) -> bool:
         result.context_recall_score >= config.context_recall_threshold
         and result.completeness_score >= config.completeness_threshold
         and result.faithfulness_pass
+        and result.required_entities_pass
     )
 
 
@@ -62,11 +65,16 @@ def evaluate_sample(
     config: EvalConfig,
 ) -> EvalResult:
     """跑通单个样本：调用 RAG -> 依次执行评分器 -> 汇总为 EvalResult。"""
+    # 先完成被测 RAG 的一次端到端产出，再把同一响应交给各评分器，保证指标可对照。
     response = rag.retrieve_and_generate(sample)
 
     error_details: list = []
     scores: dict = {}
     faithfulness_pass = True
+    # 即便调用方替换评分器列表，必答门槛也不能被意外绕过。
+    mandatory = RequiredEntitiesEvaluator().evaluate(sample, response.context, response.answer)
+    required_entities_pass = mandatory.passed
+    error_details.extend(mandatory.details)
 
     for evaluator in evaluators:
         try:
@@ -80,17 +88,21 @@ def evaluate_sample(
             )
             if evaluator.name == "faithfulness":
                 faithfulness_pass = False  # 忠实性不可判定时保守判失败
+            elif evaluator.name == "required_entities":
+                required_entities_pass = False
             else:
                 scores[evaluator.name] = 0.0
             continue
 
         if evaluator.name == "faithfulness":
             faithfulness_pass = outcome.passed
+        elif evaluator.name == "required_entities":
+            required_entities_pass = required_entities_pass and outcome.passed
         else:
             scores[evaluator.name] = (
                 outcome.score if outcome.score is not None else 0.0
             )
-        if not outcome.passed:
+        if not outcome.passed and evaluator.name != "required_entities":
             error_details.extend(outcome.details)
 
     return EvalResult(
@@ -100,6 +112,7 @@ def evaluate_sample(
         context_recall_score=round(scores.get("context_recall", 0.0), 4),
         completeness_score=round(scores.get("completeness", 0.0), 4),
         faithfulness_pass=faithfulness_pass,
+        required_entities_pass=required_entities_pass,
         error_details=error_details,
     )
 
@@ -139,6 +152,7 @@ def run_eval_pipeline(
                     context_recall_score=0.0,
                     completeness_score=0.0,
                     faithfulness_pass=False,
+                    required_entities_pass=False,
                     error_details=[f"[harness] 样本评测链路异常: {exc!r}"],
                 )
             )
@@ -158,6 +172,7 @@ def run_eval_pipeline(
             results=[],
         )
 
+    # 聚合阶段只读取已落盘的单样本结果；通过率按整案门槛计算，避免平均分掩盖失败样本。
     passed = sum(1 for r in results if _case_passed(r, config))
     avg_recall = sum(r.context_recall_score for r in results) / total
     avg_completeness = sum(r.completeness_score for r in results) / total

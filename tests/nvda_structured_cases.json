@@ -1,0 +1,130 @@
+[
+  {
+    "id": "nvda_case_01_multimetric",
+    "category": "多口径对比 (GAAP vs Non-GAAP)",
+    "question": "NVIDIA 在 2027 财年第二季度的 GAAP 和 Non-GAAP 稀释每股收益分别是多少？净利润分别是多少？",
+    "expected_chunk_ids": ["chunk_p1_lead_summary", "chunk_p6_reconciliation_table"],
+    "ground_truth_context": "NVIDIA today reported revenue for the second quarter ended July 26, 2026, of $96.2 billion... GAAP and non-GAAP earnings per diluted share were $2.46 and $2.22, respectively... GAAP Net income $59,688 million, Non-GAAP Net income $53,954 million.",
+    "expected_extracted_json": {
+      "direct_answer": "Q2 FY27 的 GAAP 与 Non-GAAP 稀释每股收益分别为 $2.46 与 $2.22，净利润分别为 $59,688 million 与 $53,954 million。",
+      "numerical_facts": [
+        {"entity_name": "GAAP Diluted EPS", "value": "2.46", "unit": "USD"},
+        {"entity_name": "Non-GAAP Diluted EPS", "value": "2.22", "unit": "USD"},
+        {"entity_name": "GAAP Net Income", "value": "59,688", "unit": "million USD"},
+        {"entity_name": "Non-GAAP Net Income", "value": "53,954", "unit": "million USD"}
+      ],
+      "conditions_and_exceptions": ["针对截至 2026 年 7 月 26 日的第二季度"],
+      "source_quote": "GAAP and non-GAAP earnings per diluted share were $2.46 and $2.22, respectively."
+    },
+    "expected_entities": ["2.46", "2.22", "59,688", "53,954"],
+    "ground_truth_answer": "在 2027 财年第二季度，NVIDIA 的 GAAP 稀释每股收益为 $2.46，净利润为 596.88 亿美元（$59,688 million）；Non-GAAP 稀释每股收益为 $2.22，净利润为 539.54 亿美元（$53,954 million）。"
+  },
+  {
+    "id": "nvda_case_02_conditional_dividend",
+    "category": "多条件与日期约束 (Date & Condition)",
+    "question": "NVIDIA 下一次季度现金股息是多少？将在什么时候发放给哪些股东？",
+    "expected_chunk_ids": ["chunk_p1_dividend_statement"],
+    "ground_truth_context": "NVIDIA will pay its next quarterly cash dividend of $0.25 per share on October 1, 2026, to all shareholders of record on September 10, 2026.",
+    "expected_extracted_json": {
+      "direct_answer": "下一次季度现金股息为每股 $0.25，将于 2026 年 10 月 1 日派发。",
+      "numerical_facts": [
+        {"entity_name": "Quarterly Cash Dividend", "value": "0.25", "unit": "USD/share"},
+        {"entity_name": "Payment Date", "value": "2026-10-01", "unit": "date"},
+        {"entity_name": "Record Date", "value": "2026-09-10", "unit": "date"}
+      ],
+      "conditions_and_exceptions": ["派发对象仅限于在 2026 年 9 月 10 日登记在册的股东"],
+      "source_quote": "NVIDIA will pay its next quarterly cash dividend of $0.25 per share on October 1, 2026, to all shareholders of record on September 10, 2026."
+    },
+    "expected_entities": ["0.25", "2026-10-01", "2026-09-10"],
+    "ground_truth_answer": "NVIDIA 将于 2026 年 10 月 1 日向截至 2026 年 9 月 10 日登记在册的所有股东派发每股 $0.25 的季度现金股息。"
+  },
+  {
+    "id": "nvda_case_03_nli_entailment",
+    "category": "定性转定量语义推断 (NLI Entailment)",
+    "question": "NVIDIA 在对 2027 财年第三季度的业绩展望中，预计来自中国市场的数据中心计算收入是多少？",
+    "expected_chunk_ids": ["chunk_p2_outlook_guidance"],
+    "ground_truth_context": "Revenue is expected to be $108.0 billion, plus or minus 2%. NVIDIA is not assuming any Data Center compute revenue from China in its outlook.",
+    "expected_extracted_json": {
+      "direct_answer": "NVIDIA 在 Q3 展望中未假定任何来自中国的数据中心计算收入（视为 0）。",
+      "numerical_facts": [
+        {"entity_name": "China Data Center Compute Revenue Outlook", "value": "0", "unit": "USD"}
+      ],
+      "conditions_and_exceptions": ["展望模型中明确假设不包含来自中国的计算收入 (not assuming)"],
+      "source_quote": "NVIDIA is not assuming any Data Center compute revenue from China in its outlook."
+    },
+    "expected_entities": ["not assuming", "0", "未计入"],
+    "ground_truth_answer": "NVIDIA 在对 2027 财年第三季度的业绩展望中，明确表示未计入（not assuming）任何来自中国市场的数据中心计算收入。"
+  },
+  {
+    "id": "nvda_case_04_range_tolerance",
+    "category": "前瞻容差与浮动区间 (Range/Tolerance)",
+    "question": "公司对 2027 财年第三季度的营收和毛利率预期分别是多少？",
+    "expected_chunk_ids": ["chunk_p2_outlook_guidance"],
+    "ground_truth_context": "Revenue is expected to be $108.0 billion, plus or minus 2%... GAAP and non-GAAP gross margins are expected to be 74.0%, plus or minus 50 basis points.",
+    "expected_extracted_json": {
+      "direct_answer": "营收预期约为 108.0 billion 美元，毛利率预期约为 74.0%。",
+      "numerical_facts": [
+        {"entity_name": "Expected Revenue", "value": "108.0", "unit": "billion USD"},
+        {"entity_name": "Revenue Tolerance", "value": "2", "unit": "%"},
+        {"entity_name": "Expected Gross Margin", "value": "74.0", "unit": "%"},
+        {"entity_name": "Margin Tolerance", "value": "50", "unit": "basis points"}
+      ],
+      "conditions_and_exceptions": ["营收浮动区间为正负 2%", "GAAP 与 Non-GAAP 毛利率浮动区间均为正负 50 个基点"],
+      "source_quote": "Revenue is expected to be $108.0 billion, plus or minus 2%... GAAP and non-GAAP gross margins are expected to be 74.0%, plus or minus 50 basis points."
+    },
+    "expected_entities": ["108.0", "2%", "74.0%", "50"],
+    "ground_truth_answer": "NVIDIA 预计 2027 财年第三季度营收为 1080 亿美元（$108.0 billion），浮动区间为 ±2%；GAAP 与 Non-GAAP 毛利率预计均为 74.0%，浮动区间为 ±50 个基点。"
+  },
+  {
+    "id": "nvda_case_05_unit_conversion",
+    "category": "量纲换算与细分业务 (Normalization)",
+    "question": "Data Center 业务在 2027 财年第二季度的营收是多少？环比和同比增速分别是多少？",
+    "expected_chunk_ids": ["chunk_p1_lead_summary", "chunk_p2_datacenter_highlights"],
+    "ground_truth_context": "Data Center revenue was $89.0 billion, up 18% from the previous quarter and up 117% from a year ago.",
+    "expected_extracted_json": {
+      "direct_answer": "数据中心第二季度营收为 89.0 billion 美元，环比增长 18%，同比增长 117%。",
+      "numerical_facts": [
+        {"entity_name": "Data Center Revenue", "value": "89.0", "unit": "billion USD"},
+        {"entity_name": "Q/Q Growth", "value": "18", "unit": "%"},
+        {"entity_name": "Y/Y Growth", "value": "117", "unit": "%"}
+      ],
+      "conditions_and_exceptions": ["对应 2027 财年第二季度"],
+      "source_quote": "Second-quarter revenue was $89.0 billion, up 18% from the previous quarter and up 117% from a year ago."
+    },
+    "expected_entities": ["89.0", "18%", "117%"],
+    "ground_truth_answer": "2027 财年第二季度数据中心业务营收达到 890 亿美元（$89.0 billion），环比上一季度增长 18%，同比去年同期大幅增长 117%。"
+  },
+  {
+    "id": "nvda_case_06_adversarial_extraction",
+    "category": "对抗负样本测试 (Adversarial / Hallucination Interception)",
+    "question": "第二季度 Edge Computing（边缘计算）业务的营收是多少？环比增长多少？",
+    "expected_chunk_ids": ["chunk_p3_edge_computing_highlights"],
+    "ground_truth_context": "Second-quarter Edge Computing revenue was $7.2 billion, up 13% from the previous quarter and up 27% from a year ago.",
+    "expected_extracted_json": {
+      "direct_answer": "边缘计算营收为 7.2 billion 美元，环比增长 13%。",
+      "numerical_facts": [
+        {"entity_name": "Edge Computing Revenue", "value": "7.2", "unit": "billion USD"},
+        {"entity_name": "Q/Q Growth", "value": "13", "unit": "%"}
+      ],
+      "conditions_and_exceptions": [],
+      "source_quote": "Second-quarter Edge Computing revenue was $7.2 billion, up 13% from the previous quarter and up 27% from a year ago."
+    },
+    "expected_entities": ["7.2", "13%"],
+    "ground_truth_answer": "第二季度边缘计算（Edge Computing）业务营收为 72 亿美元（$7.2 billion），环比上一季度增长 13%。"
+  },
+  {
+    "id": "nvda_case_07_unmentioned_boundary",
+    "category": "未提及事实防脑补 (Hallucination Prevention)",
+    "question": "财报中披露的下季度自动驾驶汽车芯片（DRIVE Thor）单独营收预期是多少？",
+    "expected_chunk_ids": ["chunk_p2_outlook_guidance", "chunk_p3_edge_computing_highlights"],
+    "ground_truth_context": "Certain statements in this press release... NVIDIA is not assuming any Data Center compute revenue from China in its outlook... Expanded the NVIDIA DRIVE Hyperion robotaxi-ready platform ecosystem.",
+    "expected_extracted_json": {
+      "direct_answer": "财报中未单独披露 DRIVE Thor 芯片的下季度营收预期。",
+      "numerical_facts": [],
+      "conditions_and_exceptions": ["材料中仅提及 DRIVE Hyperion 生态合作，未给出具体营收数字预期"],
+      "source_quote": ""
+    },
+    "expected_entities": ["未披露", "未提及"],
+    "ground_truth_answer": "财报及业绩展望中并未单独列出或披露关于 DRIVE Thor 自动驾驶芯片的独立营收预期数据。"
+  }
+]

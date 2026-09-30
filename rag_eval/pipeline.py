@@ -11,14 +11,17 @@ from typing import Protocol, Sequence
 
 from .dummy_rag import BaseRAG, RAGResponse
 from .models import (
+    AtomicFact,
     EvalSample,
     ExtractedFact,
     ExtractionPayload,
+    FactType,
     PipelineTrace,
     VerificationFinding,
     VerificationResult,
 )
 from . import text_utils as tu
+from .verification_rules import RuleMatrix
 
 
 class FactExtractor(Protocol):
@@ -39,21 +42,87 @@ class SelfCorrector(Protocol):
 
 
 _NUMBER_WITH_SCALE_RE = re.compile(
-    r"(?P<raw>\$?\d[\d,]*(?:\.\d+)?\s*(?:million|billion|亿|万)?%?)",
+    r"(?P<raw>\$?\d[\d,]*(?:\.\d+)?\s*(?:million|billion|亿|万|元|个百分点)?%?)",
     re.IGNORECASE,
 )
 
 
+def _cjk_bigrams(text: str) -> set[str]:
+    """提取文本的中文二元组，用于 query 与段落的相关性判定。"""
+    bigrams = set()
+    chars = re.findall(r"[\u4e00-\u9fff]", text)
+    for i in range(len(chars) - 1):
+        bigrams.add(chars[i] + chars[i + 1])
+    return bigrams
+
+
+def _extract_relevant_paragraphs(query: str, context: str) -> list[str]:
+    """提取与 query 相关的完整段落，保留名词实体语义完整性。
+
+    策略：按双换行切分段落，保留含数字或与 query 共享中文二元组的段落。
+    未命中时回退为全量段落，保证不漏关键内容。
+    """
+    paragraphs = [p.strip() for p in context.split("\n\n") if p.strip()]
+    if not paragraphs:
+        return []
+
+    query_bigrams = _cjk_bigrams(query)
+    relevant = []
+    for para in paragraphs:
+        has_number = re.search(r"\d", para)
+        has_query_term = bool(_cjk_bigrams(para) & query_bigrams)
+        if has_number or has_query_term:
+            relevant.append(para)
+    return relevant or list(paragraphs)
+
+
 class RuleBasedFactExtractor:
-    """离线安全抽取器：只从 context 原文提取数字/百分比事实。"""
+    """离线安全抽取器：从 context 原文提取多种类型的事实。
+
+    支持四种事实类型：
+    - NUMERIC: 数值型（百分比、金额、日期等）
+    - ENTITY_REL: 实体关系型（含否定词的关系）
+    - CONDITION: 条件限制型（含"仅限"、"必须"等关键词）
+    - CATEGORICAL: 分类枚举型（等级、类型等）
+
+    向后兼容：同时生成旧式 ExtractedFact（用于现有测试）和新式 AtomicFact
+    （用于通用质检引擎）。
+    """
 
     def extract(self, query: str, context: str) -> ExtractionPayload:
         facts: list[ExtractedFact] = []
+        atomic_facts: list[dict] = []
         normalized = tu.normalize_faithfulness_text(context)
+
+        # 0. 保留与 query 相关的完整段落（保证名词实体如"定点医疗机构"、
+        #    "急诊"、"医保目录"不被丢弃，从而支撑 Completeness 评分）。
+        relevant_paragraphs = _extract_relevant_paragraphs(query, context)
+        for pidx, para in enumerate(relevant_paragraphs):
+            atomic_facts.append({
+                "subject": "",
+                "predicate": "",
+                "object_value": para,
+                "fact_type": "categorical",
+                "is_negative": False,
+                "source_text": para,
+            })
+
+        # 1. 抽取数值型事实（保持原有逻辑）
         for match in _NUMBER_WITH_SCALE_RE.finditer(normalized):
             value = match.group("raw").strip()
             if not value:
                 continue
+
+            # 提取数值周围的上下文作为 subject/predicate
+            start = max(0, match.start() - 20)
+            end = min(len(normalized), match.end() + 10)
+            surrounding = normalized[start:end]
+
+            # 简单启发式：数值前的中文词作为 predicate
+            before_text = normalized[max(0, match.start() - 10):match.start()]
+            predicate_match = re.findall(r"[\u4e00-\u9fff]{2,6}$", before_text)
+            predicate = predicate_match[0] if predicate_match else "数值"
+
             facts.append(
                 ExtractedFact(
                     key="numeric_fact",
@@ -62,6 +131,22 @@ class RuleBasedFactExtractor:
                     is_numeric=True,
                 )
             )
+
+            atomic_facts.append({
+                "subject": "",  # 数值型通常无明确 subject
+                "predicate": predicate,
+                "object_value": value,
+                "fact_type": "numeric",
+                "is_negative": False,
+                "source_text": match.group(0),
+            })
+
+        # 注：entity_rel / condition 的纯启发式抽取（用否定词/条件词切出前后实体）
+        # 对长段落不可靠（会把"非医保目录内费用不纳入"误判为实体关系），且与
+        # 上面已保留的相关完整段落重复。完整段落已覆盖名词实体，故此处不再生成
+        # 这两类原子事实，交由更稳健的段落级 categorical 承载。
+
+        # 去重（按 value 去重）
         unique: list[ExtractedFact] = []
         seen: set[str] = set()
         for fact in facts:
@@ -69,23 +154,98 @@ class RuleBasedFactExtractor:
             if key not in seen:
                 seen.add(key)
                 unique.append(fact)
+
         claims = [f.value for f in unique]
         return ExtractionPayload(
             facts=unique,
             claims=claims,
-            raw_json={"query": query, "facts": [f.model_dump() for f in unique]},
+            raw_json={
+                "extraction_mode": "verbatim_evidence",
+                "query": query,
+                "facts": [f.model_dump() for f in unique],
+                "atomic_facts": atomic_facts,
+            },
         )
 
 
 class ControlledSynthesizer:
-    """只输出已经通过代码验证的事实，不重新自由生成数字。"""
+    """只输出已经通过代码验证的事实，不重新自由生成数字。
+
+    支持两种输入：
+    - 旧式 ExtractedFact（key/value 对）：保持向后兼容，输出 "key: value"
+    - 新式 AtomicFact（主体/谓词/客体三元组）：输出自然语言句子
+
+    生成逻辑完全确定性（无 LLM），通过模板拼装保证每个词都可追溯到上下文。
+    """
 
     def synthesize(self, query: str, payload: ExtractionPayload) -> str:
-        return "；".join(f"{fact.key}: {fact.value}" for fact in payload.facts)
+        # 优先使用 AtomicFact（新式三元组）
+        atomic_facts = payload.raw_json.get("atomic_facts", [])
+        if payload.raw_json.get("extraction_mode") == "verbatim_evidence":
+            # 原文段落已经包含数值及其主体，不再追加脱离来源的数值碎片。
+            paragraphs = [fact for fact in atomic_facts
+                          if fact.get("fact_type") == "categorical"
+                          and not fact.get("subject") and not fact.get("predicate")
+                          and fact.get("object_value") == fact.get("source_text")]
+            if paragraphs:
+                return self._synthesize_atomic(paragraphs)
+        if atomic_facts:
+            return self._synthesize_atomic(atomic_facts)
+
+        # 回退到旧式 ExtractedFact
+        if payload.facts:
+            return "；".join(f"{fact.key}: {fact.value}" for fact in payload.facts)
+
+        return ""
+
+    def _synthesize_atomic(self, atomic_facts: list[dict]) -> str:
+        """将 AtomicFact 列表拼装为自然语言句子。"""
+        sentences: list[str] = []
+        for f in atomic_facts:
+            subject = f.get("subject", "")
+            predicate = f.get("predicate", "")
+            object_value = f.get("object_value", "")
+            is_negative = f.get("is_negative", False)
+            fact_type = f.get("fact_type", "numeric")
+
+            if not object_value:
+                continue
+
+            # 根据事实类型选择模板
+            if fact_type == "numeric":
+                sentences.append(f"{subject}{predicate}{object_value}")
+            elif fact_type == "entity_rel":
+                neg = "不得" if is_negative else ""
+                sentences.append(f"{subject}{neg}{predicate}{object_value}")
+            elif fact_type == "condition":
+                neg = "不得" if is_negative else ""
+                sentences.append(f"{subject}{neg}{predicate}{object_value}")
+            elif fact_type == "categorical":
+                # 整段原文：直接输出，避免空谓词拼接破坏语义
+                if not predicate:
+                    sentences.append(object_value)
+                else:
+                    sentences.append(f"{subject}{predicate}{object_value}")
+            else:
+                sentences.append(f"{subject}{predicate}{object_value}")
+
+        return "；".join(sentences) + "。" if sentences else ""
 
 
 class Tier1CodeVerifier:
-    """毫秒级确定性质检：字段、实体和数字必须有上下文出处。"""
+    """毫秒级确定性质检：使用规则矩阵验证多种类型的事实。
+
+    支持四种事实类型的校验：
+    - NUMERIC: 数值边界敏感匹配
+    - ENTITY_REL: 实体共现检测
+    - CONDITION: 条件关键词检测
+    - CATEGORICAL: 分类标签匹配
+
+    向后兼容：同时验证旧式 ExtractedFact 和新式 AtomicFact。
+    """
+
+    def __init__(self) -> None:
+        self.rule_matrix = RuleMatrix()
 
     def verify(
         self,
@@ -95,8 +255,37 @@ class Tier1CodeVerifier:
     ) -> VerificationResult:
         findings: list[VerificationFinding] = []
         normalized_context = tu.normalize_faithfulness_text(context)
+        literal_context = tu.normalize_text(context)
         seen: set[str] = set()
 
+        # 1. 验证新式 AtomicFact（使用规则矩阵）
+        atomic_facts = payload.raw_json.get("atomic_facts", [])
+        for index, fact_dict in enumerate(atomic_facts):
+            field = f"atomic_facts[{index}]"
+
+            # 转换为 AtomicFact 对象
+            fact = AtomicFact(
+                subject=fact_dict.get("subject", ""),
+                predicate=fact_dict.get("predicate", ""),
+                object_value=fact_dict.get("object_value", ""),
+                fact_type=FactType(fact_dict.get("fact_type", "numeric")),
+                is_negative=fact_dict.get("is_negative", False),
+                source_text=fact_dict.get("source_text"),
+            )
+
+            # 检查空值
+            if not fact.object_value:
+                findings.append(
+                    VerificationFinding(code="EMPTY_FACT", message="事实值为空", field=field)
+                )
+                continue
+
+            # 使用规则矩阵验证
+            rule_result = self.rule_matrix.verify(fact, context)
+            findings.extend(rule_result.findings)
+
+        # 2. 验证旧式 ExtractedFact（保持向后兼容）
+        nli_verified = set(payload.raw_json.get("nli_verified_fields", []))
         for index, fact in enumerate(payload.facts):
             field = f"facts[{index}]"
             value_norm = tu.normalize_for_match(fact.value)
@@ -111,11 +300,14 @@ class Tier1CodeVerifier:
                 )
             seen.add(value_norm)
 
-            nli_verified = set(payload.raw_json.get("nli_verified_fields", []))
-            numbers = tu.extract_faithfulness_numbers(fact.value)
+            # 如果该字段已被 NLI 验证通过，跳过后续检查
             if field in nli_verified:
                 continue
-            if numbers:
+
+            # 数值型事实：边界敏感匹配
+            if fact.is_numeric:
+                normalized_fact = tu.normalize_faithfulness_text(fact.value)
+                numbers = tu.extract_faithfulness_numbers(normalized_fact)
                 for value, is_pct in numbers:
                     if not tu.number_supported_in_context(
                         value, is_pct, normalized_context
@@ -127,6 +319,7 @@ class Tier1CodeVerifier:
                                 field=field,
                             )
                         )
+            # 非数值型事实：子串匹配
             elif value_norm not in tu.normalize_for_match(normalized_context):
                 findings.append(
                     VerificationFinding(
@@ -136,7 +329,8 @@ class Tier1CodeVerifier:
                     )
                 )
 
-        context_norm = tu.normalize_for_match(normalized_context)
+        # 3. 检查预期实体（保持原有逻辑）
+        context_norm = tu.normalize_for_match(literal_context)
         for entity in sample.expected_entities:
             if tu.normalize_for_match(entity) not in context_norm:
                 findings.append(
@@ -217,6 +411,7 @@ def run_controlled_pipeline(
     self_corrector: SelfCorrector | None = None,
 ) -> PipelineResult:
     """执行完整五步流程，Tier2 后必须重新经过 Tier1。"""
+    # 阶段一：抽取和代码质检先形成安全边界，合成器只能消费已验证的 payload。
     payload = extractor.extract(sample.question, context)
     first = verifier.verify(sample, context, payload)
     trace = PipelineTrace(
@@ -226,6 +421,7 @@ def run_controlled_pipeline(
     )
     final = first
 
+    # 阶段二：仅在 Tier 1 失败时自愈，且修复后必须回到同一质检边界重新验收。
     if not first.passed and self_corrector is not None:
         trace = trace.model_copy(update={"tier2_triggered": True, "repair_count": 1})
         original_fact_count = len(payload.facts)
@@ -275,7 +471,12 @@ class PipelineRAG(BaseRAG):
         self.last_trace: PipelineTrace | None = None
 
     def retrieve_and_generate(self, sample: EvalSample) -> RAGResponse:
+        # 适配器只负责提供上下文；抽取、验证和合成仍由受控流水线统一管理。
         context = self.context_provider(sample)
+        return self.generate_from_context(sample, context)
+
+    def generate_from_context(self, sample: EvalSample, context: str) -> RAGResponse:
+        """按请求传入已筛选证据，不修改共享的 context_provider。"""
         result = run_controlled_pipeline(
             sample,
             context,

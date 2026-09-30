@@ -54,11 +54,12 @@ def render_report(summary: EvalSummary, questions: Optional[Mapping] = None) -> 
     )
     lines.append(_DIV)
     lines.append("")
+    lines.append("额外硬门槛: 已声明的必答项必须全部命中（REQUIRED == PASS）")
 
     # [1] 逐样本明细 ----------------------------------------------------------
     lines.append("[1] 逐样本明细")
-    headers = ["CASE ID", "问题(截断)", "RECALL", "COMPLETE", "FAITH", "VERDICT"]
-    aligns = ["left", "left", "right", "right", "center", "center"]
+    headers = ["CASE ID", "问题(截断)", "RECALL", "COMPLETE", "FAITH", "REQUIRED", "VERDICT"]
+    aligns = ["left", "left", "right", "right", "center", "center", "center"]
     rows = []
     for r in summary.results:
         rows.append(
@@ -68,6 +69,7 @@ def render_report(summary: EvalSummary, questions: Optional[Mapping] = None) -> 
                 _fmt(r.context_recall_score),
                 _fmt(r.completeness_score),
                 "PASS" if r.faithfulness_pass else "FAIL",
+                "PASS" if r.required_entities_pass else "FAIL",
                 "PASS" if summary.is_case_passed(r) else "FAIL",
             ]
         )

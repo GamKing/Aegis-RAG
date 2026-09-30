@@ -1,3 +1,16 @@
 __pycache__/
 *.py[cod]
 .zcode/
+
+# Java build output
+out_syntaxcheck/
+target/
+*.class
+*.jar
+
+# Virtual envs
+.venv/
+venv/
+
+# Local snapshots / archives
+*.zip

@@ -1,0 +1,30 @@
+[
+  {
+    "id": "nvda_case_01",
+    "question": "NVIDIA 在 2027 财年第二季度的 GAAP 和 Non-GAAP 稀释每股收益分别是多少？净利润分别是多少？",
+    "ground_truth_context": "For the quarter, GAAP and non-GAAP gross margins were both 75.0%. GAAP and non-GAAP earnings per diluted share were $2.46 and $2.22, respectively... GAAP Net income $59,688 million, Non-GAAP Net income $53,954 million.",
+    "ground_truth_answer": "GAAP 稀释每股收益为 $2.46，净利润为 $59,688 million（约 596.88 亿美元）；Non-GAAP 稀释每股收益为 $2.22，净利润为 $53,954 million（约 539.54 亿美元）。",
+    "expected_entities": ["$2.46", "$2.22", "59,688", "53,954"]
+  },
+  {
+    "id": "nvda_case_02",
+    "question": "NVIDIA 下一次季度现金股息是多少？将在什么时候发放给哪些股东？",
+    "ground_truth_context": "NVIDIA will pay its next quarterly cash dividend of $0.25 per share on October 1, 2026, to all shareholders of record on September 10, 2026.",
+    "ground_truth_answer": "NVIDIA 将于 2026 年 10 月 1 日向 2026 年 9 月 10 日登记在册的所有股东派发每股 $0.25 的季度现金股息。",
+    "expected_entities": ["$0.25", "2026", "10", "1", "9"]
+  },
+  {
+    "id": "nvda_case_03",
+    "question": "NVIDIA 在对 2027 财年第三季度的业绩展望中，预计来自中国市场的数据中心计算收入是多少？",
+    "ground_truth_context": "Revenue is expected to be $108.0 billion, plus or minus 2%. NVIDIA is not assuming any Data Center compute revenue from China in its outlook.",
+    "ground_truth_answer": "NVIDIA 在第三季度业绩展望中，未计入任何来自中国的数据中心计算收入。",
+    "expected_entities": ["not assuming", "中国", "未计入"]
+  },
+  {
+    "id": "nvda_case_04",
+    "question": "公司对 2027 财年第三季度的营收和毛利率预期分别是多少？",
+    "ground_truth_context": "Revenue is expected to be $108.0 billion, plus or minus 2%... GAAP and non-GAAP gross margins are expected to be 74.0%, plus or minus 50 basis points.",
+    "ground_truth_answer": "营收预计为 1080 亿美元（$108.0 billion），浮动区间 ±2%；GAAP 与 Non-GAAP 毛利率预计均为 74.0%，浮动区间 ±50 个基点。",
+    "expected_entities": ["108.0", "2%", "74.0%", "50"]
+  }
+]

@@ -38,6 +38,7 @@ class DummyRAG(BaseRAG):
         self._presets = dict(presets)
 
     def retrieve_and_generate(self, sample: EvalSample) -> RAGResponse:
+        # 查表结果让测试精确控制检索/生成的边界，未命中则显式模拟最差响应。
         preset = self._presets.get(sample.id)
         if preset is not None:
             return preset

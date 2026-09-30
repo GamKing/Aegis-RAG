@@ -1,5 +1,32 @@
 # Offline RAG Eval Harness（离线 RAG 评测套件 · 基础版）
 
+## 当前质量基线（2026-09-30）
+
+修复原因、方案与验证见 [来源约束与必答项修复报告](reports/SOURCE_GROUNDING_FIX.md)。
+修复前审计保留在 [质量基线审计报告](reports/QUALITY_BASELINE.md)。
+默认数据集已修正为恰好 100 条：55 合成、25 边界、15 对抗、5 种子。
+问题显式指定虚构政策版本；对抗候选与正确标准答案分开存储。
+
+```bash
+# 固定数据集：审计 + Top-3 检索 + 正确上下文对照 + 对抗检出
+python -m rag_eval.scissors_check --dataset golden_dataset_100.json --output reports/baseline_v3.json
+
+# Top-1 仅作诊断对照，不替代默认 Top-3 验收
+python -m rag_eval.scissors_check --dataset golden_dataset_100.json --top-k 1 --output reports/baseline_v3_top1.json
+```
+
+当前基线门禁预期返回 **0**：Top-3 召回后按用户指定来源筛选，100 条问答通过；
+必答项独立门槛使 15 条错误候选全部检出，完整性覆盖阈值仍为 0.8。
+新增 `source_id` 用于来源命中核验，`candidate_answer` 用于独立评分器测试；
+该合成数据集只证明机制行为，不代表真实政策问答质量。
+
+生产接入时请在块元数据填写 `scope_id`（同一政策版本的多个块共享该值），
+并通过问题中的 `【来源 id】` / `[source: id]` 或
+`ProductionRAG.retrieve_and_generate(sample, requested_sources=[...])` 指定来源。
+`sample.source_id` 仅供评测使用，不参与生产来源选择。多个版本缺少选择条件时抛出
+`SourceScopeError(code="AMBIGUOUS_SOURCE")`，由调用层提示用户澄清。
+`required_entities` 是评测侧必答项；实际业务应根据需求维护这些标注。
+
 面向工业级 RAG 系统的离线自动化评测套件：不依赖任何在线模型服务，用纯代码断言
 对「检索质量 / 答案完整性 / 数值忠实性」三个维度做可复现评测，并输出结构化
 ASCII 报表（含失败归因与指标剪刀差提示）。

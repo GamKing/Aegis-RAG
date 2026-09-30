@@ -1,0 +1,3501 @@
+{
+  "schema_version": 2,
+  "total": 100,
+  "top_k": 1,
+  "indexed_chunks": 69,
+  "data_issues": [],
+  "categories": {
+    "synthetic": 55,
+    "edge": 25,
+    "adversarial": 15,
+    "seed": 5
+  },
+  "metrics": {
+    "context_recall": 1.0,
+    "completeness": 1.0,
+    "faithfulness": 1.0,
+    "legacy_case_pass_rate": 1.0,
+    "source_hit_rate": 1.0,
+    "oracle_case_pass_rate": 1.0,
+    "grounded_case_pass_rate": 1.0
+  },
+  "classifications": {
+    "pass": 100
+  },
+  "adversarial_total": 15,
+  "adversarial_detected": 13,
+  "gate_passed": false,
+  "limitations": [
+    "合成政策版本检索，不代表真实业务泛化质量。",
+    "忠实性仅检查数值出处，不证明事实归属、非数值语义或答案相关性。",
+    "失败分类是诊断线索，仍需逐例检查混入文档与生成选择。"
+  ],
+  "cases": [
+    {
+      "sample_id": "syn-000",
+      "category": "synthetic",
+      "question": "【模拟政策 policy_a】城乡居民医保住院在三级医疗机构的起付线、报销比例和年度封顶线是多少？",
+      "expected_source": "policy_a",
+      "retrieved_sources": [
+        "policy_a"
+      ],
+      "source_hit": true,
+      "oracle_passed": true,
+      "metric_passed": true,
+      "gold_numeric_supported": true,
+      "classification": "pass",
+      "actual": {
+        "sample_id": "syn-000",
+        "actual_context": "【模拟政策 policy_a】城乡居民基本医疗保险住院待遇标准：三级医疗机构起付线200元，政策范围内费用报销比例55%；一个自然年度内，基本医保统筹基金最高支付限额（封顶线）为20万元。",
+        "actual_answer": "【模拟政策 policy_a】城乡居民基本医疗保险住院待遇标准：三级医疗机构起付线200元，政策范围内费用报销比例55%；一个自然年度内，基本医保统筹基金最高支付限额（封顶线）为20万元。；疗机构起付线200元；费用报销比例55%；数值20万。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "oracle": {
+        "sample_id": "syn-000",
+        "actual_context": "【模拟政策 policy_a】城乡居民基本医疗保险住院待遇标准：三级医疗机构起付线200元，政策范围内费用报销比例55%；一个自然年度内，基本医保统筹基金最高支付限额（封顶线）为20万元。",
+        "actual_answer": "【模拟政策 policy_a】城乡居民基本医疗保险住院待遇标准：三级医疗机构起付线200元，政策范围内费用报销比例55%；一个自然年度内，基本医保统筹基金最高支付限额（封顶线）为20万元。；疗机构起付线200元；费用报销比例55%；数值20万。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "gold_support_details": []
+    },
+    {
+      "sample_id": "syn-001",
+      "category": "synthetic",
+      "question": "【模拟政策 policy_b】慢性肾病是否纳入门诊慢特病保障范围？统筹基金年度限额和报销比例是多少？",
+      "expected_source": "policy_b",
+      "retrieved_sources": [
+        "policy_b"
+      ],
+      "source_hit": true,
+      "oracle_passed": true,
+      "metric_passed": true,
+      "gold_numeric_supported": true,
+      "classification": "pass",
+      "actual": {
+        "sample_id": "syn-001",
+        "actual_context": "【模拟政策 policy_b】慢性肾病病纳入门诊慢特病保障范围。统筹基金支付限额为每人每年2000元，政策范围内费用报销比例为65%。待遇认定须经二级及以上定点医疗机构确诊，并由医保经办机构审核通过。",
+        "actual_answer": "【模拟政策 policy_b】慢性肾病病纳入门诊慢特病保障范围。统筹基金支付限额为每人每年2000元，政策范围内费用报销比例为65%。待遇认定须经二级及以上定点医疗机构确诊，并由医保经办机构审核通过。；额为每人每年2000元；用报销比例为65%。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "oracle": {
+        "sample_id": "syn-001",
+        "actual_context": "【模拟政策 policy_b】慢性肾病病纳入门诊慢特病保障范围。统筹基金支付限额为每人每年2000元，政策范围内费用报销比例为65%。待遇认定须经二级及以上定点医疗机构确诊，并由医保经办机构审核通过。",
+        "actual_answer": "【模拟政策 policy_b】慢性肾病病纳入门诊慢特病保障范围。统筹基金支付限额为每人每年2000元，政策范围内费用报销比例为65%。待遇认定须经二级及以上定点医疗机构确诊，并由医保经办机构审核通过。；额为每人每年2000元；用报销比例为65%。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "gold_support_details": []
+    },
+    {
+      "sample_id": "syn-002",
+      "category": "synthetic",
+      "question": "【模拟政策 policy_c】大病保险的基础起付线、报销比例是多少，对困难群体有没有倾斜？",
+      "expected_source": "policy_c",
+      "retrieved_sources": [
+        "policy_c"
+      ],
+      "source_hit": true,
+      "oracle_passed": true,
+      "metric_passed": true,
+      "gold_numeric_supported": true,
+      "classification": "pass",
+      "actual": {
+        "sample_id": "syn-002",
+        "actual_context": "【模拟政策 policy_c】大病保险的保障对象为参加城乡居民基本医疗保险的人员。一个自然年度内，个人自付的合规医疗费用累计超过起付线200元的部分，纳入大病保险支付范围，报销比例为60%，不设封顶线。特困人员、低保对象等困难群体起付线降低50%，报销比例提高5个百分点。",
+        "actual_answer": "【模拟政策 policy_c】大病保险的保障对象为参加城乡居民基本医疗保险的人员。一个自然年度内，个人自付的合规医疗费用累计超过起付线200元的部分，纳入大病保险支付范围，报销比例为60%，不设封顶线。特困人员、低保对象等困难群体起付线降低50%，报销比例提高5个百分点。；计超过起付线200元；报销比例为60%；体起付线降低50%；报销比例提高5个百分点。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "oracle": {
+        "sample_id": "syn-002",
+        "actual_context": "【模拟政策 policy_c】大病保险的保障对象为参加城乡居民基本医疗保险的人员。一个自然年度内，个人自付的合规医疗费用累计超过起付线200元的部分，纳入大病保险支付范围，报销比例为60%，不设封顶线。特困人员、低保对象等困难群体起付线降低50%，报销比例提高5个百分点。",
+        "actual_answer": "【模拟政策 policy_c】大病保险的保障对象为参加城乡居民基本医疗保险的人员。一个自然年度内，个人自付的合规医疗费用累计超过起付线200元的部分，纳入大病保险支付范围，报销比例为60%，不设封顶线。特困人员、低保对象等困难群体起付线降低50%，报销比例提高5个百分点。；计超过起付线200元；报销比例为60%；体起付线降低50%；报销比例提高5个百分点。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "gold_support_details": []
+    },
+    {
+      "sample_id": "syn-003",
+      "category": "synthetic",
+      "question": "【模拟政策 policy_d】城乡居民医保住院在三级医疗机构的起付线、报销比例和年度封顶线是多少？",
+      "expected_source": "policy_d",
+      "retrieved_sources": [
+        "policy_d"
+      ],
+      "source_hit": true,
+      "oracle_passed": true,
+      "metric_passed": true,
+      "gold_numeric_supported": true,
+      "classification": "pass",
+      "actual": {
+        "sample_id": "syn-003",
+        "actual_context": "【模拟政策 policy_d】城乡居民基本医疗保险住院待遇标准：三级医疗机构起付线1000元，政策范围内费用报销比例55%；一个自然年度内，基本医保统筹基金最高支付限额（封顶线）为10万元。",
+        "actual_answer": "【模拟政策 policy_d】城乡居民基本医疗保险住院待遇标准：三级医疗机构起付线1000元，政策范围内费用报销比例55%；一个自然年度内，基本医保统筹基金最高支付限额（封顶线）为10万元。；疗机构起付线1000元；费用报销比例55%；数值10万。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "oracle": {
+        "sample_id": "syn-003",
+        "actual_context": "【模拟政策 policy_d】城乡居民基本医疗保险住院待遇标准：三级医疗机构起付线1000元，政策范围内费用报销比例55%；一个自然年度内，基本医保统筹基金最高支付限额（封顶线）为10万元。",
+        "actual_answer": "【模拟政策 policy_d】城乡居民基本医疗保险住院待遇标准：三级医疗机构起付线1000元，政策范围内费用报销比例55%；一个自然年度内，基本医保统筹基金最高支付限额（封顶线）为10万元。；疗机构起付线1000元；费用报销比例55%；数值10万。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "gold_support_details": []
+    },
+    {
+      "sample_id": "syn-004",
+      "category": "synthetic",
+      "question": "【模拟政策 policy_e】糖尿病是否纳入门诊慢特病保障范围？统筹基金年度限额和报销比例是多少？",
+      "expected_source": "policy_e",
+      "retrieved_sources": [
+        "policy_e"
+      ],
+      "source_hit": true,
+      "oracle_passed": true,
+      "metric_passed": true,
+      "gold_numeric_supported": true,
+      "classification": "pass",
+      "actual": {
+        "sample_id": "syn-004",
+        "actual_context": "【模拟政策 policy_e】糖尿病病纳入门诊慢特病保障范围。统筹基金支付限额为每人每年2000元，政策范围内费用报销比例为70%。待遇认定须经二级及以上定点医疗机构确诊，并由医保经办机构审核通过。",
+        "actual_answer": "【模拟政策 policy_e】糖尿病病纳入门诊慢特病保障范围。统筹基金支付限额为每人每年2000元，政策范围内费用报销比例为70%。待遇认定须经二级及以上定点医疗机构确诊，并由医保经办机构审核通过。；额为每人每年2000元；用报销比例为70%。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "oracle": {
+        "sample_id": "syn-004",
+        "actual_context": "【模拟政策 policy_e】糖尿病病纳入门诊慢特病保障范围。统筹基金支付限额为每人每年2000元，政策范围内费用报销比例为70%。待遇认定须经二级及以上定点医疗机构确诊，并由医保经办机构审核通过。",
+        "actual_answer": "【模拟政策 policy_e】糖尿病病纳入门诊慢特病保障范围。统筹基金支付限额为每人每年2000元，政策范围内费用报销比例为70%。待遇认定须经二级及以上定点医疗机构确诊，并由医保经办机构审核通过。；额为每人每年2000元；用报销比例为70%。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "gold_support_details": []
+    },
+    {
+      "sample_id": "syn-005",
+      "category": "synthetic",
+      "question": "【模拟政策 policy_f】大病保险的基础起付线、报销比例是多少，对困难群体有没有倾斜？",
+      "expected_source": "policy_f",
+      "retrieved_sources": [
+        "policy_f"
+      ],
+      "source_hit": true,
+      "oracle_passed": true,
+      "metric_passed": true,
+      "gold_numeric_supported": true,
+      "classification": "pass",
+      "actual": {
+        "sample_id": "syn-005",
+        "actual_context": "【模拟政策 policy_f】大病保险的保障对象为参加城乡居民基本医疗保险的人员。一个自然年度内，个人自付的合规医疗费用累计超过起付线100元的部分，纳入大病保险支付范围，报销比例为70%，不设封顶线。特困人员、低保对象等困难群体起付线降低50%，报销比例提高5个百分点。",
+        "actual_answer": "【模拟政策 policy_f】大病保险的保障对象为参加城乡居民基本医疗保险的人员。一个自然年度内，个人自付的合规医疗费用累计超过起付线100元的部分，纳入大病保险支付范围，报销比例为70%，不设封顶线。特困人员、低保对象等困难群体起付线降低50%，报销比例提高5个百分点。；计超过起付线100元；报销比例为70%；体起付线降低50%；报销比例提高5个百分点。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "oracle": {
+        "sample_id": "syn-005",
+        "actual_context": "【模拟政策 policy_f】大病保险的保障对象为参加城乡居民基本医疗保险的人员。一个自然年度内，个人自付的合规医疗费用累计超过起付线100元的部分，纳入大病保险支付范围，报销比例为70%，不设封顶线。特困人员、低保对象等困难群体起付线降低50%，报销比例提高5个百分点。",
+        "actual_answer": "【模拟政策 policy_f】大病保险的保障对象为参加城乡居民基本医疗保险的人员。一个自然年度内，个人自付的合规医疗费用累计超过起付线100元的部分，纳入大病保险支付范围，报销比例为70%，不设封顶线。特困人员、低保对象等困难群体起付线降低50%，报销比例提高5个百分点。；计超过起付线100元；报销比例为70%；体起付线降低50%；报销比例提高5个百分点。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "gold_support_details": []
+    },
+    {
+      "sample_id": "syn-006",
+      "category": "synthetic",
+      "question": "【模拟政策 policy_g】城乡居民医保住院在三级医疗机构的起付线、报销比例和年度封顶线是多少？",
+      "expected_source": "policy_g",
+      "retrieved_sources": [
+        "policy_g"
+      ],
+      "source_hit": true,
+      "oracle_passed": true,
+      "metric_passed": true,
+      "gold_numeric_supported": true,
+      "classification": "pass",
+      "actual": {
+        "sample_id": "syn-006",
+        "actual_context": "【模拟政策 policy_g】城乡居民基本医疗保险住院待遇标准：三级医疗机构起付线1000元，政策范围内费用报销比例70%；一个自然年度内，基本医保统筹基金最高支付限额（封顶线）为25万元。",
+        "actual_answer": "【模拟政策 policy_g】城乡居民基本医疗保险住院待遇标准：三级医疗机构起付线1000元，政策范围内费用报销比例70%；一个自然年度内，基本医保统筹基金最高支付限额（封顶线）为25万元。；疗机构起付线1000元；费用报销比例70%；数值25万。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "oracle": {
+        "sample_id": "syn-006",
+        "actual_context": "【模拟政策 policy_g】城乡居民基本医疗保险住院待遇标准：三级医疗机构起付线1000元，政策范围内费用报销比例70%；一个自然年度内，基本医保统筹基金最高支付限额（封顶线）为25万元。",
+        "actual_answer": "【模拟政策 policy_g】城乡居民基本医疗保险住院待遇标准：三级医疗机构起付线1000元，政策范围内费用报销比例70%；一个自然年度内，基本医保统筹基金最高支付限额（封顶线）为25万元。；疗机构起付线1000元；费用报销比例70%；数值25万。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "gold_support_details": []
+    },
+    {
+      "sample_id": "syn-007",
+      "category": "synthetic",
+      "question": "【模拟政策 policy_h】帕金森病是否纳入门诊慢特病保障范围？统筹基金年度限额和报销比例是多少？",
+      "expected_source": "policy_h",
+      "retrieved_sources": [
+        "policy_h"
+      ],
+      "source_hit": true,
+      "oracle_passed": true,
+      "metric_passed": true,
+      "gold_numeric_supported": true,
+      "classification": "pass",
+      "actual": {
+        "sample_id": "syn-007",
+        "actual_context": "【模拟政策 policy_h】帕金森病病纳入门诊慢特病保障范围。统筹基金支付限额为每人每年2500元，政策范围内费用报销比例为55%。待遇认定须经二级及以上定点医疗机构确诊，并由医保经办机构审核通过。",
+        "actual_answer": "【模拟政策 policy_h】帕金森病病纳入门诊慢特病保障范围。统筹基金支付限额为每人每年2500元，政策范围内费用报销比例为55%。待遇认定须经二级及以上定点医疗机构确诊，并由医保经办机构审核通过。；额为每人每年2500元；用报销比例为55%。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "oracle": {
+        "sample_id": "syn-007",
+        "actual_context": "【模拟政策 policy_h】帕金森病病纳入门诊慢特病保障范围。统筹基金支付限额为每人每年2500元，政策范围内费用报销比例为55%。待遇认定须经二级及以上定点医疗机构确诊，并由医保经办机构审核通过。",
+        "actual_answer": "【模拟政策 policy_h】帕金森病病纳入门诊慢特病保障范围。统筹基金支付限额为每人每年2500元，政策范围内费用报销比例为55%。待遇认定须经二级及以上定点医疗机构确诊，并由医保经办机构审核通过。；额为每人每年2500元；用报销比例为55%。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "gold_support_details": []
+    },
+    {
+      "sample_id": "syn-008",
+      "category": "synthetic",
+      "question": "【模拟政策 policy_i】大病保险的基础起付线、报销比例是多少，对困难群体有没有倾斜？",
+      "expected_source": "policy_i",
+      "retrieved_sources": [
+        "policy_i"
+      ],
+      "source_hit": true,
+      "oracle_passed": true,
+      "metric_passed": true,
+      "gold_numeric_supported": true,
+      "classification": "pass",
+      "actual": {
+        "sample_id": "syn-008",
+        "actual_context": "【模拟政策 policy_i】大病保险的保障对象为参加城乡居民基本医疗保险的人员。一个自然年度内，个人自付的合规医疗费用累计超过起付线300元的部分，纳入大病保险支付范围，报销比例为85%，不设封顶线。特困人员、低保对象等困难群体起付线降低50%，报销比例提高5个百分点。",
+        "actual_answer": "【模拟政策 policy_i】大病保险的保障对象为参加城乡居民基本医疗保险的人员。一个自然年度内，个人自付的合规医疗费用累计超过起付线300元的部分，纳入大病保险支付范围，报销比例为85%，不设封顶线。特困人员、低保对象等困难群体起付线降低50%，报销比例提高5个百分点。；计超过起付线300元；报销比例为85%；体起付线降低50%；报销比例提高5个百分点。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "oracle": {
+        "sample_id": "syn-008",
+        "actual_context": "【模拟政策 policy_i】大病保险的保障对象为参加城乡居民基本医疗保险的人员。一个自然年度内，个人自付的合规医疗费用累计超过起付线300元的部分，纳入大病保险支付范围，报销比例为85%，不设封顶线。特困人员、低保对象等困难群体起付线降低50%，报销比例提高5个百分点。",
+        "actual_answer": "【模拟政策 policy_i】大病保险的保障对象为参加城乡居民基本医疗保险的人员。一个自然年度内，个人自付的合规医疗费用累计超过起付线300元的部分，纳入大病保险支付范围，报销比例为85%，不设封顶线。特困人员、低保对象等困难群体起付线降低50%，报销比例提高5个百分点。；计超过起付线300元；报销比例为85%；体起付线降低50%；报销比例提高5个百分点。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "gold_support_details": []
+    },
+    {
+      "sample_id": "syn-009",
+      "category": "synthetic",
+      "question": "【模拟政策 policy_j】城乡居民医保住院在二级医疗机构的起付线、报销比例和年度封顶线是多少？",
+      "expected_source": "policy_j",
+      "retrieved_sources": [
+        "policy_j"
+      ],
+      "source_hit": true,
+      "oracle_passed": true,
+      "metric_passed": true,
+      "gold_numeric_supported": true,
+      "classification": "pass",
+      "actual": {
+        "sample_id": "syn-009",
+        "actual_context": "【模拟政策 policy_j】城乡居民基本医疗保险住院待遇标准：二级医疗机构起付线600元，政策范围内费用报销比例65%；一个自然年度内，基本医保统筹基金最高支付限额（封顶线）为15万元。",
+        "actual_answer": "【模拟政策 policy_j】城乡居民基本医疗保险住院待遇标准：二级医疗机构起付线600元，政策范围内费用报销比例65%；一个自然年度内，基本医保统筹基金最高支付限额（封顶线）为15万元。；疗机构起付线600元；费用报销比例65%；数值15万。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "oracle": {
+        "sample_id": "syn-009",
+        "actual_context": "【模拟政策 policy_j】城乡居民基本医疗保险住院待遇标准：二级医疗机构起付线600元，政策范围内费用报销比例65%；一个自然年度内，基本医保统筹基金最高支付限额（封顶线）为15万元。",
+        "actual_answer": "【模拟政策 policy_j】城乡居民基本医疗保险住院待遇标准：二级医疗机构起付线600元，政策范围内费用报销比例65%；一个自然年度内，基本医保统筹基金最高支付限额（封顶线）为15万元。；疗机构起付线600元；费用报销比例65%；数值15万。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "gold_support_details": []
+    },
+    {
+      "sample_id": "syn-010",
+      "category": "synthetic",
+      "question": "【模拟政策 policy_ba】类风湿关节炎是否纳入门诊慢特病保障范围？统筹基金年度限额和报销比例是多少？",
+      "expected_source": "policy_ba",
+      "retrieved_sources": [
+        "policy_ba"
+      ],
+      "source_hit": true,
+      "oracle_passed": true,
+      "metric_passed": true,
+      "gold_numeric_supported": true,
+      "classification": "pass",
+      "actual": {
+        "sample_id": "syn-010",
+        "actual_context": "【模拟政策 policy_ba】类风湿关节炎病纳入门诊慢特病保障范围。统筹基金支付限额为每人每年1500元，政策范围内费用报销比例为60%。待遇认定须经二级及以上定点医疗机构确诊，并由医保经办机构审核通过。",
+        "actual_answer": "【模拟政策 policy_ba】类风湿关节炎病纳入门诊慢特病保障范围。统筹基金支付限额为每人每年1500元，政策范围内费用报销比例为60%。待遇认定须经二级及以上定点医疗机构确诊，并由医保经办机构审核通过。；额为每人每年1500元；用报销比例为60%。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "oracle": {
+        "sample_id": "syn-010",
+        "actual_context": "【模拟政策 policy_ba】类风湿关节炎病纳入门诊慢特病保障范围。统筹基金支付限额为每人每年1500元，政策范围内费用报销比例为60%。待遇认定须经二级及以上定点医疗机构确诊，并由医保经办机构审核通过。",
+        "actual_answer": "【模拟政策 policy_ba】类风湿关节炎病纳入门诊慢特病保障范围。统筹基金支付限额为每人每年1500元，政策范围内费用报销比例为60%。待遇认定须经二级及以上定点医疗机构确诊，并由医保经办机构审核通过。；额为每人每年1500元；用报销比例为60%。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "gold_support_details": []
+    },
+    {
+      "sample_id": "syn-011",
+      "category": "synthetic",
+      "question": "【模拟政策 policy_bb】大病保险的基础起付线、报销比例是多少，对困难群体有没有倾斜？",
+      "expected_source": "policy_bb",
+      "retrieved_sources": [
+        "policy_bb"
+      ],
+      "source_hit": true,
+      "oracle_passed": true,
+      "metric_passed": true,
+      "gold_numeric_supported": true,
+      "classification": "pass",
+      "actual": {
+        "sample_id": "syn-011",
+        "actual_context": "【模拟政策 policy_bb】大病保险的保障对象为参加城乡居民基本医疗保险的人员。一个自然年度内，个人自付的合规医疗费用累计超过起付线1000元的部分，纳入大病保险支付范围，报销比例为60%，不设封顶线。特困人员、低保对象等困难群体起付线降低50%，报销比例提高5个百分点。",
+        "actual_answer": "【模拟政策 policy_bb】大病保险的保障对象为参加城乡居民基本医疗保险的人员。一个自然年度内，个人自付的合规医疗费用累计超过起付线1000元的部分，纳入大病保险支付范围，报销比例为60%，不设封顶线。特困人员、低保对象等困难群体起付线降低50%，报销比例提高5个百分点。；计超过起付线1000元；报销比例为60%；体起付线降低50%；报销比例提高5个百分点。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "oracle": {
+        "sample_id": "syn-011",
+        "actual_context": "【模拟政策 policy_bb】大病保险的保障对象为参加城乡居民基本医疗保险的人员。一个自然年度内，个人自付的合规医疗费用累计超过起付线1000元的部分，纳入大病保险支付范围，报销比例为60%，不设封顶线。特困人员、低保对象等困难群体起付线降低50%，报销比例提高5个百分点。",
+        "actual_answer": "【模拟政策 policy_bb】大病保险的保障对象为参加城乡居民基本医疗保险的人员。一个自然年度内，个人自付的合规医疗费用累计超过起付线1000元的部分，纳入大病保险支付范围，报销比例为60%，不设封顶线。特困人员、低保对象等困难群体起付线降低50%，报销比例提高5个百分点。；计超过起付线1000元；报销比例为60%；体起付线降低50%；报销比例提高5个百分点。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "gold_support_details": []
+    },
+    {
+      "sample_id": "syn-012",
+      "category": "synthetic",
+      "question": "【模拟政策 policy_bc】城乡居民医保住院在二级医疗机构的起付线、报销比例和年度封顶线是多少？",
+      "expected_source": "policy_bc",
+      "retrieved_sources": [
+        "policy_bc"
+      ],
+      "source_hit": true,
+      "oracle_passed": true,
+      "metric_passed": true,
+      "gold_numeric_supported": true,
+      "classification": "pass",
+      "actual": {
+        "sample_id": "syn-012",
+        "actual_context": "【模拟政策 policy_bc】城乡居民基本医疗保险住院待遇标准：二级医疗机构起付线800元，政策范围内费用报销比例75%；一个自然年度内，基本医保统筹基金最高支付限额（封顶线）为10万元。",
+        "actual_answer": "【模拟政策 policy_bc】城乡居民基本医疗保险住院待遇标准：二级医疗机构起付线800元，政策范围内费用报销比例75%；一个自然年度内，基本医保统筹基金最高支付限额（封顶线）为10万元。；疗机构起付线800元；费用报销比例75%；数值10万。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "oracle": {
+        "sample_id": "syn-012",
+        "actual_context": "【模拟政策 policy_bc】城乡居民基本医疗保险住院待遇标准：二级医疗机构起付线800元，政策范围内费用报销比例75%；一个自然年度内，基本医保统筹基金最高支付限额（封顶线）为10万元。",
+        "actual_answer": "【模拟政策 policy_bc】城乡居民基本医疗保险住院待遇标准：二级医疗机构起付线800元，政策范围内费用报销比例75%；一个自然年度内，基本医保统筹基金最高支付限额（封顶线）为10万元。；疗机构起付线800元；费用报销比例75%；数值10万。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "gold_support_details": []
+    },
+    {
+      "sample_id": "syn-013",
+      "category": "synthetic",
+      "question": "【模拟政策 policy_bd】乙肝是否纳入门诊慢特病保障范围？统筹基金年度限额和报销比例是多少？",
+      "expected_source": "policy_bd",
+      "retrieved_sources": [
+        "policy_bd"
+      ],
+      "source_hit": true,
+      "oracle_passed": true,
+      "metric_passed": true,
+      "gold_numeric_supported": true,
+      "classification": "pass",
+      "actual": {
+        "sample_id": "syn-013",
+        "actual_context": "【模拟政策 policy_bd】乙肝病纳入门诊慢特病保障范围。统筹基金支付限额为每人每年4000元，政策范围内费用报销比例为60%。待遇认定须经二级及以上定点医疗机构确诊，并由医保经办机构审核通过。",
+        "actual_answer": "【模拟政策 policy_bd】乙肝病纳入门诊慢特病保障范围。统筹基金支付限额为每人每年4000元，政策范围内费用报销比例为60%。待遇认定须经二级及以上定点医疗机构确诊，并由医保经办机构审核通过。；额为每人每年4000元；用报销比例为60%。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "oracle": {
+        "sample_id": "syn-013",
+        "actual_context": "【模拟政策 policy_bd】乙肝病纳入门诊慢特病保障范围。统筹基金支付限额为每人每年4000元，政策范围内费用报销比例为60%。待遇认定须经二级及以上定点医疗机构确诊，并由医保经办机构审核通过。",
+        "actual_answer": "【模拟政策 policy_bd】乙肝病纳入门诊慢特病保障范围。统筹基金支付限额为每人每年4000元，政策范围内费用报销比例为60%。待遇认定须经二级及以上定点医疗机构确诊，并由医保经办机构审核通过。；额为每人每年4000元；用报销比例为60%。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "gold_support_details": []
+    },
+    {
+      "sample_id": "syn-014",
+      "category": "synthetic",
+      "question": "【模拟政策 policy_be】大病保险的基础起付线、报销比例是多少，对困难群体有没有倾斜？",
+      "expected_source": "policy_be",
+      "retrieved_sources": [
+        "policy_be"
+      ],
+      "source_hit": true,
+      "oracle_passed": true,
+      "metric_passed": true,
+      "gold_numeric_supported": true,
+      "classification": "pass",
+      "actual": {
+        "sample_id": "syn-014",
+        "actual_context": "【模拟政策 policy_be】大病保险的保障对象为参加城乡居民基本医疗保险的人员。一个自然年度内，个人自付的合规医疗费用累计超过起付线1000元的部分，纳入大病保险支付范围，报销比例为60%，不设封顶线。特困人员、低保对象等困难群体起付线降低50%，报销比例提高5个百分点。",
+        "actual_answer": "【模拟政策 policy_be】大病保险的保障对象为参加城乡居民基本医疗保险的人员。一个自然年度内，个人自付的合规医疗费用累计超过起付线1000元的部分，纳入大病保险支付范围，报销比例为60%，不设封顶线。特困人员、低保对象等困难群体起付线降低50%，报销比例提高5个百分点。；计超过起付线1000元；报销比例为60%；体起付线降低50%；报销比例提高5个百分点。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "oracle": {
+        "sample_id": "syn-014",
+        "actual_context": "【模拟政策 policy_be】大病保险的保障对象为参加城乡居民基本医疗保险的人员。一个自然年度内，个人自付的合规医疗费用累计超过起付线1000元的部分，纳入大病保险支付范围，报销比例为60%，不设封顶线。特困人员、低保对象等困难群体起付线降低50%，报销比例提高5个百分点。",
+        "actual_answer": "【模拟政策 policy_be】大病保险的保障对象为参加城乡居民基本医疗保险的人员。一个自然年度内，个人自付的合规医疗费用累计超过起付线1000元的部分，纳入大病保险支付范围，报销比例为60%，不设封顶线。特困人员、低保对象等困难群体起付线降低50%，报销比例提高5个百分点。；计超过起付线1000元；报销比例为60%；体起付线降低50%；报销比例提高5个百分点。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "gold_support_details": []
+    },
+    {
+      "sample_id": "syn-015",
+      "category": "synthetic",
+      "question": "【模拟政策 policy_bf】城乡居民医保住院在三级医疗机构的起付线、报销比例和年度封顶线是多少？",
+      "expected_source": "policy_bf",
+      "retrieved_sources": [
+        "policy_bf"
+      ],
+      "source_hit": true,
+      "oracle_passed": true,
+      "metric_passed": true,
+      "gold_numeric_supported": true,
+      "classification": "pass",
+      "actual": {
+        "sample_id": "syn-015",
+        "actual_context": "【模拟政策 policy_bf】城乡居民基本医疗保险住院待遇标准：三级医疗机构起付线600元，政策范围内费用报销比例80%；一个自然年度内，基本医保统筹基金最高支付限额（封顶线）为30万元。",
+        "actual_answer": "【模拟政策 policy_bf】城乡居民基本医疗保险住院待遇标准：三级医疗机构起付线600元，政策范围内费用报销比例80%；一个自然年度内，基本医保统筹基金最高支付限额（封顶线）为30万元。；疗机构起付线600元；费用报销比例80%；数值30万。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "oracle": {
+        "sample_id": "syn-015",
+        "actual_context": "【模拟政策 policy_bf】城乡居民基本医疗保险住院待遇标准：三级医疗机构起付线600元，政策范围内费用报销比例80%；一个自然年度内，基本医保统筹基金最高支付限额（封顶线）为30万元。",
+        "actual_answer": "【模拟政策 policy_bf】城乡居民基本医疗保险住院待遇标准：三级医疗机构起付线600元，政策范围内费用报销比例80%；一个自然年度内，基本医保统筹基金最高支付限额（封顶线）为30万元。；疗机构起付线600元；费用报销比例80%；数值30万。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "gold_support_details": []
+    },
+    {
+      "sample_id": "syn-016",
+      "category": "synthetic",
+      "question": "【模拟政策 policy_bg】慢性肾病是否纳入门诊慢特病保障范围？统筹基金年度限额和报销比例是多少？",
+      "expected_source": "policy_bg",
+      "retrieved_sources": [
+        "policy_bg"
+      ],
+      "source_hit": true,
+      "oracle_passed": true,
+      "metric_passed": true,
+      "gold_numeric_supported": true,
+      "classification": "pass",
+      "actual": {
+        "sample_id": "syn-016",
+        "actual_context": "【模拟政策 policy_bg】慢性肾病病纳入门诊慢特病保障范围。统筹基金支付限额为每人每年1500元，政策范围内费用报销比例为55%。待遇认定须经二级及以上定点医疗机构确诊，并由医保经办机构审核通过。",
+        "actual_answer": "【模拟政策 policy_bg】慢性肾病病纳入门诊慢特病保障范围。统筹基金支付限额为每人每年1500元，政策范围内费用报销比例为55%。待遇认定须经二级及以上定点医疗机构确诊，并由医保经办机构审核通过。；额为每人每年1500元；用报销比例为55%。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "oracle": {
+        "sample_id": "syn-016",
+        "actual_context": "【模拟政策 policy_bg】慢性肾病病纳入门诊慢特病保障范围。统筹基金支付限额为每人每年1500元，政策范围内费用报销比例为55%。待遇认定须经二级及以上定点医疗机构确诊，并由医保经办机构审核通过。",
+        "actual_answer": "【模拟政策 policy_bg】慢性肾病病纳入门诊慢特病保障范围。统筹基金支付限额为每人每年1500元，政策范围内费用报销比例为55%。待遇认定须经二级及以上定点医疗机构确诊，并由医保经办机构审核通过。；额为每人每年1500元；用报销比例为55%。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "gold_support_details": []
+    },
+    {
+      "sample_id": "syn-017",
+      "category": "synthetic",
+      "question": "【模拟政策 policy_bh】大病保险的基础起付线、报销比例是多少，对困难群体有没有倾斜？",
+      "expected_source": "policy_bh",
+      "retrieved_sources": [
+        "policy_bh"
+      ],
+      "source_hit": true,
+      "oracle_passed": true,
+      "metric_passed": true,
+      "gold_numeric_supported": true,
+      "classification": "pass",
+      "actual": {
+        "sample_id": "syn-017",
+        "actual_context": "【模拟政策 policy_bh】大病保险的保障对象为参加城乡居民基本医疗保险的人员。一个自然年度内，个人自付的合规医疗费用累计超过起付线500元的部分，纳入大病保险支付范围，报销比例为75%，不设封顶线。特困人员、低保对象等困难群体起付线降低50%，报销比例提高5个百分点。",
+        "actual_answer": "【模拟政策 policy_bh】大病保险的保障对象为参加城乡居民基本医疗保险的人员。一个自然年度内，个人自付的合规医疗费用累计超过起付线500元的部分，纳入大病保险支付范围，报销比例为75%，不设封顶线。特困人员、低保对象等困难群体起付线降低50%，报销比例提高5个百分点。；计超过起付线500元；报销比例为75%；体起付线降低50%；报销比例提高5个百分点。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "oracle": {
+        "sample_id": "syn-017",
+        "actual_context": "【模拟政策 policy_bh】大病保险的保障对象为参加城乡居民基本医疗保险的人员。一个自然年度内，个人自付的合规医疗费用累计超过起付线500元的部分，纳入大病保险支付范围，报销比例为75%，不设封顶线。特困人员、低保对象等困难群体起付线降低50%，报销比例提高5个百分点。",
+        "actual_answer": "【模拟政策 policy_bh】大病保险的保障对象为参加城乡居民基本医疗保险的人员。一个自然年度内，个人自付的合规医疗费用累计超过起付线500元的部分，纳入大病保险支付范围，报销比例为75%，不设封顶线。特困人员、低保对象等困难群体起付线降低50%，报销比例提高5个百分点。；计超过起付线500元；报销比例为75%；体起付线降低50%；报销比例提高5个百分点。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "gold_support_details": []
+    },
+    {
+      "sample_id": "syn-018",
+      "category": "synthetic",
+      "question": "【模拟政策 policy_bi】城乡居民医保住院在一级及以下医疗机构的起付线、报销比例和年度封顶线是多少？",
+      "expected_source": "policy_bi",
+      "retrieved_sources": [
+        "policy_bi"
+      ],
+      "source_hit": true,
+      "oracle_passed": true,
+      "metric_passed": true,
+      "gold_numeric_supported": true,
+      "classification": "pass",
+      "actual": {
+        "sample_id": "syn-018",
+        "actual_context": "【模拟政策 policy_bi】城乡居民基本医疗保险住院待遇标准：一级及以下医疗机构起付线500元，政策范围内费用报销比例60%；一个自然年度内，基本医保统筹基金最高支付限额（封顶线）为25万元。",
+        "actual_answer": "【模拟政策 policy_bi】城乡居民基本医疗保险住院待遇标准：一级及以下医疗机构起付线500元，政策范围内费用报销比例60%；一个自然年度内，基本医保统筹基金最高支付限额（封顶线）为25万元。；疗机构起付线500元；费用报销比例60%；数值25万。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "oracle": {
+        "sample_id": "syn-018",
+        "actual_context": "【模拟政策 policy_bi】城乡居民基本医疗保险住院待遇标准：一级及以下医疗机构起付线500元，政策范围内费用报销比例60%；一个自然年度内，基本医保统筹基金最高支付限额（封顶线）为25万元。",
+        "actual_answer": "【模拟政策 policy_bi】城乡居民基本医疗保险住院待遇标准：一级及以下医疗机构起付线500元，政策范围内费用报销比例60%；一个自然年度内，基本医保统筹基金最高支付限额（封顶线）为25万元。；疗机构起付线500元；费用报销比例60%；数值25万。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "gold_support_details": []
+    },
+    {
+      "sample_id": "syn-019",
+      "category": "synthetic",
+      "question": "【模拟政策 policy_bj】慢阻肺是否纳入门诊慢特病保障范围？统筹基金年度限额和报销比例是多少？",
+      "expected_source": "policy_bj",
+      "retrieved_sources": [
+        "policy_bj"
+      ],
+      "source_hit": true,
+      "oracle_passed": true,
+      "metric_passed": true,
+      "gold_numeric_supported": true,
+      "classification": "pass",
+      "actual": {
+        "sample_id": "syn-019",
+        "actual_context": "【模拟政策 policy_bj】慢阻肺病纳入门诊慢特病保障范围。统筹基金支付限额为每人每年3000元，政策范围内费用报销比例为80%。待遇认定须经二级及以上定点医疗机构确诊，并由医保经办机构审核通过。",
+        "actual_answer": "【模拟政策 policy_bj】慢阻肺病纳入门诊慢特病保障范围。统筹基金支付限额为每人每年3000元，政策范围内费用报销比例为80%。待遇认定须经二级及以上定点医疗机构确诊，并由医保经办机构审核通过。；额为每人每年3000元；用报销比例为80%。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "oracle": {
+        "sample_id": "syn-019",
+        "actual_context": "【模拟政策 policy_bj】慢阻肺病纳入门诊慢特病保障范围。统筹基金支付限额为每人每年3000元，政策范围内费用报销比例为80%。待遇认定须经二级及以上定点医疗机构确诊，并由医保经办机构审核通过。",
+        "actual_answer": "【模拟政策 policy_bj】慢阻肺病纳入门诊慢特病保障范围。统筹基金支付限额为每人每年3000元，政策范围内费用报销比例为80%。待遇认定须经二级及以上定点医疗机构确诊，并由医保经办机构审核通过。；额为每人每年3000元；用报销比例为80%。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "gold_support_details": []
+    },
+    {
+      "sample_id": "syn-020",
+      "category": "synthetic",
+      "question": "【模拟政策 policy_ca】大病保险的基础起付线、报销比例是多少，对困难群体有没有倾斜？",
+      "expected_source": "policy_ca",
+      "retrieved_sources": [
+        "policy_ca"
+      ],
+      "source_hit": true,
+      "oracle_passed": true,
+      "metric_passed": true,
+      "gold_numeric_supported": true,
+      "classification": "pass",
+      "actual": {
+        "sample_id": "syn-020",
+        "actual_context": "【模拟政策 policy_ca】大病保险的保障对象为参加城乡居民基本医疗保险的人员。一个自然年度内，个人自付的合规医疗费用累计超过起付线300元的部分，纳入大病保险支付范围，报销比例为80%，不设封顶线。特困人员、低保对象等困难群体起付线降低50%，报销比例提高5个百分点。",
+        "actual_answer": "【模拟政策 policy_ca】大病保险的保障对象为参加城乡居民基本医疗保险的人员。一个自然年度内，个人自付的合规医疗费用累计超过起付线300元的部分，纳入大病保险支付范围，报销比例为80%，不设封顶线。特困人员、低保对象等困难群体起付线降低50%，报销比例提高5个百分点。；计超过起付线300元；报销比例为80%；体起付线降低50%；报销比例提高5个百分点。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "oracle": {
+        "sample_id": "syn-020",
+        "actual_context": "【模拟政策 policy_ca】大病保险的保障对象为参加城乡居民基本医疗保险的人员。一个自然年度内，个人自付的合规医疗费用累计超过起付线300元的部分，纳入大病保险支付范围，报销比例为80%，不设封顶线。特困人员、低保对象等困难群体起付线降低50%，报销比例提高5个百分点。",
+        "actual_answer": "【模拟政策 policy_ca】大病保险的保障对象为参加城乡居民基本医疗保险的人员。一个自然年度内，个人自付的合规医疗费用累计超过起付线300元的部分，纳入大病保险支付范围，报销比例为80%，不设封顶线。特困人员、低保对象等困难群体起付线降低50%，报销比例提高5个百分点。；计超过起付线300元；报销比例为80%；体起付线降低50%；报销比例提高5个百分点。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "gold_support_details": []
+    },
+    {
+      "sample_id": "syn-021",
+      "category": "synthetic",
+      "question": "【模拟政策 policy_cb】城乡居民医保住院在二级医疗机构的起付线、报销比例和年度封顶线是多少？",
+      "expected_source": "policy_cb",
+      "retrieved_sources": [
+        "policy_cb"
+      ],
+      "source_hit": true,
+      "oracle_passed": true,
+      "metric_passed": true,
+      "gold_numeric_supported": true,
+      "classification": "pass",
+      "actual": {
+        "sample_id": "syn-021",
+        "actual_context": "【模拟政策 policy_cb】城乡居民基本医疗保险住院待遇标准：二级医疗机构起付线500元，政策范围内费用报销比例75%；一个自然年度内，基本医保统筹基金最高支付限额（封顶线）为10万元。",
+        "actual_answer": "【模拟政策 policy_cb】城乡居民基本医疗保险住院待遇标准：二级医疗机构起付线500元，政策范围内费用报销比例75%；一个自然年度内，基本医保统筹基金最高支付限额（封顶线）为10万元。；疗机构起付线500元；费用报销比例75%；数值10万。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "oracle": {
+        "sample_id": "syn-021",
+        "actual_context": "【模拟政策 policy_cb】城乡居民基本医疗保险住院待遇标准：二级医疗机构起付线500元，政策范围内费用报销比例75%；一个自然年度内，基本医保统筹基金最高支付限额（封顶线）为10万元。",
+        "actual_answer": "【模拟政策 policy_cb】城乡居民基本医疗保险住院待遇标准：二级医疗机构起付线500元，政策范围内费用报销比例75%；一个自然年度内，基本医保统筹基金最高支付限额（封顶线）为10万元。；疗机构起付线500元；费用报销比例75%；数值10万。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "gold_support_details": []
+    },
+    {
+      "sample_id": "syn-022",
+      "category": "synthetic",
+      "question": "【模拟政策 policy_cc】帕金森病是否纳入门诊慢特病保障范围？统筹基金年度限额和报销比例是多少？",
+      "expected_source": "policy_cc",
+      "retrieved_sources": [
+        "policy_cc"
+      ],
+      "source_hit": true,
+      "oracle_passed": true,
+      "metric_passed": true,
+      "gold_numeric_supported": true,
+      "classification": "pass",
+      "actual": {
+        "sample_id": "syn-022",
+        "actual_context": "【模拟政策 policy_cc】帕金森病病纳入门诊慢特病保障范围。统筹基金支付限额为每人每年2000元，政策范围内费用报销比例为70%。待遇认定须经二级及以上定点医疗机构确诊，并由医保经办机构审核通过。",
+        "actual_answer": "【模拟政策 policy_cc】帕金森病病纳入门诊慢特病保障范围。统筹基金支付限额为每人每年2000元，政策范围内费用报销比例为70%。待遇认定须经二级及以上定点医疗机构确诊，并由医保经办机构审核通过。；额为每人每年2000元；用报销比例为70%。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "oracle": {
+        "sample_id": "syn-022",
+        "actual_context": "【模拟政策 policy_cc】帕金森病病纳入门诊慢特病保障范围。统筹基金支付限额为每人每年2000元，政策范围内费用报销比例为70%。待遇认定须经二级及以上定点医疗机构确诊，并由医保经办机构审核通过。",
+        "actual_answer": "【模拟政策 policy_cc】帕金森病病纳入门诊慢特病保障范围。统筹基金支付限额为每人每年2000元，政策范围内费用报销比例为70%。待遇认定须经二级及以上定点医疗机构确诊，并由医保经办机构审核通过。；额为每人每年2000元；用报销比例为70%。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "gold_support_details": []
+    },
+    {
+      "sample_id": "syn-023",
+      "category": "synthetic",
+      "question": "【模拟政策 policy_cd】大病保险的基础起付线、报销比例是多少，对困难群体有没有倾斜？",
+      "expected_source": "policy_cd",
+      "retrieved_sources": [
+        "policy_cd"
+      ],
+      "source_hit": true,
+      "oracle_passed": true,
+      "metric_passed": true,
+      "gold_numeric_supported": true,
+      "classification": "pass",
+      "actual": {
+        "sample_id": "syn-023",
+        "actual_context": "【模拟政策 policy_cd】大病保险的保障对象为参加城乡居民基本医疗保险的人员。一个自然年度内，个人自付的合规医疗费用累计超过起付线300元的部分，纳入大病保险支付范围，报销比例为90%，不设封顶线。特困人员、低保对象等困难群体起付线降低50%，报销比例提高5个百分点。",
+        "actual_answer": "【模拟政策 policy_cd】大病保险的保障对象为参加城乡居民基本医疗保险的人员。一个自然年度内，个人自付的合规医疗费用累计超过起付线300元的部分，纳入大病保险支付范围，报销比例为90%，不设封顶线。特困人员、低保对象等困难群体起付线降低50%，报销比例提高5个百分点。；计超过起付线300元；报销比例为90%；体起付线降低50%；报销比例提高5个百分点。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "oracle": {
+        "sample_id": "syn-023",
+        "actual_context": "【模拟政策 policy_cd】大病保险的保障对象为参加城乡居民基本医疗保险的人员。一个自然年度内，个人自付的合规医疗费用累计超过起付线300元的部分，纳入大病保险支付范围，报销比例为90%，不设封顶线。特困人员、低保对象等困难群体起付线降低50%，报销比例提高5个百分点。",
+        "actual_answer": "【模拟政策 policy_cd】大病保险的保障对象为参加城乡居民基本医疗保险的人员。一个自然年度内，个人自付的合规医疗费用累计超过起付线300元的部分，纳入大病保险支付范围，报销比例为90%，不设封顶线。特困人员、低保对象等困难群体起付线降低50%，报销比例提高5个百分点。；计超过起付线300元；报销比例为90%；体起付线降低50%；报销比例提高5个百分点。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "gold_support_details": []
+    },
+    {
+      "sample_id": "syn-024",
+      "category": "synthetic",
+      "question": "【模拟政策 policy_ce】城乡居民医保住院在二级医疗机构的起付线、报销比例和年度封顶线是多少？",
+      "expected_source": "policy_ce",
+      "retrieved_sources": [
+        "policy_ce"
+      ],
+      "source_hit": true,
+      "oracle_passed": true,
+      "metric_passed": true,
+      "gold_numeric_supported": true,
+      "classification": "pass",
+      "actual": {
+        "sample_id": "syn-024",
+        "actual_context": "【模拟政策 policy_ce】城乡居民基本医疗保险住院待遇标准：二级医疗机构起付线600元，政策范围内费用报销比例70%；一个自然年度内，基本医保统筹基金最高支付限额（封顶线）为20万元。",
+        "actual_answer": "【模拟政策 policy_ce】城乡居民基本医疗保险住院待遇标准：二级医疗机构起付线600元，政策范围内费用报销比例70%；一个自然年度内，基本医保统筹基金最高支付限额（封顶线）为20万元。；疗机构起付线600元；费用报销比例70%；数值20万。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "oracle": {
+        "sample_id": "syn-024",
+        "actual_context": "【模拟政策 policy_ce】城乡居民基本医疗保险住院待遇标准：二级医疗机构起付线600元，政策范围内费用报销比例70%；一个自然年度内，基本医保统筹基金最高支付限额（封顶线）为20万元。",
+        "actual_answer": "【模拟政策 policy_ce】城乡居民基本医疗保险住院待遇标准：二级医疗机构起付线600元，政策范围内费用报销比例70%；一个自然年度内，基本医保统筹基金最高支付限额（封顶线）为20万元。；疗机构起付线600元；费用报销比例70%；数值20万。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "gold_support_details": []
+    },
+    {
+      "sample_id": "syn-025",
+      "category": "synthetic",
+      "question": "【模拟政策 policy_cf】高血压是否纳入门诊慢特病保障范围？统筹基金年度限额和报销比例是多少？",
+      "expected_source": "policy_cf",
+      "retrieved_sources": [
+        "policy_cf"
+      ],
+      "source_hit": true,
+      "oracle_passed": true,
+      "metric_passed": true,
+      "gold_numeric_supported": true,
+      "classification": "pass",
+      "actual": {
+        "sample_id": "syn-025",
+        "actual_context": "【模拟政策 policy_cf】高血压病纳入门诊慢特病保障范围。统筹基金支付限额为每人每年2000元，政策范围内费用报销比例为55%。待遇认定须经二级及以上定点医疗机构确诊，并由医保经办机构审核通过。",
+        "actual_answer": "【模拟政策 policy_cf】高血压病纳入门诊慢特病保障范围。统筹基金支付限额为每人每年2000元，政策范围内费用报销比例为55%。待遇认定须经二级及以上定点医疗机构确诊，并由医保经办机构审核通过。；额为每人每年2000元；用报销比例为55%。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "oracle": {
+        "sample_id": "syn-025",
+        "actual_context": "【模拟政策 policy_cf】高血压病纳入门诊慢特病保障范围。统筹基金支付限额为每人每年2000元，政策范围内费用报销比例为55%。待遇认定须经二级及以上定点医疗机构确诊，并由医保经办机构审核通过。",
+        "actual_answer": "【模拟政策 policy_cf】高血压病纳入门诊慢特病保障范围。统筹基金支付限额为每人每年2000元，政策范围内费用报销比例为55%。待遇认定须经二级及以上定点医疗机构确诊，并由医保经办机构审核通过。；额为每人每年2000元；用报销比例为55%。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "gold_support_details": []
+    },
+    {
+      "sample_id": "syn-026",
+      "category": "synthetic",
+      "question": "【模拟政策 policy_cg】大病保险的基础起付线、报销比例是多少，对困难群体有没有倾斜？",
+      "expected_source": "policy_cg",
+      "retrieved_sources": [
+        "policy_cg"
+      ],
+      "source_hit": true,
+      "oracle_passed": true,
+      "metric_passed": true,
+      "gold_numeric_supported": true,
+      "classification": "pass",
+      "actual": {
+        "sample_id": "syn-026",
+        "actual_context": "【模拟政策 policy_cg】大病保险的保障对象为参加城乡居民基本医疗保险的人员。一个自然年度内，个人自付的合规医疗费用累计超过起付线800元的部分，纳入大病保险支付范围，报销比例为85%，不设封顶线。特困人员、低保对象等困难群体起付线降低50%，报销比例提高5个百分点。",
+        "actual_answer": "【模拟政策 policy_cg】大病保险的保障对象为参加城乡居民基本医疗保险的人员。一个自然年度内，个人自付的合规医疗费用累计超过起付线800元的部分，纳入大病保险支付范围，报销比例为85%，不设封顶线。特困人员、低保对象等困难群体起付线降低50%，报销比例提高5个百分点。；计超过起付线800元；报销比例为85%；体起付线降低50%；报销比例提高5个百分点。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "oracle": {
+        "sample_id": "syn-026",
+        "actual_context": "【模拟政策 policy_cg】大病保险的保障对象为参加城乡居民基本医疗保险的人员。一个自然年度内，个人自付的合规医疗费用累计超过起付线800元的部分，纳入大病保险支付范围，报销比例为85%，不设封顶线。特困人员、低保对象等困难群体起付线降低50%，报销比例提高5个百分点。",
+        "actual_answer": "【模拟政策 policy_cg】大病保险的保障对象为参加城乡居民基本医疗保险的人员。一个自然年度内，个人自付的合规医疗费用累计超过起付线800元的部分，纳入大病保险支付范围，报销比例为85%，不设封顶线。特困人员、低保对象等困难群体起付线降低50%，报销比例提高5个百分点。；计超过起付线800元；报销比例为85%；体起付线降低50%；报销比例提高5个百分点。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "gold_support_details": []
+    },
+    {
+      "sample_id": "syn-027",
+      "category": "synthetic",
+      "question": "【模拟政策 policy_ch】城乡居民医保住院在二级医疗机构的起付线、报销比例和年度封顶线是多少？",
+      "expected_source": "policy_ch",
+      "retrieved_sources": [
+        "policy_ch"
+      ],
+      "source_hit": true,
+      "oracle_passed": true,
+      "metric_passed": true,
+      "gold_numeric_supported": true,
+      "classification": "pass",
+      "actual": {
+        "sample_id": "syn-027",
+        "actual_context": "【模拟政策 policy_ch】城乡居民基本医疗保险住院待遇标准：二级医疗机构起付线200元，政策范围内费用报销比例70%；一个自然年度内，基本医保统筹基金最高支付限额（封顶线）为30万元。",
+        "actual_answer": "【模拟政策 policy_ch】城乡居民基本医疗保险住院待遇标准：二级医疗机构起付线200元，政策范围内费用报销比例70%；一个自然年度内，基本医保统筹基金最高支付限额（封顶线）为30万元。；疗机构起付线200元；费用报销比例70%；数值30万。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "oracle": {
+        "sample_id": "syn-027",
+        "actual_context": "【模拟政策 policy_ch】城乡居民基本医疗保险住院待遇标准：二级医疗机构起付线200元，政策范围内费用报销比例70%；一个自然年度内，基本医保统筹基金最高支付限额（封顶线）为30万元。",
+        "actual_answer": "【模拟政策 policy_ch】城乡居民基本医疗保险住院待遇标准：二级医疗机构起付线200元，政策范围内费用报销比例70%；一个自然年度内，基本医保统筹基金最高支付限额（封顶线）为30万元。；疗机构起付线200元；费用报销比例70%；数值30万。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "gold_support_details": []
+    },
+    {
+      "sample_id": "syn-028",
+      "category": "synthetic",
+      "question": "【模拟政策 policy_ci】类风湿关节炎是否纳入门诊慢特病保障范围？统筹基金年度限额和报销比例是多少？",
+      "expected_source": "policy_ci",
+      "retrieved_sources": [
+        "policy_ci"
+      ],
+      "source_hit": true,
+      "oracle_passed": true,
+      "metric_passed": true,
+      "gold_numeric_supported": true,
+      "classification": "pass",
+      "actual": {
+        "sample_id": "syn-028",
+        "actual_context": "【模拟政策 policy_ci】类风湿关节炎病纳入门诊慢特病保障范围。统筹基金支付限额为每人每年2000元，政策范围内费用报销比例为90%。待遇认定须经二级及以上定点医疗机构确诊，并由医保经办机构审核通过。",
+        "actual_answer": "【模拟政策 policy_ci】类风湿关节炎病纳入门诊慢特病保障范围。统筹基金支付限额为每人每年2000元，政策范围内费用报销比例为90%。待遇认定须经二级及以上定点医疗机构确诊，并由医保经办机构审核通过。；额为每人每年2000元；用报销比例为90%。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "oracle": {
+        "sample_id": "syn-028",
+        "actual_context": "【模拟政策 policy_ci】类风湿关节炎病纳入门诊慢特病保障范围。统筹基金支付限额为每人每年2000元，政策范围内费用报销比例为90%。待遇认定须经二级及以上定点医疗机构确诊，并由医保经办机构审核通过。",
+        "actual_answer": "【模拟政策 policy_ci】类风湿关节炎病纳入门诊慢特病保障范围。统筹基金支付限额为每人每年2000元，政策范围内费用报销比例为90%。待遇认定须经二级及以上定点医疗机构确诊，并由医保经办机构审核通过。；额为每人每年2000元；用报销比例为90%。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "gold_support_details": []
+    },
+    {
+      "sample_id": "syn-029",
+      "category": "synthetic",
+      "question": "【模拟政策 policy_cj】大病保险的基础起付线、报销比例是多少，对困难群体有没有倾斜？",
+      "expected_source": "policy_cj",
+      "retrieved_sources": [
+        "policy_cj"
+      ],
+      "source_hit": true,
+      "oracle_passed": true,
+      "metric_passed": true,
+      "gold_numeric_supported": true,
+      "classification": "pass",
+      "actual": {
+        "sample_id": "syn-029",
+        "actual_context": "【模拟政策 policy_cj】大病保险的保障对象为参加城乡居民基本医疗保险的人员。一个自然年度内，个人自付的合规医疗费用累计超过起付线1000元的部分，纳入大病保险支付范围，报销比例为90%，不设封顶线。特困人员、低保对象等困难群体起付线降低50%，报销比例提高5个百分点。",
+        "actual_answer": "【模拟政策 policy_cj】大病保险的保障对象为参加城乡居民基本医疗保险的人员。一个自然年度内，个人自付的合规医疗费用累计超过起付线1000元的部分，纳入大病保险支付范围，报销比例为90%，不设封顶线。特困人员、低保对象等困难群体起付线降低50%，报销比例提高5个百分点。；计超过起付线1000元；报销比例为90%；体起付线降低50%；报销比例提高5个百分点。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "oracle": {
+        "sample_id": "syn-029",
+        "actual_context": "【模拟政策 policy_cj】大病保险的保障对象为参加城乡居民基本医疗保险的人员。一个自然年度内，个人自付的合规医疗费用累计超过起付线1000元的部分，纳入大病保险支付范围，报销比例为90%，不设封顶线。特困人员、低保对象等困难群体起付线降低50%，报销比例提高5个百分点。",
+        "actual_answer": "【模拟政策 policy_cj】大病保险的保障对象为参加城乡居民基本医疗保险的人员。一个自然年度内，个人自付的合规医疗费用累计超过起付线1000元的部分，纳入大病保险支付范围，报销比例为90%，不设封顶线。特困人员、低保对象等困难群体起付线降低50%，报销比例提高5个百分点。；计超过起付线1000元；报销比例为90%；体起付线降低50%；报销比例提高5个百分点。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "gold_support_details": []
+    },
+    {
+      "sample_id": "syn-030",
+      "category": "synthetic",
+      "question": "【模拟政策 policy_da】城乡居民医保住院在一级及以下医疗机构的起付线、报销比例和年度封顶线是多少？",
+      "expected_source": "policy_da",
+      "retrieved_sources": [
+        "policy_da"
+      ],
+      "source_hit": true,
+      "oracle_passed": true,
+      "metric_passed": true,
+      "gold_numeric_supported": true,
+      "classification": "pass",
+      "actual": {
+        "sample_id": "syn-030",
+        "actual_context": "【模拟政策 policy_da】城乡居民基本医疗保险住院待遇标准：一级及以下医疗机构起付线600元，政策范围内费用报销比例65%；一个自然年度内，基本医保统筹基金最高支付限额（封顶线）为15万元。",
+        "actual_answer": "【模拟政策 policy_da】城乡居民基本医疗保险住院待遇标准：一级及以下医疗机构起付线600元，政策范围内费用报销比例65%；一个自然年度内，基本医保统筹基金最高支付限额（封顶线）为15万元。；疗机构起付线600元；费用报销比例65%；数值15万。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "oracle": {
+        "sample_id": "syn-030",
+        "actual_context": "【模拟政策 policy_da】城乡居民基本医疗保险住院待遇标准：一级及以下医疗机构起付线600元，政策范围内费用报销比例65%；一个自然年度内，基本医保统筹基金最高支付限额（封顶线）为15万元。",
+        "actual_answer": "【模拟政策 policy_da】城乡居民基本医疗保险住院待遇标准：一级及以下医疗机构起付线600元，政策范围内费用报销比例65%；一个自然年度内，基本医保统筹基金最高支付限额（封顶线）为15万元。；疗机构起付线600元；费用报销比例65%；数值15万。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "gold_support_details": []
+    },
+    {
+      "sample_id": "syn-031",
+      "category": "synthetic",
+      "question": "【模拟政策 policy_db】甲状腺功能减退是否纳入门诊慢特病保障范围？统筹基金年度限额和报销比例是多少？",
+      "expected_source": "policy_db",
+      "retrieved_sources": [
+        "policy_db"
+      ],
+      "source_hit": true,
+      "oracle_passed": true,
+      "metric_passed": true,
+      "gold_numeric_supported": true,
+      "classification": "pass",
+      "actual": {
+        "sample_id": "syn-031",
+        "actual_context": "【模拟政策 policy_db】甲状腺功能减退病纳入门诊慢特病保障范围。统筹基金支付限额为每人每年4000元，政策范围内费用报销比例为75%。待遇认定须经二级及以上定点医疗机构确诊，并由医保经办机构审核通过。",
+        "actual_answer": "【模拟政策 policy_db】甲状腺功能减退病纳入门诊慢特病保障范围。统筹基金支付限额为每人每年4000元，政策范围内费用报销比例为75%。待遇认定须经二级及以上定点医疗机构确诊，并由医保经办机构审核通过。；额为每人每年4000元；用报销比例为75%。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "oracle": {
+        "sample_id": "syn-031",
+        "actual_context": "【模拟政策 policy_db】甲状腺功能减退病纳入门诊慢特病保障范围。统筹基金支付限额为每人每年4000元，政策范围内费用报销比例为75%。待遇认定须经二级及以上定点医疗机构确诊，并由医保经办机构审核通过。",
+        "actual_answer": "【模拟政策 policy_db】甲状腺功能减退病纳入门诊慢特病保障范围。统筹基金支付限额为每人每年4000元，政策范围内费用报销比例为75%。待遇认定须经二级及以上定点医疗机构确诊，并由医保经办机构审核通过。；额为每人每年4000元；用报销比例为75%。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "gold_support_details": []
+    },
+    {
+      "sample_id": "syn-032",
+      "category": "synthetic",
+      "question": "【模拟政策 policy_dc】大病保险的基础起付线、报销比例是多少，对困难群体有没有倾斜？",
+      "expected_source": "policy_dc",
+      "retrieved_sources": [
+        "policy_dc"
+      ],
+      "source_hit": true,
+      "oracle_passed": true,
+      "metric_passed": true,
+      "gold_numeric_supported": true,
+      "classification": "pass",
+      "actual": {
+        "sample_id": "syn-032",
+        "actual_context": "【模拟政策 policy_dc】大病保险的保障对象为参加城乡居民基本医疗保险的人员。一个自然年度内，个人自付的合规医疗费用累计超过起付线1000元的部分，纳入大病保险支付范围，报销比例为85%，不设封顶线。特困人员、低保对象等困难群体起付线降低50%，报销比例提高5个百分点。",
+        "actual_answer": "【模拟政策 policy_dc】大病保险的保障对象为参加城乡居民基本医疗保险的人员。一个自然年度内，个人自付的合规医疗费用累计超过起付线1000元的部分，纳入大病保险支付范围，报销比例为85%，不设封顶线。特困人员、低保对象等困难群体起付线降低50%，报销比例提高5个百分点。；计超过起付线1000元；报销比例为85%；体起付线降低50%；报销比例提高5个百分点。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "oracle": {
+        "sample_id": "syn-032",
+        "actual_context": "【模拟政策 policy_dc】大病保险的保障对象为参加城乡居民基本医疗保险的人员。一个自然年度内，个人自付的合规医疗费用累计超过起付线1000元的部分，纳入大病保险支付范围，报销比例为85%，不设封顶线。特困人员、低保对象等困难群体起付线降低50%，报销比例提高5个百分点。",
+        "actual_answer": "【模拟政策 policy_dc】大病保险的保障对象为参加城乡居民基本医疗保险的人员。一个自然年度内，个人自付的合规医疗费用累计超过起付线1000元的部分，纳入大病保险支付范围，报销比例为85%，不设封顶线。特困人员、低保对象等困难群体起付线降低50%，报销比例提高5个百分点。；计超过起付线1000元；报销比例为85%；体起付线降低50%；报销比例提高5个百分点。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "gold_support_details": []
+    },
+    {
+      "sample_id": "syn-033",
+      "category": "synthetic",
+      "question": "【模拟政策 policy_dd】城乡居民医保住院在二级医疗机构的起付线、报销比例和年度封顶线是多少？",
+      "expected_source": "policy_dd",
+      "retrieved_sources": [
+        "policy_dd"
+      ],
+      "source_hit": true,
+      "oracle_passed": true,
+      "metric_passed": true,
+      "gold_numeric_supported": true,
+      "classification": "pass",
+      "actual": {
+        "sample_id": "syn-033",
+        "actual_context": "【模拟政策 policy_dd】城乡居民基本医疗保险住院待遇标准：二级医疗机构起付线500元，政策范围内费用报销比例65%；一个自然年度内，基本医保统筹基金最高支付限额（封顶线）为30万元。",
+        "actual_answer": "【模拟政策 policy_dd】城乡居民基本医疗保险住院待遇标准：二级医疗机构起付线500元，政策范围内费用报销比例65%；一个自然年度内，基本医保统筹基金最高支付限额（封顶线）为30万元。；疗机构起付线500元；费用报销比例65%；数值30万。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "oracle": {
+        "sample_id": "syn-033",
+        "actual_context": "【模拟政策 policy_dd】城乡居民基本医疗保险住院待遇标准：二级医疗机构起付线500元，政策范围内费用报销比例65%；一个自然年度内，基本医保统筹基金最高支付限额（封顶线）为30万元。",
+        "actual_answer": "【模拟政策 policy_dd】城乡居民基本医疗保险住院待遇标准：二级医疗机构起付线500元，政策范围内费用报销比例65%；一个自然年度内，基本医保统筹基金最高支付限额（封顶线）为30万元。；疗机构起付线500元；费用报销比例65%；数值30万。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "gold_support_details": []
+    },
+    {
+      "sample_id": "syn-034",
+      "category": "synthetic",
+      "question": "【模拟政策 policy_de】乙肝是否纳入门诊慢特病保障范围？统筹基金年度限额和报销比例是多少？",
+      "expected_source": "policy_de",
+      "retrieved_sources": [
+        "policy_de"
+      ],
+      "source_hit": true,
+      "oracle_passed": true,
+      "metric_passed": true,
+      "gold_numeric_supported": true,
+      "classification": "pass",
+      "actual": {
+        "sample_id": "syn-034",
+        "actual_context": "【模拟政策 policy_de】乙肝病纳入门诊慢特病保障范围。统筹基金支付限额为每人每年1500元，政策范围内费用报销比例为55%。待遇认定须经二级及以上定点医疗机构确诊，并由医保经办机构审核通过。",
+        "actual_answer": "【模拟政策 policy_de】乙肝病纳入门诊慢特病保障范围。统筹基金支付限额为每人每年1500元，政策范围内费用报销比例为55%。待遇认定须经二级及以上定点医疗机构确诊，并由医保经办机构审核通过。；额为每人每年1500元；用报销比例为55%。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "oracle": {
+        "sample_id": "syn-034",
+        "actual_context": "【模拟政策 policy_de】乙肝病纳入门诊慢特病保障范围。统筹基金支付限额为每人每年1500元，政策范围内费用报销比例为55%。待遇认定须经二级及以上定点医疗机构确诊，并由医保经办机构审核通过。",
+        "actual_answer": "【模拟政策 policy_de】乙肝病纳入门诊慢特病保障范围。统筹基金支付限额为每人每年1500元，政策范围内费用报销比例为55%。待遇认定须经二级及以上定点医疗机构确诊，并由医保经办机构审核通过。；额为每人每年1500元；用报销比例为55%。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "gold_support_details": []
+    },
+    {
+      "sample_id": "syn-035",
+      "category": "synthetic",
+      "question": "【模拟政策 policy_df】大病保险的基础起付线、报销比例是多少，对困难群体有没有倾斜？",
+      "expected_source": "policy_df",
+      "retrieved_sources": [
+        "policy_df"
+      ],
+      "source_hit": true,
+      "oracle_passed": true,
+      "metric_passed": true,
+      "gold_numeric_supported": true,
+      "classification": "pass",
+      "actual": {
+        "sample_id": "syn-035",
+        "actual_context": "【模拟政策 policy_df】大病保险的保障对象为参加城乡居民基本医疗保险的人员。一个自然年度内，个人自付的合规医疗费用累计超过起付线200元的部分，纳入大病保险支付范围，报销比例为65%，不设封顶线。特困人员、低保对象等困难群体起付线降低50%，报销比例提高5个百分点。",
+        "actual_answer": "【模拟政策 policy_df】大病保险的保障对象为参加城乡居民基本医疗保险的人员。一个自然年度内，个人自付的合规医疗费用累计超过起付线200元的部分，纳入大病保险支付范围，报销比例为65%，不设封顶线。特困人员、低保对象等困难群体起付线降低50%，报销比例提高5个百分点。；计超过起付线200元；报销比例为65%；体起付线降低50%；报销比例提高5个百分点。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "oracle": {
+        "sample_id": "syn-035",
+        "actual_context": "【模拟政策 policy_df】大病保险的保障对象为参加城乡居民基本医疗保险的人员。一个自然年度内，个人自付的合规医疗费用累计超过起付线200元的部分，纳入大病保险支付范围，报销比例为65%，不设封顶线。特困人员、低保对象等困难群体起付线降低50%，报销比例提高5个百分点。",
+        "actual_answer": "【模拟政策 policy_df】大病保险的保障对象为参加城乡居民基本医疗保险的人员。一个自然年度内，个人自付的合规医疗费用累计超过起付线200元的部分，纳入大病保险支付范围，报销比例为65%，不设封顶线。特困人员、低保对象等困难群体起付线降低50%，报销比例提高5个百分点。；计超过起付线200元；报销比例为65%；体起付线降低50%；报销比例提高5个百分点。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "gold_support_details": []
+    },
+    {
+      "sample_id": "syn-036",
+      "category": "synthetic",
+      "question": "【模拟政策 policy_dg】城乡居民医保住院在三级医疗机构的起付线、报销比例和年度封顶线是多少？",
+      "expected_source": "policy_dg",
+      "retrieved_sources": [
+        "policy_dg"
+      ],
+      "source_hit": true,
+      "oracle_passed": true,
+      "metric_passed": true,
+      "gold_numeric_supported": true,
+      "classification": "pass",
+      "actual": {
+        "sample_id": "syn-036",
+        "actual_context": "【模拟政策 policy_dg】城乡居民基本医疗保险住院待遇标准：三级医疗机构起付线300元，政策范围内费用报销比例85%；一个自然年度内，基本医保统筹基金最高支付限额（封顶线）为30万元。",
+        "actual_answer": "【模拟政策 policy_dg】城乡居民基本医疗保险住院待遇标准：三级医疗机构起付线300元，政策范围内费用报销比例85%；一个自然年度内，基本医保统筹基金最高支付限额（封顶线）为30万元。；疗机构起付线300元；费用报销比例85%；数值30万。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "oracle": {
+        "sample_id": "syn-036",
+        "actual_context": "【模拟政策 policy_dg】城乡居民基本医疗保险住院待遇标准：三级医疗机构起付线300元，政策范围内费用报销比例85%；一个自然年度内，基本医保统筹基金最高支付限额（封顶线）为30万元。",
+        "actual_answer": "【模拟政策 policy_dg】城乡居民基本医疗保险住院待遇标准：三级医疗机构起付线300元，政策范围内费用报销比例85%；一个自然年度内，基本医保统筹基金最高支付限额（封顶线）为30万元。；疗机构起付线300元；费用报销比例85%；数值30万。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "gold_support_details": []
+    },
+    {
+      "sample_id": "syn-037",
+      "category": "synthetic",
+      "question": "【模拟政策 policy_dh】糖尿病是否纳入门诊慢特病保障范围？统筹基金年度限额和报销比例是多少？",
+      "expected_source": "policy_dh",
+      "retrieved_sources": [
+        "policy_dh"
+      ],
+      "source_hit": true,
+      "oracle_passed": true,
+      "metric_passed": true,
+      "gold_numeric_supported": true,
+      "classification": "pass",
+      "actual": {
+        "sample_id": "syn-037",
+        "actual_context": "【模拟政策 policy_dh】糖尿病病纳入门诊慢特病保障范围。统筹基金支付限额为每人每年3000元，政策范围内费用报销比例为85%。待遇认定须经二级及以上定点医疗机构确诊，并由医保经办机构审核通过。",
+        "actual_answer": "【模拟政策 policy_dh】糖尿病病纳入门诊慢特病保障范围。统筹基金支付限额为每人每年3000元，政策范围内费用报销比例为85%。待遇认定须经二级及以上定点医疗机构确诊，并由医保经办机构审核通过。；额为每人每年3000元；用报销比例为85%。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "oracle": {
+        "sample_id": "syn-037",
+        "actual_context": "【模拟政策 policy_dh】糖尿病病纳入门诊慢特病保障范围。统筹基金支付限额为每人每年3000元，政策范围内费用报销比例为85%。待遇认定须经二级及以上定点医疗机构确诊，并由医保经办机构审核通过。",
+        "actual_answer": "【模拟政策 policy_dh】糖尿病病纳入门诊慢特病保障范围。统筹基金支付限额为每人每年3000元，政策范围内费用报销比例为85%。待遇认定须经二级及以上定点医疗机构确诊，并由医保经办机构审核通过。；额为每人每年3000元；用报销比例为85%。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "gold_support_details": []
+    },
+    {
+      "sample_id": "syn-038",
+      "category": "synthetic",
+      "question": "【模拟政策 policy_di】大病保险的基础起付线、报销比例是多少，对困难群体有没有倾斜？",
+      "expected_source": "policy_di",
+      "retrieved_sources": [
+        "policy_di"
+      ],
+      "source_hit": true,
+      "oracle_passed": true,
+      "metric_passed": true,
+      "gold_numeric_supported": true,
+      "classification": "pass",
+      "actual": {
+        "sample_id": "syn-038",
+        "actual_context": "【模拟政策 policy_di】大病保险的保障对象为参加城乡居民基本医疗保险的人员。一个自然年度内，个人自付的合规医疗费用累计超过起付线1200元的部分，纳入大病保险支付范围，报销比例为75%，不设封顶线。特困人员、低保对象等困难群体起付线降低50%，报销比例提高5个百分点。",
+        "actual_answer": "【模拟政策 policy_di】大病保险的保障对象为参加城乡居民基本医疗保险的人员。一个自然年度内，个人自付的合规医疗费用累计超过起付线1200元的部分，纳入大病保险支付范围，报销比例为75%，不设封顶线。特困人员、低保对象等困难群体起付线降低50%，报销比例提高5个百分点。；计超过起付线1200元；报销比例为75%；体起付线降低50%；报销比例提高5个百分点。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "oracle": {
+        "sample_id": "syn-038",
+        "actual_context": "【模拟政策 policy_di】大病保险的保障对象为参加城乡居民基本医疗保险的人员。一个自然年度内，个人自付的合规医疗费用累计超过起付线1200元的部分，纳入大病保险支付范围，报销比例为75%，不设封顶线。特困人员、低保对象等困难群体起付线降低50%，报销比例提高5个百分点。",
+        "actual_answer": "【模拟政策 policy_di】大病保险的保障对象为参加城乡居民基本医疗保险的人员。一个自然年度内，个人自付的合规医疗费用累计超过起付线1200元的部分，纳入大病保险支付范围，报销比例为75%，不设封顶线。特困人员、低保对象等困难群体起付线降低50%，报销比例提高5个百分点。；计超过起付线1200元；报销比例为75%；体起付线降低50%；报销比例提高5个百分点。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "gold_support_details": []
+    },
+    {
+      "sample_id": "syn-039",
+      "category": "synthetic",
+      "question": "【模拟政策 policy_dj】城乡居民医保住院在三级医疗机构的起付线、报销比例和年度封顶线是多少？",
+      "expected_source": "policy_dj",
+      "retrieved_sources": [
+        "policy_dj"
+      ],
+      "source_hit": true,
+      "oracle_passed": true,
+      "metric_passed": true,
+      "gold_numeric_supported": true,
+      "classification": "pass",
+      "actual": {
+        "sample_id": "syn-039",
+        "actual_context": "【模拟政策 policy_dj】城乡居民基本医疗保险住院待遇标准：三级医疗机构起付线100元，政策范围内费用报销比例60%；一个自然年度内，基本医保统筹基金最高支付限额（封顶线）为30万元。",
+        "actual_answer": "【模拟政策 policy_dj】城乡居民基本医疗保险住院待遇标准：三级医疗机构起付线100元，政策范围内费用报销比例60%；一个自然年度内，基本医保统筹基金最高支付限额（封顶线）为30万元。；疗机构起付线100元；费用报销比例60%；数值30万。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "oracle": {
+        "sample_id": "syn-039",
+        "actual_context": "【模拟政策 policy_dj】城乡居民基本医疗保险住院待遇标准：三级医疗机构起付线100元，政策范围内费用报销比例60%；一个自然年度内，基本医保统筹基金最高支付限额（封顶线）为30万元。",
+        "actual_answer": "【模拟政策 policy_dj】城乡居民基本医疗保险住院待遇标准：三级医疗机构起付线100元，政策范围内费用报销比例60%；一个自然年度内，基本医保统筹基金最高支付限额（封顶线）为30万元。；疗机构起付线100元；费用报销比例60%；数值30万。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "gold_support_details": []
+    },
+    {
+      "sample_id": "syn-040",
+      "category": "synthetic",
+      "question": "【模拟政策 policy_ea】慢阻肺是否纳入门诊慢特病保障范围？统筹基金年度限额和报销比例是多少？",
+      "expected_source": "policy_ea",
+      "retrieved_sources": [
+        "policy_ea"
+      ],
+      "source_hit": true,
+      "oracle_passed": true,
+      "metric_passed": true,
+      "gold_numeric_supported": true,
+      "classification": "pass",
+      "actual": {
+        "sample_id": "syn-040",
+        "actual_context": "【模拟政策 policy_ea】慢阻肺病纳入门诊慢特病保障范围。统筹基金支付限额为每人每年2500元，政策范围内费用报销比例为60%。待遇认定须经二级及以上定点医疗机构确诊，并由医保经办机构审核通过。",
+        "actual_answer": "【模拟政策 policy_ea】慢阻肺病纳入门诊慢特病保障范围。统筹基金支付限额为每人每年2500元，政策范围内费用报销比例为60%。待遇认定须经二级及以上定点医疗机构确诊，并由医保经办机构审核通过。；额为每人每年2500元；用报销比例为60%。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "oracle": {
+        "sample_id": "syn-040",
+        "actual_context": "【模拟政策 policy_ea】慢阻肺病纳入门诊慢特病保障范围。统筹基金支付限额为每人每年2500元，政策范围内费用报销比例为60%。待遇认定须经二级及以上定点医疗机构确诊，并由医保经办机构审核通过。",
+        "actual_answer": "【模拟政策 policy_ea】慢阻肺病纳入门诊慢特病保障范围。统筹基金支付限额为每人每年2500元，政策范围内费用报销比例为60%。待遇认定须经二级及以上定点医疗机构确诊，并由医保经办机构审核通过。；额为每人每年2500元；用报销比例为60%。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "gold_support_details": []
+    },
+    {
+      "sample_id": "syn-041",
+      "category": "synthetic",
+      "question": "【模拟政策 policy_eb】大病保险的基础起付线、报销比例是多少，对困难群体有没有倾斜？",
+      "expected_source": "policy_eb",
+      "retrieved_sources": [
+        "policy_eb"
+      ],
+      "source_hit": true,
+      "oracle_passed": true,
+      "metric_passed": true,
+      "gold_numeric_supported": true,
+      "classification": "pass",
+      "actual": {
+        "sample_id": "syn-041",
+        "actual_context": "【模拟政策 policy_eb】大病保险的保障对象为参加城乡居民基本医疗保险的人员。一个自然年度内，个人自付的合规医疗费用累计超过起付线600元的部分，纳入大病保险支付范围，报销比例为85%，不设封顶线。特困人员、低保对象等困难群体起付线降低50%，报销比例提高5个百分点。",
+        "actual_answer": "【模拟政策 policy_eb】大病保险的保障对象为参加城乡居民基本医疗保险的人员。一个自然年度内，个人自付的合规医疗费用累计超过起付线600元的部分，纳入大病保险支付范围，报销比例为85%，不设封顶线。特困人员、低保对象等困难群体起付线降低50%，报销比例提高5个百分点。；计超过起付线600元；报销比例为85%；体起付线降低50%；报销比例提高5个百分点。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "oracle": {
+        "sample_id": "syn-041",
+        "actual_context": "【模拟政策 policy_eb】大病保险的保障对象为参加城乡居民基本医疗保险的人员。一个自然年度内，个人自付的合规医疗费用累计超过起付线600元的部分，纳入大病保险支付范围，报销比例为85%，不设封顶线。特困人员、低保对象等困难群体起付线降低50%，报销比例提高5个百分点。",
+        "actual_answer": "【模拟政策 policy_eb】大病保险的保障对象为参加城乡居民基本医疗保险的人员。一个自然年度内，个人自付的合规医疗费用累计超过起付线600元的部分，纳入大病保险支付范围，报销比例为85%，不设封顶线。特困人员、低保对象等困难群体起付线降低50%，报销比例提高5个百分点。；计超过起付线600元；报销比例为85%；体起付线降低50%；报销比例提高5个百分点。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "gold_support_details": []
+    },
+    {
+      "sample_id": "syn-042",
+      "category": "synthetic",
+      "question": "【模拟政策 policy_ec】城乡居民医保住院在一级及以下医疗机构的起付线、报销比例和年度封顶线是多少？",
+      "expected_source": "policy_ec",
+      "retrieved_sources": [
+        "policy_ec"
+      ],
+      "source_hit": true,
+      "oracle_passed": true,
+      "metric_passed": true,
+      "gold_numeric_supported": true,
+      "classification": "pass",
+      "actual": {
+        "sample_id": "syn-042",
+        "actual_context": "【模拟政策 policy_ec】城乡居民基本医疗保险住院待遇标准：一级及以下医疗机构起付线1200元，政策范围内费用报销比例55%；一个自然年度内，基本医保统筹基金最高支付限额（封顶线）为20万元。",
+        "actual_answer": "【模拟政策 policy_ec】城乡居民基本医疗保险住院待遇标准：一级及以下医疗机构起付线1200元，政策范围内费用报销比例55%；一个自然年度内，基本医保统筹基金最高支付限额（封顶线）为20万元。；疗机构起付线1200元；费用报销比例55%；数值20万。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "oracle": {
+        "sample_id": "syn-042",
+        "actual_context": "【模拟政策 policy_ec】城乡居民基本医疗保险住院待遇标准：一级及以下医疗机构起付线1200元，政策范围内费用报销比例55%；一个自然年度内，基本医保统筹基金最高支付限额（封顶线）为20万元。",
+        "actual_answer": "【模拟政策 policy_ec】城乡居民基本医疗保险住院待遇标准：一级及以下医疗机构起付线1200元，政策范围内费用报销比例55%；一个自然年度内，基本医保统筹基金最高支付限额（封顶线）为20万元。；疗机构起付线1200元；费用报销比例55%；数值20万。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "gold_support_details": []
+    },
+    {
+      "sample_id": "syn-043",
+      "category": "synthetic",
+      "question": "【模拟政策 policy_ed】甲状腺功能减退是否纳入门诊慢特病保障范围？统筹基金年度限额和报销比例是多少？",
+      "expected_source": "policy_ed",
+      "retrieved_sources": [
+        "policy_ed"
+      ],
+      "source_hit": true,
+      "oracle_passed": true,
+      "metric_passed": true,
+      "gold_numeric_supported": true,
+      "classification": "pass",
+      "actual": {
+        "sample_id": "syn-043",
+        "actual_context": "【模拟政策 policy_ed】甲状腺功能减退病纳入门诊慢特病保障范围。统筹基金支付限额为每人每年2000元，政策范围内费用报销比例为60%。待遇认定须经二级及以上定点医疗机构确诊，并由医保经办机构审核通过。",
+        "actual_answer": "【模拟政策 policy_ed】甲状腺功能减退病纳入门诊慢特病保障范围。统筹基金支付限额为每人每年2000元，政策范围内费用报销比例为60%。待遇认定须经二级及以上定点医疗机构确诊，并由医保经办机构审核通过。；额为每人每年2000元；用报销比例为60%。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "oracle": {
+        "sample_id": "syn-043",
+        "actual_context": "【模拟政策 policy_ed】甲状腺功能减退病纳入门诊慢特病保障范围。统筹基金支付限额为每人每年2000元，政策范围内费用报销比例为60%。待遇认定须经二级及以上定点医疗机构确诊，并由医保经办机构审核通过。",
+        "actual_answer": "【模拟政策 policy_ed】甲状腺功能减退病纳入门诊慢特病保障范围。统筹基金支付限额为每人每年2000元，政策范围内费用报销比例为60%。待遇认定须经二级及以上定点医疗机构确诊，并由医保经办机构审核通过。；额为每人每年2000元；用报销比例为60%。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "gold_support_details": []
+    },
+    {
+      "sample_id": "syn-044",
+      "category": "synthetic",
+      "question": "【模拟政策 policy_ee】大病保险的基础起付线、报销比例是多少，对困难群体有没有倾斜？",
+      "expected_source": "policy_ee",
+      "retrieved_sources": [
+        "policy_ee"
+      ],
+      "source_hit": true,
+      "oracle_passed": true,
+      "metric_passed": true,
+      "gold_numeric_supported": true,
+      "classification": "pass",
+      "actual": {
+        "sample_id": "syn-044",
+        "actual_context": "【模拟政策 policy_ee】大病保险的保障对象为参加城乡居民基本医疗保险的人员。一个自然年度内，个人自付的合规医疗费用累计超过起付线600元的部分，纳入大病保险支付范围，报销比例为70%，不设封顶线。特困人员、低保对象等困难群体起付线降低50%，报销比例提高5个百分点。",
+        "actual_answer": "【模拟政策 policy_ee】大病保险的保障对象为参加城乡居民基本医疗保险的人员。一个自然年度内，个人自付的合规医疗费用累计超过起付线600元的部分，纳入大病保险支付范围，报销比例为70%，不设封顶线。特困人员、低保对象等困难群体起付线降低50%，报销比例提高5个百分点。；计超过起付线600元；报销比例为70%；体起付线降低50%；报销比例提高5个百分点。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "oracle": {
+        "sample_id": "syn-044",
+        "actual_context": "【模拟政策 policy_ee】大病保险的保障对象为参加城乡居民基本医疗保险的人员。一个自然年度内，个人自付的合规医疗费用累计超过起付线600元的部分，纳入大病保险支付范围，报销比例为70%，不设封顶线。特困人员、低保对象等困难群体起付线降低50%，报销比例提高5个百分点。",
+        "actual_answer": "【模拟政策 policy_ee】大病保险的保障对象为参加城乡居民基本医疗保险的人员。一个自然年度内，个人自付的合规医疗费用累计超过起付线600元的部分，纳入大病保险支付范围，报销比例为70%，不设封顶线。特困人员、低保对象等困难群体起付线降低50%，报销比例提高5个百分点。；计超过起付线600元；报销比例为70%；体起付线降低50%；报销比例提高5个百分点。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "gold_support_details": []
+    },
+    {
+      "sample_id": "syn-045",
+      "category": "synthetic",
+      "question": "【模拟政策 policy_ef】城乡居民医保住院在一级及以下医疗机构的起付线、报销比例和年度封顶线是多少？",
+      "expected_source": "policy_ef",
+      "retrieved_sources": [
+        "policy_ef"
+      ],
+      "source_hit": true,
+      "oracle_passed": true,
+      "metric_passed": true,
+      "gold_numeric_supported": true,
+      "classification": "pass",
+      "actual": {
+        "sample_id": "syn-045",
+        "actual_context": "【模拟政策 policy_ef】城乡居民基本医疗保险住院待遇标准：一级及以下医疗机构起付线800元，政策范围内费用报销比例65%；一个自然年度内，基本医保统筹基金最高支付限额（封顶线）为30万元。",
+        "actual_answer": "【模拟政策 policy_ef】城乡居民基本医疗保险住院待遇标准：一级及以下医疗机构起付线800元，政策范围内费用报销比例65%；一个自然年度内，基本医保统筹基金最高支付限额（封顶线）为30万元。；疗机构起付线800元；费用报销比例65%；数值30万。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "oracle": {
+        "sample_id": "syn-045",
+        "actual_context": "【模拟政策 policy_ef】城乡居民基本医疗保险住院待遇标准：一级及以下医疗机构起付线800元，政策范围内费用报销比例65%；一个自然年度内，基本医保统筹基金最高支付限额（封顶线）为30万元。",
+        "actual_answer": "【模拟政策 policy_ef】城乡居民基本医疗保险住院待遇标准：一级及以下医疗机构起付线800元，政策范围内费用报销比例65%；一个自然年度内，基本医保统筹基金最高支付限额（封顶线）为30万元。；疗机构起付线800元；费用报销比例65%；数值30万。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "gold_support_details": []
+    },
+    {
+      "sample_id": "syn-046",
+      "category": "synthetic",
+      "question": "【模拟政策 policy_eg】甲状腺功能减退是否纳入门诊慢特病保障范围？统筹基金年度限额和报销比例是多少？",
+      "expected_source": "policy_eg",
+      "retrieved_sources": [
+        "policy_eg"
+      ],
+      "source_hit": true,
+      "oracle_passed": true,
+      "metric_passed": true,
+      "gold_numeric_supported": true,
+      "classification": "pass",
+      "actual": {
+        "sample_id": "syn-046",
+        "actual_context": "【模拟政策 policy_eg】甲状腺功能减退病纳入门诊慢特病保障范围。统筹基金支付限额为每人每年1500元，政策范围内费用报销比例为80%。待遇认定须经二级及以上定点医疗机构确诊，并由医保经办机构审核通过。",
+        "actual_answer": "【模拟政策 policy_eg】甲状腺功能减退病纳入门诊慢特病保障范围。统筹基金支付限额为每人每年1500元，政策范围内费用报销比例为80%。待遇认定须经二级及以上定点医疗机构确诊，并由医保经办机构审核通过。；额为每人每年1500元；用报销比例为80%。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "oracle": {
+        "sample_id": "syn-046",
+        "actual_context": "【模拟政策 policy_eg】甲状腺功能减退病纳入门诊慢特病保障范围。统筹基金支付限额为每人每年1500元，政策范围内费用报销比例为80%。待遇认定须经二级及以上定点医疗机构确诊，并由医保经办机构审核通过。",
+        "actual_answer": "【模拟政策 policy_eg】甲状腺功能减退病纳入门诊慢特病保障范围。统筹基金支付限额为每人每年1500元，政策范围内费用报销比例为80%。待遇认定须经二级及以上定点医疗机构确诊，并由医保经办机构审核通过。；额为每人每年1500元；用报销比例为80%。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "gold_support_details": []
+    },
+    {
+      "sample_id": "syn-047",
+      "category": "synthetic",
+      "question": "【模拟政策 policy_eh】大病保险的基础起付线、报销比例是多少，对困难群体有没有倾斜？",
+      "expected_source": "policy_eh",
+      "retrieved_sources": [
+        "policy_eh"
+      ],
+      "source_hit": true,
+      "oracle_passed": true,
+      "metric_passed": true,
+      "gold_numeric_supported": true,
+      "classification": "pass",
+      "actual": {
+        "sample_id": "syn-047",
+        "actual_context": "【模拟政策 policy_eh】大病保险的保障对象为参加城乡居民基本医疗保险的人员。一个自然年度内，个人自付的合规医疗费用累计超过起付线1200元的部分，纳入大病保险支付范围，报销比例为55%，不设封顶线。特困人员、低保对象等困难群体起付线降低50%，报销比例提高5个百分点。",
+        "actual_answer": "【模拟政策 policy_eh】大病保险的保障对象为参加城乡居民基本医疗保险的人员。一个自然年度内，个人自付的合规医疗费用累计超过起付线1200元的部分，纳入大病保险支付范围，报销比例为55%，不设封顶线。特困人员、低保对象等困难群体起付线降低50%，报销比例提高5个百分点。；计超过起付线1200元；报销比例为55%；体起付线降低50%；报销比例提高5个百分点。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "oracle": {
+        "sample_id": "syn-047",
+        "actual_context": "【模拟政策 policy_eh】大病保险的保障对象为参加城乡居民基本医疗保险的人员。一个自然年度内，个人自付的合规医疗费用累计超过起付线1200元的部分，纳入大病保险支付范围，报销比例为55%，不设封顶线。特困人员、低保对象等困难群体起付线降低50%，报销比例提高5个百分点。",
+        "actual_answer": "【模拟政策 policy_eh】大病保险的保障对象为参加城乡居民基本医疗保险的人员。一个自然年度内，个人自付的合规医疗费用累计超过起付线1200元的部分，纳入大病保险支付范围，报销比例为55%，不设封顶线。特困人员、低保对象等困难群体起付线降低50%，报销比例提高5个百分点。；计超过起付线1200元；报销比例为55%；体起付线降低50%；报销比例提高5个百分点。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "gold_support_details": []
+    },
+    {
+      "sample_id": "syn-048",
+      "category": "synthetic",
+      "question": "【模拟政策 policy_ei】城乡居民医保住院在一级及以下医疗机构的起付线、报销比例和年度封顶线是多少？",
+      "expected_source": "policy_ei",
+      "retrieved_sources": [
+        "policy_ei"
+      ],
+      "source_hit": true,
+      "oracle_passed": true,
+      "metric_passed": true,
+      "gold_numeric_supported": true,
+      "classification": "pass",
+      "actual": {
+        "sample_id": "syn-048",
+        "actual_context": "【模拟政策 policy_ei】城乡居民基本医疗保险住院待遇标准：一级及以下医疗机构起付线800元，政策范围内费用报销比例75%；一个自然年度内，基本医保统筹基金最高支付限额（封顶线）为15万元。",
+        "actual_answer": "【模拟政策 policy_ei】城乡居民基本医疗保险住院待遇标准：一级及以下医疗机构起付线800元，政策范围内费用报销比例75%；一个自然年度内，基本医保统筹基金最高支付限额（封顶线）为15万元。；疗机构起付线800元；费用报销比例75%；数值15万。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "oracle": {
+        "sample_id": "syn-048",
+        "actual_context": "【模拟政策 policy_ei】城乡居民基本医疗保险住院待遇标准：一级及以下医疗机构起付线800元，政策范围内费用报销比例75%；一个自然年度内，基本医保统筹基金最高支付限额（封顶线）为15万元。",
+        "actual_answer": "【模拟政策 policy_ei】城乡居民基本医疗保险住院待遇标准：一级及以下医疗机构起付线800元，政策范围内费用报销比例75%；一个自然年度内，基本医保统筹基金最高支付限额（封顶线）为15万元。；疗机构起付线800元；费用报销比例75%；数值15万。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "gold_support_details": []
+    },
+    {
+      "sample_id": "syn-049",
+      "category": "synthetic",
+      "question": "【模拟政策 policy_ej】高血压是否纳入门诊慢特病保障范围？统筹基金年度限额和报销比例是多少？",
+      "expected_source": "policy_ej",
+      "retrieved_sources": [
+        "policy_ej"
+      ],
+      "source_hit": true,
+      "oracle_passed": true,
+      "metric_passed": true,
+      "gold_numeric_supported": true,
+      "classification": "pass",
+      "actual": {
+        "sample_id": "syn-049",
+        "actual_context": "【模拟政策 policy_ej】高血压病纳入门诊慢特病保障范围。统筹基金支付限额为每人每年2000元，政策范围内费用报销比例为60%。待遇认定须经二级及以上定点医疗机构确诊，并由医保经办机构审核通过。",
+        "actual_answer": "【模拟政策 policy_ej】高血压病纳入门诊慢特病保障范围。统筹基金支付限额为每人每年2000元，政策范围内费用报销比例为60%。待遇认定须经二级及以上定点医疗机构确诊，并由医保经办机构审核通过。；额为每人每年2000元；用报销比例为60%。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "oracle": {
+        "sample_id": "syn-049",
+        "actual_context": "【模拟政策 policy_ej】高血压病纳入门诊慢特病保障范围。统筹基金支付限额为每人每年2000元，政策范围内费用报销比例为60%。待遇认定须经二级及以上定点医疗机构确诊，并由医保经办机构审核通过。",
+        "actual_answer": "【模拟政策 policy_ej】高血压病纳入门诊慢特病保障范围。统筹基金支付限额为每人每年2000元，政策范围内费用报销比例为60%。待遇认定须经二级及以上定点医疗机构确诊，并由医保经办机构审核通过。；额为每人每年2000元；用报销比例为60%。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "gold_support_details": []
+    },
+    {
+      "sample_id": "syn-050",
+      "category": "synthetic",
+      "question": "【模拟政策 policy_fa】大病保险的基础起付线、报销比例是多少，对困难群体有没有倾斜？",
+      "expected_source": "policy_fa",
+      "retrieved_sources": [
+        "policy_fa"
+      ],
+      "source_hit": true,
+      "oracle_passed": true,
+      "metric_passed": true,
+      "gold_numeric_supported": true,
+      "classification": "pass",
+      "actual": {
+        "sample_id": "syn-050",
+        "actual_context": "【模拟政策 policy_fa】大病保险的保障对象为参加城乡居民基本医疗保险的人员。一个自然年度内，个人自付的合规医疗费用累计超过起付线200元的部分，纳入大病保险支付范围，报销比例为90%，不设封顶线。特困人员、低保对象等困难群体起付线降低50%，报销比例提高5个百分点。",
+        "actual_answer": "【模拟政策 policy_fa】大病保险的保障对象为参加城乡居民基本医疗保险的人员。一个自然年度内，个人自付的合规医疗费用累计超过起付线200元的部分，纳入大病保险支付范围，报销比例为90%，不设封顶线。特困人员、低保对象等困难群体起付线降低50%，报销比例提高5个百分点。；计超过起付线200元；报销比例为90%；体起付线降低50%；报销比例提高5个百分点。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "oracle": {
+        "sample_id": "syn-050",
+        "actual_context": "【模拟政策 policy_fa】大病保险的保障对象为参加城乡居民基本医疗保险的人员。一个自然年度内，个人自付的合规医疗费用累计超过起付线200元的部分，纳入大病保险支付范围，报销比例为90%，不设封顶线。特困人员、低保对象等困难群体起付线降低50%，报销比例提高5个百分点。",
+        "actual_answer": "【模拟政策 policy_fa】大病保险的保障对象为参加城乡居民基本医疗保险的人员。一个自然年度内，个人自付的合规医疗费用累计超过起付线200元的部分，纳入大病保险支付范围，报销比例为90%，不设封顶线。特困人员、低保对象等困难群体起付线降低50%，报销比例提高5个百分点。；计超过起付线200元；报销比例为90%；体起付线降低50%；报销比例提高5个百分点。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "gold_support_details": []
+    },
+    {
+      "sample_id": "syn-051",
+      "category": "synthetic",
+      "question": "【模拟政策 policy_fb】城乡居民医保住院在一级及以下医疗机构的起付线、报销比例和年度封顶线是多少？",
+      "expected_source": "policy_fb",
+      "retrieved_sources": [
+        "policy_fb"
+      ],
+      "source_hit": true,
+      "oracle_passed": true,
+      "metric_passed": true,
+      "gold_numeric_supported": true,
+      "classification": "pass",
+      "actual": {
+        "sample_id": "syn-051",
+        "actual_context": "【模拟政策 policy_fb】城乡居民基本医疗保险住院待遇标准：一级及以下医疗机构起付线300元，政策范围内费用报销比例65%；一个自然年度内，基本医保统筹基金最高支付限额（封顶线）为25万元。",
+        "actual_answer": "【模拟政策 policy_fb】城乡居民基本医疗保险住院待遇标准：一级及以下医疗机构起付线300元，政策范围内费用报销比例65%；一个自然年度内，基本医保统筹基金最高支付限额（封顶线）为25万元。；疗机构起付线300元；费用报销比例65%；数值25万。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "oracle": {
+        "sample_id": "syn-051",
+        "actual_context": "【模拟政策 policy_fb】城乡居民基本医疗保险住院待遇标准：一级及以下医疗机构起付线300元，政策范围内费用报销比例65%；一个自然年度内，基本医保统筹基金最高支付限额（封顶线）为25万元。",
+        "actual_answer": "【模拟政策 policy_fb】城乡居民基本医疗保险住院待遇标准：一级及以下医疗机构起付线300元，政策范围内费用报销比例65%；一个自然年度内，基本医保统筹基金最高支付限额（封顶线）为25万元。；疗机构起付线300元；费用报销比例65%；数值25万。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "gold_support_details": []
+    },
+    {
+      "sample_id": "syn-052",
+      "category": "synthetic",
+      "question": "【模拟政策 policy_fc】甲状腺功能减退是否纳入门诊慢特病保障范围？统筹基金年度限额和报销比例是多少？",
+      "expected_source": "policy_fc",
+      "retrieved_sources": [
+        "policy_fc"
+      ],
+      "source_hit": true,
+      "oracle_passed": true,
+      "metric_passed": true,
+      "gold_numeric_supported": true,
+      "classification": "pass",
+      "actual": {
+        "sample_id": "syn-052",
+        "actual_context": "【模拟政策 policy_fc】甲状腺功能减退病纳入门诊慢特病保障范围。统筹基金支付限额为每人每年2000元，政策范围内费用报销比例为75%。待遇认定须经二级及以上定点医疗机构确诊，并由医保经办机构审核通过。",
+        "actual_answer": "【模拟政策 policy_fc】甲状腺功能减退病纳入门诊慢特病保障范围。统筹基金支付限额为每人每年2000元，政策范围内费用报销比例为75%。待遇认定须经二级及以上定点医疗机构确诊，并由医保经办机构审核通过。；额为每人每年2000元；用报销比例为75%。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "oracle": {
+        "sample_id": "syn-052",
+        "actual_context": "【模拟政策 policy_fc】甲状腺功能减退病纳入门诊慢特病保障范围。统筹基金支付限额为每人每年2000元，政策范围内费用报销比例为75%。待遇认定须经二级及以上定点医疗机构确诊，并由医保经办机构审核通过。",
+        "actual_answer": "【模拟政策 policy_fc】甲状腺功能减退病纳入门诊慢特病保障范围。统筹基金支付限额为每人每年2000元，政策范围内费用报销比例为75%。待遇认定须经二级及以上定点医疗机构确诊，并由医保经办机构审核通过。；额为每人每年2000元；用报销比例为75%。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "gold_support_details": []
+    },
+    {
+      "sample_id": "syn-053",
+      "category": "synthetic",
+      "question": "【模拟政策 policy_fd】大病保险的基础起付线、报销比例是多少，对困难群体有没有倾斜？",
+      "expected_source": "policy_fd",
+      "retrieved_sources": [
+        "policy_fd"
+      ],
+      "source_hit": true,
+      "oracle_passed": true,
+      "metric_passed": true,
+      "gold_numeric_supported": true,
+      "classification": "pass",
+      "actual": {
+        "sample_id": "syn-053",
+        "actual_context": "【模拟政策 policy_fd】大病保险的保障对象为参加城乡居民基本医疗保险的人员。一个自然年度内，个人自付的合规医疗费用累计超过起付线1000元的部分，纳入大病保险支付范围，报销比例为70%，不设封顶线。特困人员、低保对象等困难群体起付线降低50%，报销比例提高5个百分点。",
+        "actual_answer": "【模拟政策 policy_fd】大病保险的保障对象为参加城乡居民基本医疗保险的人员。一个自然年度内，个人自付的合规医疗费用累计超过起付线1000元的部分，纳入大病保险支付范围，报销比例为70%，不设封顶线。特困人员、低保对象等困难群体起付线降低50%，报销比例提高5个百分点。；计超过起付线1000元；报销比例为70%；体起付线降低50%；报销比例提高5个百分点。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "oracle": {
+        "sample_id": "syn-053",
+        "actual_context": "【模拟政策 policy_fd】大病保险的保障对象为参加城乡居民基本医疗保险的人员。一个自然年度内，个人自付的合规医疗费用累计超过起付线1000元的部分，纳入大病保险支付范围，报销比例为70%，不设封顶线。特困人员、低保对象等困难群体起付线降低50%，报销比例提高5个百分点。",
+        "actual_answer": "【模拟政策 policy_fd】大病保险的保障对象为参加城乡居民基本医疗保险的人员。一个自然年度内，个人自付的合规医疗费用累计超过起付线1000元的部分，纳入大病保险支付范围，报销比例为70%，不设封顶线。特困人员、低保对象等困难群体起付线降低50%，报销比例提高5个百分点。；计超过起付线1000元；报销比例为70%；体起付线降低50%；报销比例提高5个百分点。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "gold_support_details": []
+    },
+    {
+      "sample_id": "syn-054",
+      "category": "synthetic",
+      "question": "【模拟政策 policy_fe】城乡居民医保住院在三级医疗机构的起付线、报销比例和年度封顶线是多少？",
+      "expected_source": "policy_fe",
+      "retrieved_sources": [
+        "policy_fe"
+      ],
+      "source_hit": true,
+      "oracle_passed": true,
+      "metric_passed": true,
+      "gold_numeric_supported": true,
+      "classification": "pass",
+      "actual": {
+        "sample_id": "syn-054",
+        "actual_context": "【模拟政策 policy_fe】城乡居民基本医疗保险住院待遇标准：三级医疗机构起付线500元，政策范围内费用报销比例75%；一个自然年度内，基本医保统筹基金最高支付限额（封顶线）为25万元。",
+        "actual_answer": "【模拟政策 policy_fe】城乡居民基本医疗保险住院待遇标准：三级医疗机构起付线500元，政策范围内费用报销比例75%；一个自然年度内，基本医保统筹基金最高支付限额（封顶线）为25万元。；疗机构起付线500元；费用报销比例75%；数值25万。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "oracle": {
+        "sample_id": "syn-054",
+        "actual_context": "【模拟政策 policy_fe】城乡居民基本医疗保险住院待遇标准：三级医疗机构起付线500元，政策范围内费用报销比例75%；一个自然年度内，基本医保统筹基金最高支付限额（封顶线）为25万元。",
+        "actual_answer": "【模拟政策 policy_fe】城乡居民基本医疗保险住院待遇标准：三级医疗机构起付线500元，政策范围内费用报销比例75%；一个自然年度内，基本医保统筹基金最高支付限额（封顶线）为25万元。；疗机构起付线500元；费用报销比例75%；数值25万。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "gold_support_details": []
+    },
+    {
+      "sample_id": "edge-000",
+      "category": "edge",
+      "question": "【模拟政策 edge_a】城乡居民医保住院在一级及以下医疗机构的起付线、报销比例和年度封顶线是多少？请明确说明零起付线。",
+      "expected_source": "edge_a",
+      "retrieved_sources": [
+        "edge_a"
+      ],
+      "source_hit": true,
+      "oracle_passed": true,
+      "metric_passed": true,
+      "gold_numeric_supported": true,
+      "classification": "pass",
+      "actual": {
+        "sample_id": "edge-000",
+        "actual_context": "【模拟政策 edge_a】城乡居民基本医疗保险住院待遇标准：一级及以下医疗机构起付线0元，政策范围内费用报销比例70%；一个自然年度内，基本医保统筹基金最高支付限额（封顶线）为20万元。",
+        "actual_answer": "【模拟政策 edge_a】城乡居民基本医疗保险住院待遇标准：一级及以下医疗机构起付线0元，政策范围内费用报销比例70%；一个自然年度内，基本医保统筹基金最高支付限额（封顶线）为20万元。；疗机构起付线0元；费用报销比例70%；数值20万。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "oracle": {
+        "sample_id": "edge-000",
+        "actual_context": "【模拟政策 edge_a】城乡居民基本医疗保险住院待遇标准：一级及以下医疗机构起付线0元，政策范围内费用报销比例70%；一个自然年度内，基本医保统筹基金最高支付限额（封顶线）为20万元。",
+        "actual_answer": "【模拟政策 edge_a】城乡居民基本医疗保险住院待遇标准：一级及以下医疗机构起付线0元，政策范围内费用报销比例70%；一个自然年度内，基本医保统筹基金最高支付限额（封顶线）为20万元。；疗机构起付线0元；费用报销比例70%；数值20万。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "gold_support_details": []
+    },
+    {
+      "sample_id": "edge-001",
+      "category": "edge",
+      "question": "请依据所指政策回答：【模拟政策 policy_b】慢性肾病是否纳入门诊慢特病保障范围？统筹基金年度限额和报销比例是多少？",
+      "expected_source": "policy_b",
+      "retrieved_sources": [
+        "policy_b"
+      ],
+      "source_hit": true,
+      "oracle_passed": true,
+      "metric_passed": true,
+      "gold_numeric_supported": true,
+      "classification": "pass",
+      "actual": {
+        "sample_id": "edge-001",
+        "actual_context": "【模拟政策 policy_b】慢性肾病病纳入门诊慢特病保障范围。统筹基金支付限额为每人每年2000元，政策范围内费用报销比例为65%。待遇认定须经二级及以上定点医疗机构确诊，并由医保经办机构审核通过。",
+        "actual_answer": "【模拟政策 policy_b】慢性肾病病纳入门诊慢特病保障范围。统筹基金支付限额为每人每年2000元，政策范围内费用报销比例为65%。待遇认定须经二级及以上定点医疗机构确诊，并由医保经办机构审核通过。；额为每人每年2000元；用报销比例为65%。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "oracle": {
+        "sample_id": "edge-001",
+        "actual_context": "【模拟政策 policy_b】慢性肾病病纳入门诊慢特病保障范围。统筹基金支付限额为每人每年2000元，政策范围内费用报销比例为65%。待遇认定须经二级及以上定点医疗机构确诊，并由医保经办机构审核通过。",
+        "actual_answer": "【模拟政策 policy_b】慢性肾病病纳入门诊慢特病保障范围。统筹基金支付限额为每人每年2000元，政策范围内费用报销比例为65%。待遇认定须经二级及以上定点医疗机构确诊，并由医保经办机构审核通过。；额为每人每年2000元；用报销比例为65%。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "gold_support_details": []
+    },
+    {
+      "sample_id": "edge-002",
+      "category": "edge",
+      "question": "【模拟政策 policy_c】大病险的基础起付线、报销比例是多少，对困难群体有没有倾斜？",
+      "expected_source": "policy_c",
+      "retrieved_sources": [
+        "policy_c"
+      ],
+      "source_hit": true,
+      "oracle_passed": true,
+      "metric_passed": true,
+      "gold_numeric_supported": true,
+      "classification": "pass",
+      "actual": {
+        "sample_id": "edge-002",
+        "actual_context": "【模拟政策 policy_c】大病保险的保障对象为参加城乡居民基本医疗保险的人员。一个自然年度内，个人自付的合规医疗费用累计超过起付线200元的部分，纳入大病保险支付范围，报销比例为60%，不设封顶线。特困人员、低保对象等困难群体起付线降低50%，报销比例提高5个百分点。",
+        "actual_answer": "【模拟政策 policy_c】大病保险的保障对象为参加城乡居民基本医疗保险的人员。一个自然年度内，个人自付的合规医疗费用累计超过起付线200元的部分，纳入大病保险支付范围，报销比例为60%，不设封顶线。特困人员、低保对象等困难群体起付线降低50%，报销比例提高5个百分点。；计超过起付线200元；报销比例为60%；体起付线降低50%；报销比例提高5个百分点。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "oracle": {
+        "sample_id": "edge-002",
+        "actual_context": "【模拟政策 policy_c】大病保险的保障对象为参加城乡居民基本医疗保险的人员。一个自然年度内，个人自付的合规医疗费用累计超过起付线200元的部分，纳入大病保险支付范围，报销比例为60%，不设封顶线。特困人员、低保对象等困难群体起付线降低50%，报销比例提高5个百分点。",
+        "actual_answer": "【模拟政策 policy_c】大病保险的保障对象为参加城乡居民基本医疗保险的人员。一个自然年度内，个人自付的合规医疗费用累计超过起付线200元的部分，纳入大病保险支付范围，报销比例为60%，不设封顶线。特困人员、低保对象等困难群体起付线降低50%，报销比例提高5个百分点。；计超过起付线200元；报销比例为60%；体起付线降低50%；报销比例提高5个百分点。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "gold_support_details": []
+    },
+    {
+      "sample_id": "edge-003",
+      "category": "edge",
+      "question": "【模拟政策 edge_d】城乡居民医保住院在一级及以下医疗机构的起付线、报销比例和年度封顶线是多少？请明确说明零起付线。",
+      "expected_source": "edge_d",
+      "retrieved_sources": [
+        "edge_d"
+      ],
+      "source_hit": true,
+      "oracle_passed": true,
+      "metric_passed": true,
+      "gold_numeric_supported": true,
+      "classification": "pass",
+      "actual": {
+        "sample_id": "edge-003",
+        "actual_context": "【模拟政策 edge_d】城乡居民基本医疗保险住院待遇标准：一级及以下医疗机构起付线0元，政策范围内费用报销比例70%；一个自然年度内，基本医保统筹基金最高支付限额（封顶线）为20万元。",
+        "actual_answer": "【模拟政策 edge_d】城乡居民基本医疗保险住院待遇标准：一级及以下医疗机构起付线0元，政策范围内费用报销比例70%；一个自然年度内，基本医保统筹基金最高支付限额（封顶线）为20万元。；疗机构起付线0元；费用报销比例70%；数值20万。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "oracle": {
+        "sample_id": "edge-003",
+        "actual_context": "【模拟政策 edge_d】城乡居民基本医疗保险住院待遇标准：一级及以下医疗机构起付线0元，政策范围内费用报销比例70%；一个自然年度内，基本医保统筹基金最高支付限额（封顶线）为20万元。",
+        "actual_answer": "【模拟政策 edge_d】城乡居民基本医疗保险住院待遇标准：一级及以下医疗机构起付线0元，政策范围内费用报销比例70%；一个自然年度内，基本医保统筹基金最高支付限额（封顶线）为20万元。；疗机构起付线0元；费用报销比例70%；数值20万。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "gold_support_details": []
+    },
+    {
+      "sample_id": "edge-004",
+      "category": "edge",
+      "question": "请依据所指政策回答：【模拟政策 policy_e】糖尿病是否纳入门诊慢特病保障范围？统筹基金年度限额和报销比例是多少？",
+      "expected_source": "policy_e",
+      "retrieved_sources": [
+        "policy_e"
+      ],
+      "source_hit": true,
+      "oracle_passed": true,
+      "metric_passed": true,
+      "gold_numeric_supported": true,
+      "classification": "pass",
+      "actual": {
+        "sample_id": "edge-004",
+        "actual_context": "【模拟政策 policy_e】糖尿病病纳入门诊慢特病保障范围。统筹基金支付限额为每人每年2000元，政策范围内费用报销比例为70%。待遇认定须经二级及以上定点医疗机构确诊，并由医保经办机构审核通过。",
+        "actual_answer": "【模拟政策 policy_e】糖尿病病纳入门诊慢特病保障范围。统筹基金支付限额为每人每年2000元，政策范围内费用报销比例为70%。待遇认定须经二级及以上定点医疗机构确诊，并由医保经办机构审核通过。；额为每人每年2000元；用报销比例为70%。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "oracle": {
+        "sample_id": "edge-004",
+        "actual_context": "【模拟政策 policy_e】糖尿病病纳入门诊慢特病保障范围。统筹基金支付限额为每人每年2000元，政策范围内费用报销比例为70%。待遇认定须经二级及以上定点医疗机构确诊，并由医保经办机构审核通过。",
+        "actual_answer": "【模拟政策 policy_e】糖尿病病纳入门诊慢特病保障范围。统筹基金支付限额为每人每年2000元，政策范围内费用报销比例为70%。待遇认定须经二级及以上定点医疗机构确诊，并由医保经办机构审核通过。；额为每人每年2000元；用报销比例为70%。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "gold_support_details": []
+    },
+    {
+      "sample_id": "edge-005",
+      "category": "edge",
+      "question": "【模拟政策 policy_f】大病险的基础起付线、报销比例是多少，对困难群体有没有倾斜？",
+      "expected_source": "policy_f",
+      "retrieved_sources": [
+        "policy_f"
+      ],
+      "source_hit": true,
+      "oracle_passed": true,
+      "metric_passed": true,
+      "gold_numeric_supported": true,
+      "classification": "pass",
+      "actual": {
+        "sample_id": "edge-005",
+        "actual_context": "【模拟政策 policy_f】大病保险的保障对象为参加城乡居民基本医疗保险的人员。一个自然年度内，个人自付的合规医疗费用累计超过起付线100元的部分，纳入大病保险支付范围，报销比例为70%，不设封顶线。特困人员、低保对象等困难群体起付线降低50%，报销比例提高5个百分点。",
+        "actual_answer": "【模拟政策 policy_f】大病保险的保障对象为参加城乡居民基本医疗保险的人员。一个自然年度内，个人自付的合规医疗费用累计超过起付线100元的部分，纳入大病保险支付范围，报销比例为70%，不设封顶线。特困人员、低保对象等困难群体起付线降低50%，报销比例提高5个百分点。；计超过起付线100元；报销比例为70%；体起付线降低50%；报销比例提高5个百分点。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "oracle": {
+        "sample_id": "edge-005",
+        "actual_context": "【模拟政策 policy_f】大病保险的保障对象为参加城乡居民基本医疗保险的人员。一个自然年度内，个人自付的合规医疗费用累计超过起付线100元的部分，纳入大病保险支付范围，报销比例为70%，不设封顶线。特困人员、低保对象等困难群体起付线降低50%，报销比例提高5个百分点。",
+        "actual_answer": "【模拟政策 policy_f】大病保险的保障对象为参加城乡居民基本医疗保险的人员。一个自然年度内，个人自付的合规医疗费用累计超过起付线100元的部分，纳入大病保险支付范围，报销比例为70%，不设封顶线。特困人员、低保对象等困难群体起付线降低50%，报销比例提高5个百分点。；计超过起付线100元；报销比例为70%；体起付线降低50%；报销比例提高5个百分点。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "gold_support_details": []
+    },
+    {
+      "sample_id": "edge-006",
+      "category": "edge",
+      "question": "【模拟政策 edge_g】城乡居民医保住院在一级及以下医疗机构的起付线、报销比例和年度封顶线是多少？请明确说明零起付线。",
+      "expected_source": "edge_g",
+      "retrieved_sources": [
+        "edge_g"
+      ],
+      "source_hit": true,
+      "oracle_passed": true,
+      "metric_passed": true,
+      "gold_numeric_supported": true,
+      "classification": "pass",
+      "actual": {
+        "sample_id": "edge-006",
+        "actual_context": "【模拟政策 edge_g】城乡居民基本医疗保险住院待遇标准：一级及以下医疗机构起付线0元，政策范围内费用报销比例70%；一个自然年度内，基本医保统筹基金最高支付限额（封顶线）为20万元。",
+        "actual_answer": "【模拟政策 edge_g】城乡居民基本医疗保险住院待遇标准：一级及以下医疗机构起付线0元，政策范围内费用报销比例70%；一个自然年度内，基本医保统筹基金最高支付限额（封顶线）为20万元。；疗机构起付线0元；费用报销比例70%；数值20万。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "oracle": {
+        "sample_id": "edge-006",
+        "actual_context": "【模拟政策 edge_g】城乡居民基本医疗保险住院待遇标准：一级及以下医疗机构起付线0元，政策范围内费用报销比例70%；一个自然年度内，基本医保统筹基金最高支付限额（封顶线）为20万元。",
+        "actual_answer": "【模拟政策 edge_g】城乡居民基本医疗保险住院待遇标准：一级及以下医疗机构起付线0元，政策范围内费用报销比例70%；一个自然年度内，基本医保统筹基金最高支付限额（封顶线）为20万元。；疗机构起付线0元；费用报销比例70%；数值20万。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "gold_support_details": []
+    },
+    {
+      "sample_id": "edge-007",
+      "category": "edge",
+      "question": "请依据所指政策回答：【模拟政策 policy_h】帕金森病是否纳入门诊慢特病保障范围？统筹基金年度限额和报销比例是多少？",
+      "expected_source": "policy_h",
+      "retrieved_sources": [
+        "policy_h"
+      ],
+      "source_hit": true,
+      "oracle_passed": true,
+      "metric_passed": true,
+      "gold_numeric_supported": true,
+      "classification": "pass",
+      "actual": {
+        "sample_id": "edge-007",
+        "actual_context": "【模拟政策 policy_h】帕金森病病纳入门诊慢特病保障范围。统筹基金支付限额为每人每年2500元，政策范围内费用报销比例为55%。待遇认定须经二级及以上定点医疗机构确诊，并由医保经办机构审核通过。",
+        "actual_answer": "【模拟政策 policy_h】帕金森病病纳入门诊慢特病保障范围。统筹基金支付限额为每人每年2500元，政策范围内费用报销比例为55%。待遇认定须经二级及以上定点医疗机构确诊，并由医保经办机构审核通过。；额为每人每年2500元；用报销比例为55%。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "oracle": {
+        "sample_id": "edge-007",
+        "actual_context": "【模拟政策 policy_h】帕金森病病纳入门诊慢特病保障范围。统筹基金支付限额为每人每年2500元，政策范围内费用报销比例为55%。待遇认定须经二级及以上定点医疗机构确诊，并由医保经办机构审核通过。",
+        "actual_answer": "【模拟政策 policy_h】帕金森病病纳入门诊慢特病保障范围。统筹基金支付限额为每人每年2500元，政策范围内费用报销比例为55%。待遇认定须经二级及以上定点医疗机构确诊，并由医保经办机构审核通过。；额为每人每年2500元；用报销比例为55%。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "gold_support_details": []
+    },
+    {
+      "sample_id": "edge-008",
+      "category": "edge",
+      "question": "【模拟政策 policy_i】大病险的基础起付线、报销比例是多少，对困难群体有没有倾斜？",
+      "expected_source": "policy_i",
+      "retrieved_sources": [
+        "policy_i"
+      ],
+      "source_hit": true,
+      "oracle_passed": true,
+      "metric_passed": true,
+      "gold_numeric_supported": true,
+      "classification": "pass",
+      "actual": {
+        "sample_id": "edge-008",
+        "actual_context": "【模拟政策 policy_i】大病保险的保障对象为参加城乡居民基本医疗保险的人员。一个自然年度内，个人自付的合规医疗费用累计超过起付线300元的部分，纳入大病保险支付范围，报销比例为85%，不设封顶线。特困人员、低保对象等困难群体起付线降低50%，报销比例提高5个百分点。",
+        "actual_answer": "【模拟政策 policy_i】大病保险的保障对象为参加城乡居民基本医疗保险的人员。一个自然年度内，个人自付的合规医疗费用累计超过起付线300元的部分，纳入大病保险支付范围，报销比例为85%，不设封顶线。特困人员、低保对象等困难群体起付线降低50%，报销比例提高5个百分点。；计超过起付线300元；报销比例为85%；体起付线降低50%；报销比例提高5个百分点。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "oracle": {
+        "sample_id": "edge-008",
+        "actual_context": "【模拟政策 policy_i】大病保险的保障对象为参加城乡居民基本医疗保险的人员。一个自然年度内，个人自付的合规医疗费用累计超过起付线300元的部分，纳入大病保险支付范围，报销比例为85%，不设封顶线。特困人员、低保对象等困难群体起付线降低50%，报销比例提高5个百分点。",
+        "actual_answer": "【模拟政策 policy_i】大病保险的保障对象为参加城乡居民基本医疗保险的人员。一个自然年度内，个人自付的合规医疗费用累计超过起付线300元的部分，纳入大病保险支付范围，报销比例为85%，不设封顶线。特困人员、低保对象等困难群体起付线降低50%，报销比例提高5个百分点。；计超过起付线300元；报销比例为85%；体起付线降低50%；报销比例提高5个百分点。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "gold_support_details": []
+    },
+    {
+      "sample_id": "edge-009",
+      "category": "edge",
+      "question": "【模拟政策 edge_j】城乡居民医保住院在一级及以下医疗机构的起付线、报销比例和年度封顶线是多少？请明确说明零起付线。",
+      "expected_source": "edge_j",
+      "retrieved_sources": [
+        "edge_j"
+      ],
+      "source_hit": true,
+      "oracle_passed": true,
+      "metric_passed": true,
+      "gold_numeric_supported": true,
+      "classification": "pass",
+      "actual": {
+        "sample_id": "edge-009",
+        "actual_context": "【模拟政策 edge_j】城乡居民基本医疗保险住院待遇标准：一级及以下医疗机构起付线0元，政策范围内费用报销比例70%；一个自然年度内，基本医保统筹基金最高支付限额（封顶线）为20万元。",
+        "actual_answer": "【模拟政策 edge_j】城乡居民基本医疗保险住院待遇标准：一级及以下医疗机构起付线0元，政策范围内费用报销比例70%；一个自然年度内，基本医保统筹基金最高支付限额（封顶线）为20万元。；疗机构起付线0元；费用报销比例70%；数值20万。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "oracle": {
+        "sample_id": "edge-009",
+        "actual_context": "【模拟政策 edge_j】城乡居民基本医疗保险住院待遇标准：一级及以下医疗机构起付线0元，政策范围内费用报销比例70%；一个自然年度内，基本医保统筹基金最高支付限额（封顶线）为20万元。",
+        "actual_answer": "【模拟政策 edge_j】城乡居民基本医疗保险住院待遇标准：一级及以下医疗机构起付线0元，政策范围内费用报销比例70%；一个自然年度内，基本医保统筹基金最高支付限额（封顶线）为20万元。；疗机构起付线0元；费用报销比例70%；数值20万。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "gold_support_details": []
+    },
+    {
+      "sample_id": "edge-010",
+      "category": "edge",
+      "question": "请依据所指政策回答：【模拟政策 policy_ba】类风湿关节炎是否纳入门诊慢特病保障范围？统筹基金年度限额和报销比例是多少？",
+      "expected_source": "policy_ba",
+      "retrieved_sources": [
+        "policy_ba"
+      ],
+      "source_hit": true,
+      "oracle_passed": true,
+      "metric_passed": true,
+      "gold_numeric_supported": true,
+      "classification": "pass",
+      "actual": {
+        "sample_id": "edge-010",
+        "actual_context": "【模拟政策 policy_ba】类风湿关节炎病纳入门诊慢特病保障范围。统筹基金支付限额为每人每年1500元，政策范围内费用报销比例为60%。待遇认定须经二级及以上定点医疗机构确诊，并由医保经办机构审核通过。",
+        "actual_answer": "【模拟政策 policy_ba】类风湿关节炎病纳入门诊慢特病保障范围。统筹基金支付限额为每人每年1500元，政策范围内费用报销比例为60%。待遇认定须经二级及以上定点医疗机构确诊，并由医保经办机构审核通过。；额为每人每年1500元；用报销比例为60%。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "oracle": {
+        "sample_id": "edge-010",
+        "actual_context": "【模拟政策 policy_ba】类风湿关节炎病纳入门诊慢特病保障范围。统筹基金支付限额为每人每年1500元，政策范围内费用报销比例为60%。待遇认定须经二级及以上定点医疗机构确诊，并由医保经办机构审核通过。",
+        "actual_answer": "【模拟政策 policy_ba】类风湿关节炎病纳入门诊慢特病保障范围。统筹基金支付限额为每人每年1500元，政策范围内费用报销比例为60%。待遇认定须经二级及以上定点医疗机构确诊，并由医保经办机构审核通过。；额为每人每年1500元；用报销比例为60%。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "gold_support_details": []
+    },
+    {
+      "sample_id": "edge-011",
+      "category": "edge",
+      "question": "【模拟政策 policy_bb】大病险的基础起付线、报销比例是多少，对困难群体有没有倾斜？",
+      "expected_source": "policy_bb",
+      "retrieved_sources": [
+        "policy_bb"
+      ],
+      "source_hit": true,
+      "oracle_passed": true,
+      "metric_passed": true,
+      "gold_numeric_supported": true,
+      "classification": "pass",
+      "actual": {
+        "sample_id": "edge-011",
+        "actual_context": "【模拟政策 policy_bb】大病保险的保障对象为参加城乡居民基本医疗保险的人员。一个自然年度内，个人自付的合规医疗费用累计超过起付线1000元的部分，纳入大病保险支付范围，报销比例为60%，不设封顶线。特困人员、低保对象等困难群体起付线降低50%，报销比例提高5个百分点。",
+        "actual_answer": "【模拟政策 policy_bb】大病保险的保障对象为参加城乡居民基本医疗保险的人员。一个自然年度内，个人自付的合规医疗费用累计超过起付线1000元的部分，纳入大病保险支付范围，报销比例为60%，不设封顶线。特困人员、低保对象等困难群体起付线降低50%，报销比例提高5个百分点。；计超过起付线1000元；报销比例为60%；体起付线降低50%；报销比例提高5个百分点。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "oracle": {
+        "sample_id": "edge-011",
+        "actual_context": "【模拟政策 policy_bb】大病保险的保障对象为参加城乡居民基本医疗保险的人员。一个自然年度内，个人自付的合规医疗费用累计超过起付线1000元的部分，纳入大病保险支付范围，报销比例为60%，不设封顶线。特困人员、低保对象等困难群体起付线降低50%，报销比例提高5个百分点。",
+        "actual_answer": "【模拟政策 policy_bb】大病保险的保障对象为参加城乡居民基本医疗保险的人员。一个自然年度内，个人自付的合规医疗费用累计超过起付线1000元的部分，纳入大病保险支付范围，报销比例为60%，不设封顶线。特困人员、低保对象等困难群体起付线降低50%，报销比例提高5个百分点。；计超过起付线1000元；报销比例为60%；体起付线降低50%；报销比例提高5个百分点。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "gold_support_details": []
+    },
+    {
+      "sample_id": "edge-012",
+      "category": "edge",
+      "question": "【模拟政策 edge_bc】城乡居民医保住院在一级及以下医疗机构的起付线、报销比例和年度封顶线是多少？请明确说明零起付线。",
+      "expected_source": "edge_bc",
+      "retrieved_sources": [
+        "edge_bc"
+      ],
+      "source_hit": true,
+      "oracle_passed": true,
+      "metric_passed": true,
+      "gold_numeric_supported": true,
+      "classification": "pass",
+      "actual": {
+        "sample_id": "edge-012",
+        "actual_context": "【模拟政策 edge_bc】城乡居民基本医疗保险住院待遇标准：一级及以下医疗机构起付线0元，政策范围内费用报销比例70%；一个自然年度内，基本医保统筹基金最高支付限额（封顶线）为20万元。",
+        "actual_answer": "【模拟政策 edge_bc】城乡居民基本医疗保险住院待遇标准：一级及以下医疗机构起付线0元，政策范围内费用报销比例70%；一个自然年度内，基本医保统筹基金最高支付限额（封顶线）为20万元。；疗机构起付线0元；费用报销比例70%；数值20万。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "oracle": {
+        "sample_id": "edge-012",
+        "actual_context": "【模拟政策 edge_bc】城乡居民基本医疗保险住院待遇标准：一级及以下医疗机构起付线0元，政策范围内费用报销比例70%；一个自然年度内，基本医保统筹基金最高支付限额（封顶线）为20万元。",
+        "actual_answer": "【模拟政策 edge_bc】城乡居民基本医疗保险住院待遇标准：一级及以下医疗机构起付线0元，政策范围内费用报销比例70%；一个自然年度内，基本医保统筹基金最高支付限额（封顶线）为20万元。；疗机构起付线0元；费用报销比例70%；数值20万。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "gold_support_details": []
+    },
+    {
+      "sample_id": "edge-013",
+      "category": "edge",
+      "question": "请依据所指政策回答：【模拟政策 policy_bd】乙肝是否纳入门诊慢特病保障范围？统筹基金年度限额和报销比例是多少？",
+      "expected_source": "policy_bd",
+      "retrieved_sources": [
+        "policy_bd"
+      ],
+      "source_hit": true,
+      "oracle_passed": true,
+      "metric_passed": true,
+      "gold_numeric_supported": true,
+      "classification": "pass",
+      "actual": {
+        "sample_id": "edge-013",
+        "actual_context": "【模拟政策 policy_bd】乙肝病纳入门诊慢特病保障范围。统筹基金支付限额为每人每年4000元，政策范围内费用报销比例为60%。待遇认定须经二级及以上定点医疗机构确诊，并由医保经办机构审核通过。",
+        "actual_answer": "【模拟政策 policy_bd】乙肝病纳入门诊慢特病保障范围。统筹基金支付限额为每人每年4000元，政策范围内费用报销比例为60%。待遇认定须经二级及以上定点医疗机构确诊，并由医保经办机构审核通过。；额为每人每年4000元；用报销比例为60%。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "oracle": {
+        "sample_id": "edge-013",
+        "actual_context": "【模拟政策 policy_bd】乙肝病纳入门诊慢特病保障范围。统筹基金支付限额为每人每年4000元，政策范围内费用报销比例为60%。待遇认定须经二级及以上定点医疗机构确诊，并由医保经办机构审核通过。",
+        "actual_answer": "【模拟政策 policy_bd】乙肝病纳入门诊慢特病保障范围。统筹基金支付限额为每人每年4000元，政策范围内费用报销比例为60%。待遇认定须经二级及以上定点医疗机构确诊，并由医保经办机构审核通过。；额为每人每年4000元；用报销比例为60%。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "gold_support_details": []
+    },
+    {
+      "sample_id": "edge-014",
+      "category": "edge",
+      "question": "【模拟政策 policy_be】大病险的基础起付线、报销比例是多少，对困难群体有没有倾斜？",
+      "expected_source": "policy_be",
+      "retrieved_sources": [
+        "policy_be"
+      ],
+      "source_hit": true,
+      "oracle_passed": true,
+      "metric_passed": true,
+      "gold_numeric_supported": true,
+      "classification": "pass",
+      "actual": {
+        "sample_id": "edge-014",
+        "actual_context": "【模拟政策 policy_be】大病保险的保障对象为参加城乡居民基本医疗保险的人员。一个自然年度内，个人自付的合规医疗费用累计超过起付线1000元的部分，纳入大病保险支付范围，报销比例为60%，不设封顶线。特困人员、低保对象等困难群体起付线降低50%，报销比例提高5个百分点。",
+        "actual_answer": "【模拟政策 policy_be】大病保险的保障对象为参加城乡居民基本医疗保险的人员。一个自然年度内，个人自付的合规医疗费用累计超过起付线1000元的部分，纳入大病保险支付范围，报销比例为60%，不设封顶线。特困人员、低保对象等困难群体起付线降低50%，报销比例提高5个百分点。；计超过起付线1000元；报销比例为60%；体起付线降低50%；报销比例提高5个百分点。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "oracle": {
+        "sample_id": "edge-014",
+        "actual_context": "【模拟政策 policy_be】大病保险的保障对象为参加城乡居民基本医疗保险的人员。一个自然年度内，个人自付的合规医疗费用累计超过起付线1000元的部分，纳入大病保险支付范围，报销比例为60%，不设封顶线。特困人员、低保对象等困难群体起付线降低50%，报销比例提高5个百分点。",
+        "actual_answer": "【模拟政策 policy_be】大病保险的保障对象为参加城乡居民基本医疗保险的人员。一个自然年度内，个人自付的合规医疗费用累计超过起付线1000元的部分，纳入大病保险支付范围，报销比例为60%，不设封顶线。特困人员、低保对象等困难群体起付线降低50%，报销比例提高5个百分点。；计超过起付线1000元；报销比例为60%；体起付线降低50%；报销比例提高5个百分点。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "gold_support_details": []
+    },
+    {
+      "sample_id": "edge-015",
+      "category": "edge",
+      "question": "【模拟政策 edge_bf】城乡居民医保住院在一级及以下医疗机构的起付线、报销比例和年度封顶线是多少？请明确说明零起付线。",
+      "expected_source": "edge_bf",
+      "retrieved_sources": [
+        "edge_bf"
+      ],
+      "source_hit": true,
+      "oracle_passed": true,
+      "metric_passed": true,
+      "gold_numeric_supported": true,
+      "classification": "pass",
+      "actual": {
+        "sample_id": "edge-015",
+        "actual_context": "【模拟政策 edge_bf】城乡居民基本医疗保险住院待遇标准：一级及以下医疗机构起付线0元，政策范围内费用报销比例70%；一个自然年度内，基本医保统筹基金最高支付限额（封顶线）为20万元。",
+        "actual_answer": "【模拟政策 edge_bf】城乡居民基本医疗保险住院待遇标准：一级及以下医疗机构起付线0元，政策范围内费用报销比例70%；一个自然年度内，基本医保统筹基金最高支付限额（封顶线）为20万元。；疗机构起付线0元；费用报销比例70%；数值20万。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "oracle": {
+        "sample_id": "edge-015",
+        "actual_context": "【模拟政策 edge_bf】城乡居民基本医疗保险住院待遇标准：一级及以下医疗机构起付线0元，政策范围内费用报销比例70%；一个自然年度内，基本医保统筹基金最高支付限额（封顶线）为20万元。",
+        "actual_answer": "【模拟政策 edge_bf】城乡居民基本医疗保险住院待遇标准：一级及以下医疗机构起付线0元，政策范围内费用报销比例70%；一个自然年度内，基本医保统筹基金最高支付限额（封顶线）为20万元。；疗机构起付线0元；费用报销比例70%；数值20万。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "gold_support_details": []
+    },
+    {
+      "sample_id": "edge-016",
+      "category": "edge",
+      "question": "请依据所指政策回答：【模拟政策 policy_bg】慢性肾病是否纳入门诊慢特病保障范围？统筹基金年度限额和报销比例是多少？",
+      "expected_source": "policy_bg",
+      "retrieved_sources": [
+        "policy_bg"
+      ],
+      "source_hit": true,
+      "oracle_passed": true,
+      "metric_passed": true,
+      "gold_numeric_supported": true,
+      "classification": "pass",
+      "actual": {
+        "sample_id": "edge-016",
+        "actual_context": "【模拟政策 policy_bg】慢性肾病病纳入门诊慢特病保障范围。统筹基金支付限额为每人每年1500元，政策范围内费用报销比例为55%。待遇认定须经二级及以上定点医疗机构确诊，并由医保经办机构审核通过。",
+        "actual_answer": "【模拟政策 policy_bg】慢性肾病病纳入门诊慢特病保障范围。统筹基金支付限额为每人每年1500元，政策范围内费用报销比例为55%。待遇认定须经二级及以上定点医疗机构确诊，并由医保经办机构审核通过。；额为每人每年1500元；用报销比例为55%。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "oracle": {
+        "sample_id": "edge-016",
+        "actual_context": "【模拟政策 policy_bg】慢性肾病病纳入门诊慢特病保障范围。统筹基金支付限额为每人每年1500元，政策范围内费用报销比例为55%。待遇认定须经二级及以上定点医疗机构确诊，并由医保经办机构审核通过。",
+        "actual_answer": "【模拟政策 policy_bg】慢性肾病病纳入门诊慢特病保障范围。统筹基金支付限额为每人每年1500元，政策范围内费用报销比例为55%。待遇认定须经二级及以上定点医疗机构确诊，并由医保经办机构审核通过。；额为每人每年1500元；用报销比例为55%。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "gold_support_details": []
+    },
+    {
+      "sample_id": "edge-017",
+      "category": "edge",
+      "question": "【模拟政策 policy_bh】大病险的基础起付线、报销比例是多少，对困难群体有没有倾斜？",
+      "expected_source": "policy_bh",
+      "retrieved_sources": [
+        "policy_bh"
+      ],
+      "source_hit": true,
+      "oracle_passed": true,
+      "metric_passed": true,
+      "gold_numeric_supported": true,
+      "classification": "pass",
+      "actual": {
+        "sample_id": "edge-017",
+        "actual_context": "【模拟政策 policy_bh】大病保险的保障对象为参加城乡居民基本医疗保险的人员。一个自然年度内，个人自付的合规医疗费用累计超过起付线500元的部分，纳入大病保险支付范围，报销比例为75%，不设封顶线。特困人员、低保对象等困难群体起付线降低50%，报销比例提高5个百分点。",
+        "actual_answer": "【模拟政策 policy_bh】大病保险的保障对象为参加城乡居民基本医疗保险的人员。一个自然年度内，个人自付的合规医疗费用累计超过起付线500元的部分，纳入大病保险支付范围，报销比例为75%，不设封顶线。特困人员、低保对象等困难群体起付线降低50%，报销比例提高5个百分点。；计超过起付线500元；报销比例为75%；体起付线降低50%；报销比例提高5个百分点。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "oracle": {
+        "sample_id": "edge-017",
+        "actual_context": "【模拟政策 policy_bh】大病保险的保障对象为参加城乡居民基本医疗保险的人员。一个自然年度内，个人自付的合规医疗费用累计超过起付线500元的部分，纳入大病保险支付范围，报销比例为75%，不设封顶线。特困人员、低保对象等困难群体起付线降低50%，报销比例提高5个百分点。",
+        "actual_answer": "【模拟政策 policy_bh】大病保险的保障对象为参加城乡居民基本医疗保险的人员。一个自然年度内，个人自付的合规医疗费用累计超过起付线500元的部分，纳入大病保险支付范围，报销比例为75%，不设封顶线。特困人员、低保对象等困难群体起付线降低50%，报销比例提高5个百分点。；计超过起付线500元；报销比例为75%；体起付线降低50%；报销比例提高5个百分点。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "gold_support_details": []
+    },
+    {
+      "sample_id": "edge-018",
+      "category": "edge",
+      "question": "【模拟政策 edge_bi】城乡居民医保住院在一级及以下医疗机构的起付线、报销比例和年度封顶线是多少？请明确说明零起付线。",
+      "expected_source": "edge_bi",
+      "retrieved_sources": [
+        "edge_bi"
+      ],
+      "source_hit": true,
+      "oracle_passed": true,
+      "metric_passed": true,
+      "gold_numeric_supported": true,
+      "classification": "pass",
+      "actual": {
+        "sample_id": "edge-018",
+        "actual_context": "【模拟政策 edge_bi】城乡居民基本医疗保险住院待遇标准：一级及以下医疗机构起付线0元，政策范围内费用报销比例70%；一个自然年度内，基本医保统筹基金最高支付限额（封顶线）为20万元。",
+        "actual_answer": "【模拟政策 edge_bi】城乡居民基本医疗保险住院待遇标准：一级及以下医疗机构起付线0元，政策范围内费用报销比例70%；一个自然年度内，基本医保统筹基金最高支付限额（封顶线）为20万元。；疗机构起付线0元；费用报销比例70%；数值20万。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "oracle": {
+        "sample_id": "edge-018",
+        "actual_context": "【模拟政策 edge_bi】城乡居民基本医疗保险住院待遇标准：一级及以下医疗机构起付线0元，政策范围内费用报销比例70%；一个自然年度内，基本医保统筹基金最高支付限额（封顶线）为20万元。",
+        "actual_answer": "【模拟政策 edge_bi】城乡居民基本医疗保险住院待遇标准：一级及以下医疗机构起付线0元，政策范围内费用报销比例70%；一个自然年度内，基本医保统筹基金最高支付限额（封顶线）为20万元。；疗机构起付线0元；费用报销比例70%；数值20万。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "gold_support_details": []
+    },
+    {
+      "sample_id": "edge-019",
+      "category": "edge",
+      "question": "请依据所指政策回答：【模拟政策 policy_bj】慢阻肺是否纳入门诊慢特病保障范围？统筹基金年度限额和报销比例是多少？",
+      "expected_source": "policy_bj",
+      "retrieved_sources": [
+        "policy_bj"
+      ],
+      "source_hit": true,
+      "oracle_passed": true,
+      "metric_passed": true,
+      "gold_numeric_supported": true,
+      "classification": "pass",
+      "actual": {
+        "sample_id": "edge-019",
+        "actual_context": "【模拟政策 policy_bj】慢阻肺病纳入门诊慢特病保障范围。统筹基金支付限额为每人每年3000元，政策范围内费用报销比例为80%。待遇认定须经二级及以上定点医疗机构确诊，并由医保经办机构审核通过。",
+        "actual_answer": "【模拟政策 policy_bj】慢阻肺病纳入门诊慢特病保障范围。统筹基金支付限额为每人每年3000元，政策范围内费用报销比例为80%。待遇认定须经二级及以上定点医疗机构确诊，并由医保经办机构审核通过。；额为每人每年3000元；用报销比例为80%。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "oracle": {
+        "sample_id": "edge-019",
+        "actual_context": "【模拟政策 policy_bj】慢阻肺病纳入门诊慢特病保障范围。统筹基金支付限额为每人每年3000元，政策范围内费用报销比例为80%。待遇认定须经二级及以上定点医疗机构确诊，并由医保经办机构审核通过。",
+        "actual_answer": "【模拟政策 policy_bj】慢阻肺病纳入门诊慢特病保障范围。统筹基金支付限额为每人每年3000元，政策范围内费用报销比例为80%。待遇认定须经二级及以上定点医疗机构确诊，并由医保经办机构审核通过。；额为每人每年3000元；用报销比例为80%。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "gold_support_details": []
+    },
+    {
+      "sample_id": "edge-020",
+      "category": "edge",
+      "question": "【模拟政策 policy_ca】大病险的基础起付线、报销比例是多少，对困难群体有没有倾斜？",
+      "expected_source": "policy_ca",
+      "retrieved_sources": [
+        "policy_ca"
+      ],
+      "source_hit": true,
+      "oracle_passed": true,
+      "metric_passed": true,
+      "gold_numeric_supported": true,
+      "classification": "pass",
+      "actual": {
+        "sample_id": "edge-020",
+        "actual_context": "【模拟政策 policy_ca】大病保险的保障对象为参加城乡居民基本医疗保险的人员。一个自然年度内，个人自付的合规医疗费用累计超过起付线300元的部分，纳入大病保险支付范围，报销比例为80%，不设封顶线。特困人员、低保对象等困难群体起付线降低50%，报销比例提高5个百分点。",
+        "actual_answer": "【模拟政策 policy_ca】大病保险的保障对象为参加城乡居民基本医疗保险的人员。一个自然年度内，个人自付的合规医疗费用累计超过起付线300元的部分，纳入大病保险支付范围，报销比例为80%，不设封顶线。特困人员、低保对象等困难群体起付线降低50%，报销比例提高5个百分点。；计超过起付线300元；报销比例为80%；体起付线降低50%；报销比例提高5个百分点。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "oracle": {
+        "sample_id": "edge-020",
+        "actual_context": "【模拟政策 policy_ca】大病保险的保障对象为参加城乡居民基本医疗保险的人员。一个自然年度内，个人自付的合规医疗费用累计超过起付线300元的部分，纳入大病保险支付范围，报销比例为80%，不设封顶线。特困人员、低保对象等困难群体起付线降低50%，报销比例提高5个百分点。",
+        "actual_answer": "【模拟政策 policy_ca】大病保险的保障对象为参加城乡居民基本医疗保险的人员。一个自然年度内，个人自付的合规医疗费用累计超过起付线300元的部分，纳入大病保险支付范围，报销比例为80%，不设封顶线。特困人员、低保对象等困难群体起付线降低50%，报销比例提高5个百分点。；计超过起付线300元；报销比例为80%；体起付线降低50%；报销比例提高5个百分点。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "gold_support_details": []
+    },
+    {
+      "sample_id": "edge-021",
+      "category": "edge",
+      "question": "【模拟政策 edge_cb】城乡居民医保住院在一级及以下医疗机构的起付线、报销比例和年度封顶线是多少？请明确说明零起付线。",
+      "expected_source": "edge_cb",
+      "retrieved_sources": [
+        "edge_cb"
+      ],
+      "source_hit": true,
+      "oracle_passed": true,
+      "metric_passed": true,
+      "gold_numeric_supported": true,
+      "classification": "pass",
+      "actual": {
+        "sample_id": "edge-021",
+        "actual_context": "【模拟政策 edge_cb】城乡居民基本医疗保险住院待遇标准：一级及以下医疗机构起付线0元，政策范围内费用报销比例70%；一个自然年度内，基本医保统筹基金最高支付限额（封顶线）为20万元。",
+        "actual_answer": "【模拟政策 edge_cb】城乡居民基本医疗保险住院待遇标准：一级及以下医疗机构起付线0元，政策范围内费用报销比例70%；一个自然年度内，基本医保统筹基金最高支付限额（封顶线）为20万元。；疗机构起付线0元；费用报销比例70%；数值20万。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "oracle": {
+        "sample_id": "edge-021",
+        "actual_context": "【模拟政策 edge_cb】城乡居民基本医疗保险住院待遇标准：一级及以下医疗机构起付线0元，政策范围内费用报销比例70%；一个自然年度内，基本医保统筹基金最高支付限额（封顶线）为20万元。",
+        "actual_answer": "【模拟政策 edge_cb】城乡居民基本医疗保险住院待遇标准：一级及以下医疗机构起付线0元，政策范围内费用报销比例70%；一个自然年度内，基本医保统筹基金最高支付限额（封顶线）为20万元。；疗机构起付线0元；费用报销比例70%；数值20万。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "gold_support_details": []
+    },
+    {
+      "sample_id": "edge-022",
+      "category": "edge",
+      "question": "请依据所指政策回答：【模拟政策 policy_cc】帕金森病是否纳入门诊慢特病保障范围？统筹基金年度限额和报销比例是多少？",
+      "expected_source": "policy_cc",
+      "retrieved_sources": [
+        "policy_cc"
+      ],
+      "source_hit": true,
+      "oracle_passed": true,
+      "metric_passed": true,
+      "gold_numeric_supported": true,
+      "classification": "pass",
+      "actual": {
+        "sample_id": "edge-022",
+        "actual_context": "【模拟政策 policy_cc】帕金森病病纳入门诊慢特病保障范围。统筹基金支付限额为每人每年2000元，政策范围内费用报销比例为70%。待遇认定须经二级及以上定点医疗机构确诊，并由医保经办机构审核通过。",
+        "actual_answer": "【模拟政策 policy_cc】帕金森病病纳入门诊慢特病保障范围。统筹基金支付限额为每人每年2000元，政策范围内费用报销比例为70%。待遇认定须经二级及以上定点医疗机构确诊，并由医保经办机构审核通过。；额为每人每年2000元；用报销比例为70%。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "oracle": {
+        "sample_id": "edge-022",
+        "actual_context": "【模拟政策 policy_cc】帕金森病病纳入门诊慢特病保障范围。统筹基金支付限额为每人每年2000元，政策范围内费用报销比例为70%。待遇认定须经二级及以上定点医疗机构确诊，并由医保经办机构审核通过。",
+        "actual_answer": "【模拟政策 policy_cc】帕金森病病纳入门诊慢特病保障范围。统筹基金支付限额为每人每年2000元，政策范围内费用报销比例为70%。待遇认定须经二级及以上定点医疗机构确诊，并由医保经办机构审核通过。；额为每人每年2000元；用报销比例为70%。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "gold_support_details": []
+    },
+    {
+      "sample_id": "edge-023",
+      "category": "edge",
+      "question": "【模拟政策 policy_cd】大病险的基础起付线、报销比例是多少，对困难群体有没有倾斜？",
+      "expected_source": "policy_cd",
+      "retrieved_sources": [
+        "policy_cd"
+      ],
+      "source_hit": true,
+      "oracle_passed": true,
+      "metric_passed": true,
+      "gold_numeric_supported": true,
+      "classification": "pass",
+      "actual": {
+        "sample_id": "edge-023",
+        "actual_context": "【模拟政策 policy_cd】大病保险的保障对象为参加城乡居民基本医疗保险的人员。一个自然年度内，个人自付的合规医疗费用累计超过起付线300元的部分，纳入大病保险支付范围，报销比例为90%，不设封顶线。特困人员、低保对象等困难群体起付线降低50%，报销比例提高5个百分点。",
+        "actual_answer": "【模拟政策 policy_cd】大病保险的保障对象为参加城乡居民基本医疗保险的人员。一个自然年度内，个人自付的合规医疗费用累计超过起付线300元的部分，纳入大病保险支付范围，报销比例为90%，不设封顶线。特困人员、低保对象等困难群体起付线降低50%，报销比例提高5个百分点。；计超过起付线300元；报销比例为90%；体起付线降低50%；报销比例提高5个百分点。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "oracle": {
+        "sample_id": "edge-023",
+        "actual_context": "【模拟政策 policy_cd】大病保险的保障对象为参加城乡居民基本医疗保险的人员。一个自然年度内，个人自付的合规医疗费用累计超过起付线300元的部分，纳入大病保险支付范围，报销比例为90%，不设封顶线。特困人员、低保对象等困难群体起付线降低50%，报销比例提高5个百分点。",
+        "actual_answer": "【模拟政策 policy_cd】大病保险的保障对象为参加城乡居民基本医疗保险的人员。一个自然年度内，个人自付的合规医疗费用累计超过起付线300元的部分，纳入大病保险支付范围，报销比例为90%，不设封顶线。特困人员、低保对象等困难群体起付线降低50%，报销比例提高5个百分点。；计超过起付线300元；报销比例为90%；体起付线降低50%；报销比例提高5个百分点。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "gold_support_details": []
+    },
+    {
+      "sample_id": "edge-024",
+      "category": "edge",
+      "question": "【模拟政策 edge_ce】城乡居民医保住院在一级及以下医疗机构的起付线、报销比例和年度封顶线是多少？请明确说明零起付线。",
+      "expected_source": "edge_ce",
+      "retrieved_sources": [
+        "edge_ce"
+      ],
+      "source_hit": true,
+      "oracle_passed": true,
+      "metric_passed": true,
+      "gold_numeric_supported": true,
+      "classification": "pass",
+      "actual": {
+        "sample_id": "edge-024",
+        "actual_context": "【模拟政策 edge_ce】城乡居民基本医疗保险住院待遇标准：一级及以下医疗机构起付线0元，政策范围内费用报销比例70%；一个自然年度内，基本医保统筹基金最高支付限额（封顶线）为20万元。",
+        "actual_answer": "【模拟政策 edge_ce】城乡居民基本医疗保险住院待遇标准：一级及以下医疗机构起付线0元，政策范围内费用报销比例70%；一个自然年度内，基本医保统筹基金最高支付限额（封顶线）为20万元。；疗机构起付线0元；费用报销比例70%；数值20万。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "oracle": {
+        "sample_id": "edge-024",
+        "actual_context": "【模拟政策 edge_ce】城乡居民基本医疗保险住院待遇标准：一级及以下医疗机构起付线0元，政策范围内费用报销比例70%；一个自然年度内，基本医保统筹基金最高支付限额（封顶线）为20万元。",
+        "actual_answer": "【模拟政策 edge_ce】城乡居民基本医疗保险住院待遇标准：一级及以下医疗机构起付线0元，政策范围内费用报销比例70%；一个自然年度内，基本医保统筹基金最高支付限额（封顶线）为20万元。；疗机构起付线0元；费用报销比例70%；数值20万。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "gold_support_details": []
+    },
+    {
+      "sample_id": "adv-000-数字篡改",
+      "category": "adversarial",
+      "question": "【模拟政策 policy_a】城乡居民医保住院在三级医疗机构的起付线、报销比例和年度封顶线是多少？",
+      "expected_source": "policy_a",
+      "retrieved_sources": [
+        "policy_a"
+      ],
+      "source_hit": true,
+      "oracle_passed": true,
+      "metric_passed": true,
+      "gold_numeric_supported": true,
+      "classification": "pass",
+      "actual": {
+        "sample_id": "adv-000-数字篡改",
+        "actual_context": "【模拟政策 policy_a】城乡居民基本医疗保险住院待遇标准：三级医疗机构起付线200元，政策范围内费用报销比例55%；一个自然年度内，基本医保统筹基金最高支付限额（封顶线）为20万元。",
+        "actual_answer": "【模拟政策 policy_a】城乡居民基本医疗保险住院待遇标准：三级医疗机构起付线200元，政策范围内费用报销比例55%；一个自然年度内，基本医保统筹基金最高支付限额（封顶线）为20万元。；疗机构起付线200元；费用报销比例55%；数值20万。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "oracle": {
+        "sample_id": "adv-000-数字篡改",
+        "actual_context": "【模拟政策 policy_a】城乡居民基本医疗保险住院待遇标准：三级医疗机构起付线200元，政策范围内费用报销比例55%；一个自然年度内，基本医保统筹基金最高支付限额（封顶线）为20万元。",
+        "actual_answer": "【模拟政策 policy_a】城乡居民基本医疗保险住院待遇标准：三级医疗机构起付线200元，政策范围内费用报销比例55%；一个自然年度内，基本医保统筹基金最高支付限额（封顶线）为20万元。；疗机构起付线200元；费用报销比例55%；数值20万。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "gold_support_details": []
+    },
+    {
+      "sample_id": "adv-001-实体缺失",
+      "category": "adversarial",
+      "question": "【模拟政策 policy_b】慢性肾病是否纳入门诊慢特病保障范围？统筹基金年度限额和报销比例是多少？",
+      "expected_source": "policy_b",
+      "retrieved_sources": [
+        "policy_b"
+      ],
+      "source_hit": true,
+      "oracle_passed": true,
+      "metric_passed": true,
+      "gold_numeric_supported": true,
+      "classification": "pass",
+      "actual": {
+        "sample_id": "adv-001-实体缺失",
+        "actual_context": "【模拟政策 policy_b】慢性肾病病纳入门诊慢特病保障范围。统筹基金支付限额为每人每年2000元，政策范围内费用报销比例为65%。待遇认定须经二级及以上定点医疗机构确诊，并由医保经办机构审核通过。",
+        "actual_answer": "【模拟政策 policy_b】慢性肾病病纳入门诊慢特病保障范围。统筹基金支付限额为每人每年2000元，政策范围内费用报销比例为65%。待遇认定须经二级及以上定点医疗机构确诊，并由医保经办机构审核通过。；额为每人每年2000元；用报销比例为65%。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "oracle": {
+        "sample_id": "adv-001-实体缺失",
+        "actual_context": "【模拟政策 policy_b】慢性肾病病纳入门诊慢特病保障范围。统筹基金支付限额为每人每年2000元，政策范围内费用报销比例为65%。待遇认定须经二级及以上定点医疗机构确诊，并由医保经办机构审核通过。",
+        "actual_answer": "【模拟政策 policy_b】慢性肾病病纳入门诊慢特病保障范围。统筹基金支付限额为每人每年2000元，政策范围内费用报销比例为65%。待遇认定须经二级及以上定点医疗机构确诊，并由医保经办机构审核通过。；额为每人每年2000元；用报销比例为65%。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "gold_support_details": []
+    },
+    {
+      "sample_id": "adv-002-条件丢失",
+      "category": "adversarial",
+      "question": "【模拟政策 seed_d】异地就医的住院费用可以直接结算并正常报销吗？",
+      "expected_source": "seed_d",
+      "retrieved_sources": [
+        "seed_d"
+      ],
+      "source_hit": true,
+      "oracle_passed": true,
+      "metric_passed": true,
+      "gold_numeric_supported": true,
+      "classification": "pass",
+      "actual": {
+        "sample_id": "adv-002-条件丢失",
+        "actual_context": "【模拟政策 seed_d】异地就医直接结算须同时满足两个前置条件：一是参保人员已办理异地就医备案；二是就医医院为开通跨省联网结算的定点医疗机构。满足条件的，住院费用可直接结算，按参保地政策报销。例外情形：未备案自行外出就医的，报销比例在参保地政策基础上降低20个百分点；急诊抢救人员视同已备案；非医保目录内费用不纳入报销范围。",
+        "actual_answer": "【模拟政策 seed_d】异地就医直接结算须同时满足两个前置条件：一是参保人员已办理异地就医备案；二是就医医院为开通跨省联网结算的定点医疗机构。满足条件的，住院费用可直接结算，按参保地政策报销。例外情形：未备案自行外出就医的，报销比例在参保地政策基础上降低20个百分点；急诊抢救人员视同已备案；非医保目录内费用不纳入报销范围。；策基础上降低20个百分点。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "oracle": {
+        "sample_id": "adv-002-条件丢失",
+        "actual_context": "【模拟政策 seed_d】异地就医直接结算须同时满足两个前置条件：一是参保人员已办理异地就医备案；二是就医医院为开通跨省联网结算的定点医疗机构。满足条件的，住院费用可直接结算，按参保地政策报销。例外情形：未备案自行外出就医的，报销比例在参保地政策基础上降低20个百分点；急诊抢救人员视同已备案；非医保目录内费用不纳入报销范围。",
+        "actual_answer": "【模拟政策 seed_d】异地就医直接结算须同时满足两个前置条件：一是参保人员已办理异地就医备案；二是就医医院为开通跨省联网结算的定点医疗机构。满足条件的，住院费用可直接结算，按参保地政策报销。例外情形：未备案自行外出就医的，报销比例在参保地政策基础上降低20个百分点；急诊抢救人员视同已备案；非医保目录内费用不纳入报销范围。；策基础上降低20个百分点。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "gold_support_details": []
+    },
+    {
+      "sample_id": "adv-003-无关注入",
+      "category": "adversarial",
+      "question": "【模拟政策 policy_d】城乡居民医保住院在三级医疗机构的起付线、报销比例和年度封顶线是多少？",
+      "expected_source": "policy_d",
+      "retrieved_sources": [
+        "policy_d"
+      ],
+      "source_hit": true,
+      "oracle_passed": true,
+      "metric_passed": true,
+      "gold_numeric_supported": true,
+      "classification": "pass",
+      "actual": {
+        "sample_id": "adv-003-无关注入",
+        "actual_context": "【模拟政策 policy_d】城乡居民基本医疗保险住院待遇标准：三级医疗机构起付线1000元，政策范围内费用报销比例55%；一个自然年度内，基本医保统筹基金最高支付限额（封顶线）为10万元。",
+        "actual_answer": "【模拟政策 policy_d】城乡居民基本医疗保险住院待遇标准：三级医疗机构起付线1000元，政策范围内费用报销比例55%；一个自然年度内，基本医保统筹基金最高支付限额（封顶线）为10万元。；疗机构起付线1000元；费用报销比例55%；数值10万。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "oracle": {
+        "sample_id": "adv-003-无关注入",
+        "actual_context": "【模拟政策 policy_d】城乡居民基本医疗保险住院待遇标准：三级医疗机构起付线1000元，政策范围内费用报销比例55%；一个自然年度内，基本医保统筹基金最高支付限额（封顶线）为10万元。",
+        "actual_answer": "【模拟政策 policy_d】城乡居民基本医疗保险住院待遇标准：三级医疗机构起付线1000元，政策范围内费用报销比例55%；一个自然年度内，基本医保统筹基金最高支付限额（封顶线）为10万元。；疗机构起付线1000元；费用报销比例55%；数值10万。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "gold_support_details": []
+    },
+    {
+      "sample_id": "adv-004-数字篡改",
+      "category": "adversarial",
+      "question": "【模拟政策 policy_e】糖尿病是否纳入门诊慢特病保障范围？统筹基金年度限额和报销比例是多少？",
+      "expected_source": "policy_e",
+      "retrieved_sources": [
+        "policy_e"
+      ],
+      "source_hit": true,
+      "oracle_passed": true,
+      "metric_passed": true,
+      "gold_numeric_supported": true,
+      "classification": "pass",
+      "actual": {
+        "sample_id": "adv-004-数字篡改",
+        "actual_context": "【模拟政策 policy_e】糖尿病病纳入门诊慢特病保障范围。统筹基金支付限额为每人每年2000元，政策范围内费用报销比例为70%。待遇认定须经二级及以上定点医疗机构确诊，并由医保经办机构审核通过。",
+        "actual_answer": "【模拟政策 policy_e】糖尿病病纳入门诊慢特病保障范围。统筹基金支付限额为每人每年2000元，政策范围内费用报销比例为70%。待遇认定须经二级及以上定点医疗机构确诊，并由医保经办机构审核通过。；额为每人每年2000元；用报销比例为70%。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "oracle": {
+        "sample_id": "adv-004-数字篡改",
+        "actual_context": "【模拟政策 policy_e】糖尿病病纳入门诊慢特病保障范围。统筹基金支付限额为每人每年2000元，政策范围内费用报销比例为70%。待遇认定须经二级及以上定点医疗机构确诊，并由医保经办机构审核通过。",
+        "actual_answer": "【模拟政策 policy_e】糖尿病病纳入门诊慢特病保障范围。统筹基金支付限额为每人每年2000元，政策范围内费用报销比例为70%。待遇认定须经二级及以上定点医疗机构确诊，并由医保经办机构审核通过。；额为每人每年2000元；用报销比例为70%。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "gold_support_details": []
+    },
+    {
+      "sample_id": "adv-005-实体缺失",
+      "category": "adversarial",
+      "question": "【模拟政策 policy_f】大病保险的基础起付线、报销比例是多少，对困难群体有没有倾斜？",
+      "expected_source": "policy_f",
+      "retrieved_sources": [
+        "policy_f"
+      ],
+      "source_hit": true,
+      "oracle_passed": true,
+      "metric_passed": true,
+      "gold_numeric_supported": true,
+      "classification": "pass",
+      "actual": {
+        "sample_id": "adv-005-实体缺失",
+        "actual_context": "【模拟政策 policy_f】大病保险的保障对象为参加城乡居民基本医疗保险的人员。一个自然年度内，个人自付的合规医疗费用累计超过起付线100元的部分，纳入大病保险支付范围，报销比例为70%，不设封顶线。特困人员、低保对象等困难群体起付线降低50%，报销比例提高5个百分点。",
+        "actual_answer": "【模拟政策 policy_f】大病保险的保障对象为参加城乡居民基本医疗保险的人员。一个自然年度内，个人自付的合规医疗费用累计超过起付线100元的部分，纳入大病保险支付范围，报销比例为70%，不设封顶线。特困人员、低保对象等困难群体起付线降低50%，报销比例提高5个百分点。；计超过起付线100元；报销比例为70%；体起付线降低50%；报销比例提高5个百分点。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "oracle": {
+        "sample_id": "adv-005-实体缺失",
+        "actual_context": "【模拟政策 policy_f】大病保险的保障对象为参加城乡居民基本医疗保险的人员。一个自然年度内，个人自付的合规医疗费用累计超过起付线100元的部分，纳入大病保险支付范围，报销比例为70%，不设封顶线。特困人员、低保对象等困难群体起付线降低50%，报销比例提高5个百分点。",
+        "actual_answer": "【模拟政策 policy_f】大病保险的保障对象为参加城乡居民基本医疗保险的人员。一个自然年度内，个人自付的合规医疗费用累计超过起付线100元的部分，纳入大病保险支付范围，报销比例为70%，不设封顶线。特困人员、低保对象等困难群体起付线降低50%，报销比例提高5个百分点。；计超过起付线100元；报销比例为70%；体起付线降低50%；报销比例提高5个百分点。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "gold_support_details": []
+    },
+    {
+      "sample_id": "adv-006-条件丢失",
+      "category": "adversarial",
+      "question": "【模拟政策 seed_d】异地就医的住院费用可以直接结算并正常报销吗？",
+      "expected_source": "seed_d",
+      "retrieved_sources": [
+        "seed_d"
+      ],
+      "source_hit": true,
+      "oracle_passed": true,
+      "metric_passed": true,
+      "gold_numeric_supported": true,
+      "classification": "pass",
+      "actual": {
+        "sample_id": "adv-006-条件丢失",
+        "actual_context": "【模拟政策 seed_d】异地就医直接结算须同时满足两个前置条件：一是参保人员已办理异地就医备案；二是就医医院为开通跨省联网结算的定点医疗机构。满足条件的，住院费用可直接结算，按参保地政策报销。例外情形：未备案自行外出就医的，报销比例在参保地政策基础上降低20个百分点；急诊抢救人员视同已备案；非医保目录内费用不纳入报销范围。",
+        "actual_answer": "【模拟政策 seed_d】异地就医直接结算须同时满足两个前置条件：一是参保人员已办理异地就医备案；二是就医医院为开通跨省联网结算的定点医疗机构。满足条件的，住院费用可直接结算，按参保地政策报销。例外情形：未备案自行外出就医的，报销比例在参保地政策基础上降低20个百分点；急诊抢救人员视同已备案；非医保目录内费用不纳入报销范围。；策基础上降低20个百分点。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "oracle": {
+        "sample_id": "adv-006-条件丢失",
+        "actual_context": "【模拟政策 seed_d】异地就医直接结算须同时满足两个前置条件：一是参保人员已办理异地就医备案；二是就医医院为开通跨省联网结算的定点医疗机构。满足条件的，住院费用可直接结算，按参保地政策报销。例外情形：未备案自行外出就医的，报销比例在参保地政策基础上降低20个百分点；急诊抢救人员视同已备案；非医保目录内费用不纳入报销范围。",
+        "actual_answer": "【模拟政策 seed_d】异地就医直接结算须同时满足两个前置条件：一是参保人员已办理异地就医备案；二是就医医院为开通跨省联网结算的定点医疗机构。满足条件的，住院费用可直接结算，按参保地政策报销。例外情形：未备案自行外出就医的，报销比例在参保地政策基础上降低20个百分点；急诊抢救人员视同已备案；非医保目录内费用不纳入报销范围。；策基础上降低20个百分点。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "gold_support_details": []
+    },
+    {
+      "sample_id": "adv-007-无关注入",
+      "category": "adversarial",
+      "question": "【模拟政策 policy_h】帕金森病是否纳入门诊慢特病保障范围？统筹基金年度限额和报销比例是多少？",
+      "expected_source": "policy_h",
+      "retrieved_sources": [
+        "policy_h"
+      ],
+      "source_hit": true,
+      "oracle_passed": true,
+      "metric_passed": true,
+      "gold_numeric_supported": true,
+      "classification": "pass",
+      "actual": {
+        "sample_id": "adv-007-无关注入",
+        "actual_context": "【模拟政策 policy_h】帕金森病病纳入门诊慢特病保障范围。统筹基金支付限额为每人每年2500元，政策范围内费用报销比例为55%。待遇认定须经二级及以上定点医疗机构确诊，并由医保经办机构审核通过。",
+        "actual_answer": "【模拟政策 policy_h】帕金森病病纳入门诊慢特病保障范围。统筹基金支付限额为每人每年2500元，政策范围内费用报销比例为55%。待遇认定须经二级及以上定点医疗机构确诊，并由医保经办机构审核通过。；额为每人每年2500元；用报销比例为55%。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "oracle": {
+        "sample_id": "adv-007-无关注入",
+        "actual_context": "【模拟政策 policy_h】帕金森病病纳入门诊慢特病保障范围。统筹基金支付限额为每人每年2500元，政策范围内费用报销比例为55%。待遇认定须经二级及以上定点医疗机构确诊，并由医保经办机构审核通过。",
+        "actual_answer": "【模拟政策 policy_h】帕金森病病纳入门诊慢特病保障范围。统筹基金支付限额为每人每年2500元，政策范围内费用报销比例为55%。待遇认定须经二级及以上定点医疗机构确诊，并由医保经办机构审核通过。；额为每人每年2500元；用报销比例为55%。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "gold_support_details": []
+    },
+    {
+      "sample_id": "adv-008-数字篡改",
+      "category": "adversarial",
+      "question": "【模拟政策 policy_i】大病保险的基础起付线、报销比例是多少，对困难群体有没有倾斜？",
+      "expected_source": "policy_i",
+      "retrieved_sources": [
+        "policy_i"
+      ],
+      "source_hit": true,
+      "oracle_passed": true,
+      "metric_passed": true,
+      "gold_numeric_supported": true,
+      "classification": "pass",
+      "actual": {
+        "sample_id": "adv-008-数字篡改",
+        "actual_context": "【模拟政策 policy_i】大病保险的保障对象为参加城乡居民基本医疗保险的人员。一个自然年度内，个人自付的合规医疗费用累计超过起付线300元的部分，纳入大病保险支付范围，报销比例为85%，不设封顶线。特困人员、低保对象等困难群体起付线降低50%，报销比例提高5个百分点。",
+        "actual_answer": "【模拟政策 policy_i】大病保险的保障对象为参加城乡居民基本医疗保险的人员。一个自然年度内，个人自付的合规医疗费用累计超过起付线300元的部分，纳入大病保险支付范围，报销比例为85%，不设封顶线。特困人员、低保对象等困难群体起付线降低50%，报销比例提高5个百分点。；计超过起付线300元；报销比例为85%；体起付线降低50%；报销比例提高5个百分点。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "oracle": {
+        "sample_id": "adv-008-数字篡改",
+        "actual_context": "【模拟政策 policy_i】大病保险的保障对象为参加城乡居民基本医疗保险的人员。一个自然年度内，个人自付的合规医疗费用累计超过起付线300元的部分，纳入大病保险支付范围，报销比例为85%，不设封顶线。特困人员、低保对象等困难群体起付线降低50%，报销比例提高5个百分点。",
+        "actual_answer": "【模拟政策 policy_i】大病保险的保障对象为参加城乡居民基本医疗保险的人员。一个自然年度内，个人自付的合规医疗费用累计超过起付线300元的部分，纳入大病保险支付范围，报销比例为85%，不设封顶线。特困人员、低保对象等困难群体起付线降低50%，报销比例提高5个百分点。；计超过起付线300元；报销比例为85%；体起付线降低50%；报销比例提高5个百分点。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "gold_support_details": []
+    },
+    {
+      "sample_id": "adv-009-实体缺失",
+      "category": "adversarial",
+      "question": "【模拟政策 policy_j】城乡居民医保住院在二级医疗机构的起付线、报销比例和年度封顶线是多少？",
+      "expected_source": "policy_j",
+      "retrieved_sources": [
+        "policy_j"
+      ],
+      "source_hit": true,
+      "oracle_passed": true,
+      "metric_passed": true,
+      "gold_numeric_supported": true,
+      "classification": "pass",
+      "actual": {
+        "sample_id": "adv-009-实体缺失",
+        "actual_context": "【模拟政策 policy_j】城乡居民基本医疗保险住院待遇标准：二级医疗机构起付线600元，政策范围内费用报销比例65%；一个自然年度内，基本医保统筹基金最高支付限额（封顶线）为15万元。",
+        "actual_answer": "【模拟政策 policy_j】城乡居民基本医疗保险住院待遇标准：二级医疗机构起付线600元，政策范围内费用报销比例65%；一个自然年度内，基本医保统筹基金最高支付限额（封顶线）为15万元。；疗机构起付线600元；费用报销比例65%；数值15万。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "oracle": {
+        "sample_id": "adv-009-实体缺失",
+        "actual_context": "【模拟政策 policy_j】城乡居民基本医疗保险住院待遇标准：二级医疗机构起付线600元，政策范围内费用报销比例65%；一个自然年度内，基本医保统筹基金最高支付限额（封顶线）为15万元。",
+        "actual_answer": "【模拟政策 policy_j】城乡居民基本医疗保险住院待遇标准：二级医疗机构起付线600元，政策范围内费用报销比例65%；一个自然年度内，基本医保统筹基金最高支付限额（封顶线）为15万元。；疗机构起付线600元；费用报销比例65%；数值15万。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "gold_support_details": []
+    },
+    {
+      "sample_id": "adv-010-条件丢失",
+      "category": "adversarial",
+      "question": "【模拟政策 seed_d】异地就医的住院费用可以直接结算并正常报销吗？",
+      "expected_source": "seed_d",
+      "retrieved_sources": [
+        "seed_d"
+      ],
+      "source_hit": true,
+      "oracle_passed": true,
+      "metric_passed": true,
+      "gold_numeric_supported": true,
+      "classification": "pass",
+      "actual": {
+        "sample_id": "adv-010-条件丢失",
+        "actual_context": "【模拟政策 seed_d】异地就医直接结算须同时满足两个前置条件：一是参保人员已办理异地就医备案；二是就医医院为开通跨省联网结算的定点医疗机构。满足条件的，住院费用可直接结算，按参保地政策报销。例外情形：未备案自行外出就医的，报销比例在参保地政策基础上降低20个百分点；急诊抢救人员视同已备案；非医保目录内费用不纳入报销范围。",
+        "actual_answer": "【模拟政策 seed_d】异地就医直接结算须同时满足两个前置条件：一是参保人员已办理异地就医备案；二是就医医院为开通跨省联网结算的定点医疗机构。满足条件的，住院费用可直接结算，按参保地政策报销。例外情形：未备案自行外出就医的，报销比例在参保地政策基础上降低20个百分点；急诊抢救人员视同已备案；非医保目录内费用不纳入报销范围。；策基础上降低20个百分点。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "oracle": {
+        "sample_id": "adv-010-条件丢失",
+        "actual_context": "【模拟政策 seed_d】异地就医直接结算须同时满足两个前置条件：一是参保人员已办理异地就医备案；二是就医医院为开通跨省联网结算的定点医疗机构。满足条件的，住院费用可直接结算，按参保地政策报销。例外情形：未备案自行外出就医的，报销比例在参保地政策基础上降低20个百分点；急诊抢救人员视同已备案；非医保目录内费用不纳入报销范围。",
+        "actual_answer": "【模拟政策 seed_d】异地就医直接结算须同时满足两个前置条件：一是参保人员已办理异地就医备案；二是就医医院为开通跨省联网结算的定点医疗机构。满足条件的，住院费用可直接结算，按参保地政策报销。例外情形：未备案自行外出就医的，报销比例在参保地政策基础上降低20个百分点；急诊抢救人员视同已备案；非医保目录内费用不纳入报销范围。；策基础上降低20个百分点。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "gold_support_details": []
+    },
+    {
+      "sample_id": "adv-011-无关注入",
+      "category": "adversarial",
+      "question": "【模拟政策 policy_bb】大病保险的基础起付线、报销比例是多少，对困难群体有没有倾斜？",
+      "expected_source": "policy_bb",
+      "retrieved_sources": [
+        "policy_bb"
+      ],
+      "source_hit": true,
+      "oracle_passed": true,
+      "metric_passed": true,
+      "gold_numeric_supported": true,
+      "classification": "pass",
+      "actual": {
+        "sample_id": "adv-011-无关注入",
+        "actual_context": "【模拟政策 policy_bb】大病保险的保障对象为参加城乡居民基本医疗保险的人员。一个自然年度内，个人自付的合规医疗费用累计超过起付线1000元的部分，纳入大病保险支付范围，报销比例为60%，不设封顶线。特困人员、低保对象等困难群体起付线降低50%，报销比例提高5个百分点。",
+        "actual_answer": "【模拟政策 policy_bb】大病保险的保障对象为参加城乡居民基本医疗保险的人员。一个自然年度内，个人自付的合规医疗费用累计超过起付线1000元的部分，纳入大病保险支付范围，报销比例为60%，不设封顶线。特困人员、低保对象等困难群体起付线降低50%，报销比例提高5个百分点。；计超过起付线1000元；报销比例为60%；体起付线降低50%；报销比例提高5个百分点。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "oracle": {
+        "sample_id": "adv-011-无关注入",
+        "actual_context": "【模拟政策 policy_bb】大病保险的保障对象为参加城乡居民基本医疗保险的人员。一个自然年度内，个人自付的合规医疗费用累计超过起付线1000元的部分，纳入大病保险支付范围，报销比例为60%，不设封顶线。特困人员、低保对象等困难群体起付线降低50%，报销比例提高5个百分点。",
+        "actual_answer": "【模拟政策 policy_bb】大病保险的保障对象为参加城乡居民基本医疗保险的人员。一个自然年度内，个人自付的合规医疗费用累计超过起付线1000元的部分，纳入大病保险支付范围，报销比例为60%，不设封顶线。特困人员、低保对象等困难群体起付线降低50%，报销比例提高5个百分点。；计超过起付线1000元；报销比例为60%；体起付线降低50%；报销比例提高5个百分点。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "gold_support_details": []
+    },
+    {
+      "sample_id": "adv-012-数字篡改",
+      "category": "adversarial",
+      "question": "【模拟政策 policy_bc】城乡居民医保住院在二级医疗机构的起付线、报销比例和年度封顶线是多少？",
+      "expected_source": "policy_bc",
+      "retrieved_sources": [
+        "policy_bc"
+      ],
+      "source_hit": true,
+      "oracle_passed": true,
+      "metric_passed": true,
+      "gold_numeric_supported": true,
+      "classification": "pass",
+      "actual": {
+        "sample_id": "adv-012-数字篡改",
+        "actual_context": "【模拟政策 policy_bc】城乡居民基本医疗保险住院待遇标准：二级医疗机构起付线800元，政策范围内费用报销比例75%；一个自然年度内，基本医保统筹基金最高支付限额（封顶线）为10万元。",
+        "actual_answer": "【模拟政策 policy_bc】城乡居民基本医疗保险住院待遇标准：二级医疗机构起付线800元，政策范围内费用报销比例75%；一个自然年度内，基本医保统筹基金最高支付限额（封顶线）为10万元。；疗机构起付线800元；费用报销比例75%；数值10万。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "oracle": {
+        "sample_id": "adv-012-数字篡改",
+        "actual_context": "【模拟政策 policy_bc】城乡居民基本医疗保险住院待遇标准：二级医疗机构起付线800元，政策范围内费用报销比例75%；一个自然年度内，基本医保统筹基金最高支付限额（封顶线）为10万元。",
+        "actual_answer": "【模拟政策 policy_bc】城乡居民基本医疗保险住院待遇标准：二级医疗机构起付线800元，政策范围内费用报销比例75%；一个自然年度内，基本医保统筹基金最高支付限额（封顶线）为10万元。；疗机构起付线800元；费用报销比例75%；数值10万。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "gold_support_details": []
+    },
+    {
+      "sample_id": "adv-013-实体缺失",
+      "category": "adversarial",
+      "question": "【模拟政策 policy_bd】乙肝是否纳入门诊慢特病保障范围？统筹基金年度限额和报销比例是多少？",
+      "expected_source": "policy_bd",
+      "retrieved_sources": [
+        "policy_bd"
+      ],
+      "source_hit": true,
+      "oracle_passed": true,
+      "metric_passed": true,
+      "gold_numeric_supported": true,
+      "classification": "pass",
+      "actual": {
+        "sample_id": "adv-013-实体缺失",
+        "actual_context": "【模拟政策 policy_bd】乙肝病纳入门诊慢特病保障范围。统筹基金支付限额为每人每年4000元，政策范围内费用报销比例为60%。待遇认定须经二级及以上定点医疗机构确诊，并由医保经办机构审核通过。",
+        "actual_answer": "【模拟政策 policy_bd】乙肝病纳入门诊慢特病保障范围。统筹基金支付限额为每人每年4000元，政策范围内费用报销比例为60%。待遇认定须经二级及以上定点医疗机构确诊，并由医保经办机构审核通过。；额为每人每年4000元；用报销比例为60%。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "oracle": {
+        "sample_id": "adv-013-实体缺失",
+        "actual_context": "【模拟政策 policy_bd】乙肝病纳入门诊慢特病保障范围。统筹基金支付限额为每人每年4000元，政策范围内费用报销比例为60%。待遇认定须经二级及以上定点医疗机构确诊，并由医保经办机构审核通过。",
+        "actual_answer": "【模拟政策 policy_bd】乙肝病纳入门诊慢特病保障范围。统筹基金支付限额为每人每年4000元，政策范围内费用报销比例为60%。待遇认定须经二级及以上定点医疗机构确诊，并由医保经办机构审核通过。；额为每人每年4000元；用报销比例为60%。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "gold_support_details": []
+    },
+    {
+      "sample_id": "adv-014-条件丢失",
+      "category": "adversarial",
+      "question": "【模拟政策 seed_d】异地就医的住院费用可以直接结算并正常报销吗？",
+      "expected_source": "seed_d",
+      "retrieved_sources": [
+        "seed_d"
+      ],
+      "source_hit": true,
+      "oracle_passed": true,
+      "metric_passed": true,
+      "gold_numeric_supported": true,
+      "classification": "pass",
+      "actual": {
+        "sample_id": "adv-014-条件丢失",
+        "actual_context": "【模拟政策 seed_d】异地就医直接结算须同时满足两个前置条件：一是参保人员已办理异地就医备案；二是就医医院为开通跨省联网结算的定点医疗机构。满足条件的，住院费用可直接结算，按参保地政策报销。例外情形：未备案自行外出就医的，报销比例在参保地政策基础上降低20个百分点；急诊抢救人员视同已备案；非医保目录内费用不纳入报销范围。",
+        "actual_answer": "【模拟政策 seed_d】异地就医直接结算须同时满足两个前置条件：一是参保人员已办理异地就医备案；二是就医医院为开通跨省联网结算的定点医疗机构。满足条件的，住院费用可直接结算，按参保地政策报销。例外情形：未备案自行外出就医的，报销比例在参保地政策基础上降低20个百分点；急诊抢救人员视同已备案；非医保目录内费用不纳入报销范围。；策基础上降低20个百分点。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "oracle": {
+        "sample_id": "adv-014-条件丢失",
+        "actual_context": "【模拟政策 seed_d】异地就医直接结算须同时满足两个前置条件：一是参保人员已办理异地就医备案；二是就医医院为开通跨省联网结算的定点医疗机构。满足条件的，住院费用可直接结算，按参保地政策报销。例外情形：未备案自行外出就医的，报销比例在参保地政策基础上降低20个百分点；急诊抢救人员视同已备案；非医保目录内费用不纳入报销范围。",
+        "actual_answer": "【模拟政策 seed_d】异地就医直接结算须同时满足两个前置条件：一是参保人员已办理异地就医备案；二是就医医院为开通跨省联网结算的定点医疗机构。满足条件的，住院费用可直接结算，按参保地政策报销。例外情形：未备案自行外出就医的，报销比例在参保地政策基础上降低20个百分点；急诊抢救人员视同已备案；非医保目录内费用不纳入报销范围。；策基础上降低20个百分点。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "gold_support_details": []
+    },
+    {
+      "sample_id": "med-ins-001",
+      "category": "seed",
+      "question": "【模拟政策 seed_a】职工医保普通门诊的报销比例、起付线和年度限额是多少？",
+      "expected_source": "seed_a",
+      "retrieved_sources": [
+        "seed_a"
+      ],
+      "source_hit": true,
+      "oracle_passed": true,
+      "metric_passed": true,
+      "gold_numeric_supported": true,
+      "classification": "pass",
+      "actual": {
+        "sample_id": "med-ins-001",
+        "actual_context": "【模拟政策 seed_a】根据职工基本医疗保险门诊共济保障机制，参保职工在定点医疗机构发生的政策范围内普通门诊费用，纳入统筹基金支付：在职职工报销比例为70%，退休人员为75%；年度起付线为200元；在职职工年度最高支付限额为6000元，退休人员为7000元。",
+        "actual_answer": "【模拟政策 seed_a】根据职工基本医疗保险门诊共济保障机制，参保职工在定点医疗机构发生的政策范围内普通门诊费用，纳入统筹基金支付：在职职工报销比例为70%，退休人员为75%；年度起付线为200元；在职职工年度最高支付限额为6000元，退休人员为7000元。；工报销比例为70%；退休人员为75%；年度起付线为200元；高支付限额为6000元；退休人员为7000元。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "oracle": {
+        "sample_id": "med-ins-001",
+        "actual_context": "【模拟政策 seed_a】根据职工基本医疗保险门诊共济保障机制，参保职工在定点医疗机构发生的政策范围内普通门诊费用，纳入统筹基金支付：在职职工报销比例为70%，退休人员为75%；年度起付线为200元；在职职工年度最高支付限额为6000元，退休人员为7000元。",
+        "actual_answer": "【模拟政策 seed_a】根据职工基本医疗保险门诊共济保障机制，参保职工在定点医疗机构发生的政策范围内普通门诊费用，纳入统筹基金支付：在职职工报销比例为70%，退休人员为75%；年度起付线为200元；在职职工年度最高支付限额为6000元，退休人员为7000元。；工报销比例为70%；退休人员为75%；年度起付线为200元；高支付限额为6000元；退休人员为7000元。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "gold_support_details": []
+    },
+    {
+      "sample_id": "med-ins-002",
+      "category": "seed",
+      "question": "【模拟政策 seed_b】城乡居民医保住院在不同级别医院的起付线和报销比例分别是多少？",
+      "expected_source": "seed_b",
+      "retrieved_sources": [
+        "seed_b"
+      ],
+      "source_hit": true,
+      "oracle_passed": true,
+      "metric_passed": true,
+      "gold_numeric_supported": true,
+      "classification": "pass",
+      "actual": {
+        "sample_id": "med-ins-002",
+        "actual_context": "【模拟政策 seed_b】城乡居民基本医疗保险住院待遇标准：一级及以下医疗机构起付线300元，政策范围内费用报销比例85%；二级医疗机构起付线600元，报销比例70%；三级医疗机构起付线1200元，报销比例55%。一个自然年度内，基本医保统筹基金最高支付限额（封顶线）为20万元。",
+        "actual_answer": "【模拟政策 seed_b】城乡居民基本医疗保险住院待遇标准：一级及以下医疗机构起付线300元，政策范围内费用报销比例85%；二级医疗机构起付线600元，报销比例70%；三级医疗机构起付线1200元，报销比例55%。一个自然年度内，基本医保统筹基金最高支付限额（封顶线）为20万元。；疗机构起付线300元；费用报销比例85%；疗机构起付线600元；报销比例70%；疗机构起付线1200元；报销比例55%；数值20万。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "oracle": {
+        "sample_id": "med-ins-002",
+        "actual_context": "【模拟政策 seed_b】城乡居民基本医疗保险住院待遇标准：一级及以下医疗机构起付线300元，政策范围内费用报销比例85%；二级医疗机构起付线600元，报销比例70%；三级医疗机构起付线1200元，报销比例55%。一个自然年度内，基本医保统筹基金最高支付限额（封顶线）为20万元。",
+        "actual_answer": "【模拟政策 seed_b】城乡居民基本医疗保险住院待遇标准：一级及以下医疗机构起付线300元，政策范围内费用报销比例85%；二级医疗机构起付线600元，报销比例70%；三级医疗机构起付线1200元，报销比例55%。一个自然年度内，基本医保统筹基金最高支付限额（封顶线）为20万元。；疗机构起付线300元；费用报销比例85%；疗机构起付线600元；报销比例70%；疗机构起付线1200元；报销比例55%；数值20万。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "gold_support_details": []
+    },
+    {
+      "sample_id": "med-ins-003",
+      "category": "seed",
+      "question": "【模拟政策 seed_c】大病保险的起付线是多少？报销政策如何？对困难群体有没有倾斜？",
+      "expected_source": "seed_c",
+      "retrieved_sources": [
+        "seed_c"
+      ],
+      "source_hit": true,
+      "oracle_passed": true,
+      "metric_passed": true,
+      "gold_numeric_supported": true,
+      "classification": "pass",
+      "actual": {
+        "sample_id": "med-ins-003",
+        "actual_context": "【模拟政策 seed_c】大病保险的保障对象为参加城乡居民基本医疗保险的人员。一个自然年度内，个人自付的合规医疗费用累计超过起付线1.5万元的部分，纳入大病保险支付范围，报销比例为60%，不设封顶线。特困人员、低保对象等困难群体起付线降低50%，报销比例提高5个百分点。",
+        "actual_answer": "【模拟政策 seed_c】大病保险的保障对象为参加城乡居民基本医疗保险的人员。一个自然年度内，个人自付的合规医疗费用累计超过起付线1.5万元的部分，纳入大病保险支付范围，报销比例为60%，不设封顶线。特困人员、低保对象等困难群体起付线降低50%，报销比例提高5个百分点。；计超过起付线1.5万；报销比例为60%；体起付线降低50%；报销比例提高5个百分点。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "oracle": {
+        "sample_id": "med-ins-003",
+        "actual_context": "【模拟政策 seed_c】大病保险的保障对象为参加城乡居民基本医疗保险的人员。一个自然年度内，个人自付的合规医疗费用累计超过起付线1.5万元的部分，纳入大病保险支付范围，报销比例为60%，不设封顶线。特困人员、低保对象等困难群体起付线降低50%，报销比例提高5个百分点。",
+        "actual_answer": "【模拟政策 seed_c】大病保险的保障对象为参加城乡居民基本医疗保险的人员。一个自然年度内，个人自付的合规医疗费用累计超过起付线1.5万元的部分，纳入大病保险支付范围，报销比例为60%，不设封顶线。特困人员、低保对象等困难群体起付线降低50%，报销比例提高5个百分点。；计超过起付线1.5万；报销比例为60%；体起付线降低50%；报销比例提高5个百分点。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "gold_support_details": []
+    },
+    {
+      "sample_id": "med-ins-004",
+      "category": "seed",
+      "question": "【模拟政策 seed_d】异地就医的住院费用可以直接结算并正常报销吗？",
+      "expected_source": "seed_d",
+      "retrieved_sources": [
+        "seed_d"
+      ],
+      "source_hit": true,
+      "oracle_passed": true,
+      "metric_passed": true,
+      "gold_numeric_supported": true,
+      "classification": "pass",
+      "actual": {
+        "sample_id": "med-ins-004",
+        "actual_context": "【模拟政策 seed_d】异地就医直接结算须同时满足两个前置条件：一是参保人员已办理异地就医备案；二是就医医院为开通跨省联网结算的定点医疗机构。满足条件的，住院费用可直接结算，按参保地政策报销。例外情形：未备案自行外出就医的，报销比例在参保地政策基础上降低20个百分点；急诊抢救人员视同已备案；非医保目录内费用不纳入报销范围。",
+        "actual_answer": "【模拟政策 seed_d】异地就医直接结算须同时满足两个前置条件：一是参保人员已办理异地就医备案；二是就医医院为开通跨省联网结算的定点医疗机构。满足条件的，住院费用可直接结算，按参保地政策报销。例外情形：未备案自行外出就医的，报销比例在参保地政策基础上降低20个百分点；急诊抢救人员视同已备案；非医保目录内费用不纳入报销范围。；策基础上降低20个百分点。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "oracle": {
+        "sample_id": "med-ins-004",
+        "actual_context": "【模拟政策 seed_d】异地就医直接结算须同时满足两个前置条件：一是参保人员已办理异地就医备案；二是就医医院为开通跨省联网结算的定点医疗机构。满足条件的，住院费用可直接结算，按参保地政策报销。例外情形：未备案自行外出就医的，报销比例在参保地政策基础上降低20个百分点；急诊抢救人员视同已备案；非医保目录内费用不纳入报销范围。",
+        "actual_answer": "【模拟政策 seed_d】异地就医直接结算须同时满足两个前置条件：一是参保人员已办理异地就医备案；二是就医医院为开通跨省联网结算的定点医疗机构。满足条件的，住院费用可直接结算，按参保地政策报销。例外情形：未备案自行外出就医的，报销比例在参保地政策基础上降低20个百分点；急诊抢救人员视同已备案；非医保目录内费用不纳入报销范围。；策基础上降低20个百分点。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "gold_support_details": []
+    },
+    {
+      "sample_id": "med-ins-005",
+      "category": "seed",
+      "question": "【模拟政策 seed_e】门诊慢特病中高血压的统筹基金年度限额和报销比例是多少？",
+      "expected_source": "seed_e",
+      "retrieved_sources": [
+        "seed_e"
+      ],
+      "source_hit": true,
+      "oracle_passed": true,
+      "metric_passed": true,
+      "gold_numeric_supported": true,
+      "classification": "pass",
+      "actual": {
+        "sample_id": "med-ins-005",
+        "actual_context": "【模拟政策 seed_e】高血压病（Ⅱ级及以上）纳入门诊慢特病保障范围。统筹基金支付限额为每人每年1500元，政策范围内费用报销比例为70%。待遇认定须经二级及以上定点医疗机构确诊，并由医保经办机构审核通过。",
+        "actual_answer": "【模拟政策 seed_e】高血压病（Ⅱ级及以上）纳入门诊慢特病保障范围。统筹基金支付限额为每人每年1500元，政策范围内费用报销比例为70%。待遇认定须经二级及以上定点医疗机构确诊，并由医保经办机构审核通过。；额为每人每年1500元；用报销比例为70%。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "oracle": {
+        "sample_id": "med-ins-005",
+        "actual_context": "【模拟政策 seed_e】高血压病（Ⅱ级及以上）纳入门诊慢特病保障范围。统筹基金支付限额为每人每年1500元，政策范围内费用报销比例为70%。待遇认定须经二级及以上定点医疗机构确诊，并由医保经办机构审核通过。",
+        "actual_answer": "【模拟政策 seed_e】高血压病（Ⅱ级及以上）纳入门诊慢特病保障范围。统筹基金支付限额为每人每年1500元，政策范围内费用报销比例为70%。待遇认定须经二级及以上定点医疗机构确诊，并由医保经办机构审核通过。；额为每人每年1500元；用报销比例为70%。",
+        "context_recall_score": 1.0,
+        "completeness_score": 1.0,
+        "faithfulness_pass": true,
+        "error_details": []
+      },
+      "gold_support_details": []
+    }
+  ],
+  "adversarial": [
+    {
+      "sample_id": "adv-000-数字篡改",
+      "mutation_type": "数字篡改",
+      "detected": true,
+      "completeness": 0.6667,
+      "faithfulness": false,
+      "candidate_answer": "城乡居民医保住院在三级医疗机构起付线201元、报销55%；一个自然年度内统筹基金封顶线20万元。",
+      "details": [
+        "[completeness] 实体命中率 2/3 = 0.667 低于阈值 0.80; 未命中: 「200元」",
+        "[faithfulness] 答案数值 「201」 在检索上下文中无出处（数值幻觉/篡改嫌疑），一票否决"
+      ]
+    },
+    {
+      "sample_id": "adv-001-实体缺失",
+      "mutation_type": "实体缺失",
+      "detected": false,
+      "completeness": 0.8,
+      "faithfulness": true,
+      "candidate_answer": "病纳入门诊慢特病保障范围，统筹基金支付限额每人每年2000元，政策范围内费用报销比例65%。",
+      "details": []
+    },
+    {
+      "sample_id": "adv-002-条件丢失",
+      "mutation_type": "条件丢失",
+      "detected": true,
+      "completeness": 0.25,
+      "faithfulness": true,
+      "candidate_answer": "需满足前置条件：已办理异地就医备案、并在开通跨省联网结算的定点医疗机构就医，方可直接结算并按参保地政策报销",
+      "details": [
+        "[completeness] 实体命中率 1/4 = 0.250 低于阈值 0.80; 未命中: 「20个百分点」、「急诊」、「医保目录」"
+      ]
+    },
+    {
+      "sample_id": "adv-003-无关注入",
+      "mutation_type": "无关注入",
+      "detected": true,
+      "completeness": 1.0,
+      "faithfulness": false,
+      "candidate_answer": "城乡居民医保住院在三级医疗机构起付线1000元、报销55%；一个自然年度内统筹基金封顶线10万元。同时，参保人员可享受补充商业保险额外10%的报销优惠。",
+      "details": [
+        "[faithfulness] 答案数值 「10%」 在检索上下文中无出处（数值幻觉/篡改嫌疑），一票否决"
+      ]
+    },
+    {
+      "sample_id": "adv-004-数字篡改",
+      "mutation_type": "数字篡改",
+      "detected": true,
+      "completeness": 0.8,
+      "faithfulness": false,
+      "candidate_answer": "糖尿病病纳入门诊慢特病保障范围，统筹基金支付限额每人每年2001元，政策范围内费用报销比例70%。",
+      "details": [
+        "[faithfulness] 答案数值 「2001」 在检索上下文中无出处（数值幻觉/篡改嫌疑），一票否决"
+      ]
+    },
+    {
+      "sample_id": "adv-005-实体缺失",
+      "mutation_type": "实体缺失",
+      "detected": true,
+      "completeness": 0.75,
+      "faithfulness": true,
+      "candidate_answer": "大病保险起付线为，个人自付合规费用超过起付线的部分报销70%，不设封顶线；困难群体起付线降低50%，报销比例提高5个百分点。",
+      "details": [
+        "[completeness] 实体命中率 3/4 = 0.750 低于阈值 0.80; 未命中: 「100元」"
+      ]
+    },
+    {
+      "sample_id": "adv-006-条件丢失",
+      "mutation_type": "条件丢失",
+      "detected": true,
+      "completeness": 0.25,
+      "faithfulness": true,
+      "candidate_answer": "需满足前置条件：已办理异地就医备案、并在开通跨省联网结算的定点医疗机构就医，方可直接结算并按参保地政策报销",
+      "details": [
+        "[completeness] 实体命中率 1/4 = 0.250 低于阈值 0.80; 未命中: 「20个百分点」、「急诊」、「医保目录」"
+      ]
+    },
+    {
+      "sample_id": "adv-007-无关注入",
+      "mutation_type": "无关注入",
+      "detected": true,
+      "completeness": 1.0,
+      "faithfulness": false,
+      "candidate_answer": "帕金森病病纳入门诊慢特病保障范围，统筹基金支付限额每人每年2500元，政策范围内费用报销比例55%。同时，参保人员可享受补充商业保险额外10%的报销优惠。",
+      "details": [
+        "[faithfulness] 答案数值 「10%」 在检索上下文中无出处（数值幻觉/篡改嫌疑），一票否决"
+      ]
+    },
+    {
+      "sample_id": "adv-008-数字篡改",
+      "mutation_type": "数字篡改",
+      "detected": true,
+      "completeness": 0.75,
+      "faithfulness": false,
+      "candidate_answer": "大病保险起付线为301元，个人自付合规费用超过起付线的部分报销85%，不设封顶线；困难群体起付线降低50%，报销比例提高5个百分点。",
+      "details": [
+        "[completeness] 实体命中率 3/4 = 0.750 低于阈值 0.80; 未命中: 「300元」",
+        "[faithfulness] 答案数值 「301」 在检索上下文中无出处（数值幻觉/篡改嫌疑），一票否决"
+      ]
+    },
+    {
+      "sample_id": "adv-009-实体缺失",
+      "mutation_type": "实体缺失",
+      "detected": true,
+      "completeness": 0.6667,
+      "faithfulness": true,
+      "candidate_answer": "城乡居民医保住院在二级医疗机构起付线、报销65%；一个自然年度内统筹基金封顶线15万元。",
+      "details": [
+        "[completeness] 实体命中率 2/3 = 0.667 低于阈值 0.80; 未命中: 「600元」"
+      ]
+    },
+    {
+      "sample_id": "adv-010-条件丢失",
+      "mutation_type": "条件丢失",
+      "detected": true,
+      "completeness": 0.25,
+      "faithfulness": true,
+      "candidate_answer": "需满足前置条件：已办理异地就医备案、并在开通跨省联网结算的定点医疗机构就医，方可直接结算并按参保地政策报销",
+      "details": [
+        "[completeness] 实体命中率 1/4 = 0.250 低于阈值 0.80; 未命中: 「20个百分点」、「急诊」、「医保目录」"
+      ]
+    },
+    {
+      "sample_id": "adv-011-无关注入",
+      "mutation_type": "无关注入",
+      "detected": true,
+      "completeness": 1.0,
+      "faithfulness": false,
+      "candidate_answer": "大病保险起付线为1000元，个人自付合规费用超过起付线的部分报销60%，不设封顶线；困难群体起付线降低50%，报销比例提高5个百分点。同时，参保人员可享受补充商业保险额外10%的报销优惠。",
+      "details": [
+        "[faithfulness] 答案数值 「10%」 在检索上下文中无出处（数值幻觉/篡改嫌疑），一票否决"
+      ]
+    },
+    {
+      "sample_id": "adv-012-数字篡改",
+      "mutation_type": "数字篡改",
+      "detected": true,
+      "completeness": 0.6667,
+      "faithfulness": false,
+      "candidate_answer": "城乡居民医保住院在二级医疗机构起付线801元、报销75%；一个自然年度内统筹基金封顶线10万元。",
+      "details": [
+        "[completeness] 实体命中率 2/3 = 0.667 低于阈值 0.80; 未命中: 「800元」",
+        "[faithfulness] 答案数值 「801」 在检索上下文中无出处（数值幻觉/篡改嫌疑），一票否决"
+      ]
+    },
+    {
+      "sample_id": "adv-013-实体缺失",
+      "mutation_type": "实体缺失",
+      "detected": false,
+      "completeness": 0.8,
+      "faithfulness": true,
+      "candidate_answer": "病纳入门诊慢特病保障范围，统筹基金支付限额每人每年4000元，政策范围内费用报销比例60%。",
+      "details": []
+    },
+    {
+      "sample_id": "adv-014-条件丢失",
+      "mutation_type": "条件丢失",
+      "detected": true,
+      "completeness": 0.25,
+      "faithfulness": true,
+      "candidate_answer": "需满足前置条件：已办理异地就医备案、并在开通跨省联网结算的定点医疗机构就医，方可直接结算并按参保地政策报销",
+      "details": [
+        "[completeness] 实体命中率 1/4 = 0.250 低于阈值 0.80; 未命中: 「20个百分点」、「急诊」、「医保目录」"
+      ]
+    }
+  ]
+}

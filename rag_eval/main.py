@@ -1,14 +1,10 @@
-"""演示入口（组合根）：装配内置数据集与 Dummy RAG 预设，运行评测并打印报表。
+"""演示入口（组合根）：装配内置数据集与 RAG 后端，运行评测并打印报表。
 
-Dummy 预设刻意构造了四种失败模式，用于演示三类指标的「剪刀差」：
-- med-ins-002: 检索缺失（三级医院条款 + 封顶线丢失）-> 召回与完整性同时塌陷，
-  说明检索问题会沿链路传导到答案层；
-- med-ins-003: 检索完美、生成遗漏困难群体倾斜条款 -> 召回 1.0 但完整性 0.5，
-  说明检索指标无法发现生成端信息损耗；
-- med-ins-004: 例外条款（未备案降比例/急诊视同备案）检索丢失 -> 给出无前置
-  条件的绝对化答案，政策场景中最危险的一类错误；
-- med-ins-005: 对抗样本：检索完美、实体全命中，但数字被篡改（1500->2500，
-  70%->85%）-> 召回/完整性全绿，仅忠实性一票否决。
+支持两种模式（--mode）：
+- demo（默认）：使用 Dummy RAG 预设，刻意构造四种失败模式，演示三类指标的
+  「剪刀差」——见下方各预设的失败动机；
+- retrieval：使用真实检索模块（BM25/混合 + RRF）建库召回，接受控生成流水线，
+  验证从 Query 到 actual_context 再到答案的整条链路。
 """
 from __future__ import annotations
 
@@ -78,18 +74,31 @@ def build_demo_rag() -> DummyRAG:
     return DummyRAG(presets)
 
 
-def main() -> int:
+def main(argv: list | None = None) -> int:
     # Windows 旧控制台可能是 GBK 编码，强制 UTF-8 输出避免报表乱码
     try:
         sys.stdout.reconfigure(encoding="utf-8", errors="replace")  # type: ignore[attr-defined]
     except AttributeError:
         pass
 
-    samples = load_samples()
-    rag = build_demo_rag()
-    summary = run_eval_pipeline(samples, rag, config=EvalConfig())
+    argv = list(sys.argv[1:] if argv is None else argv)
+    mode = "demo"
+    if "--mode" in argv:
+        idx = argv.index("--mode")
+        if idx + 1 < len(argv):
+            mode = argv[idx + 1]
 
-    questions = {s.id: s.question for s in samples}
+    # demo 模式用 Dummy 预设演示指标剪刀差；retrieval 模式走真实检索链路。
+    if mode == "retrieval":
+        from .run_retrieval_eval import run_retrieval_eval
+
+        summary = run_retrieval_eval(config=EvalConfig())
+    else:
+        samples = load_samples()
+        rag = build_demo_rag()
+        summary = run_eval_pipeline(samples, rag, config=EvalConfig())
+
+    questions = {s.id: s.question for s in load_samples()}
     print(render_report(summary, questions=questions))
 
     if summary.failed:
